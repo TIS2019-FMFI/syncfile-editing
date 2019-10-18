@@ -38,7 +38,7 @@
 
 \subsection{Účel dokumentu }
  Tento dokument slúži ako katalóg požiadaviek pre existujúcu aplikáciu MediaBlockPlayer pre funkcionalitu vytvárania a editovania synchronizačného súboru. Katalóg je napísaný zrozumiteľným jazykom a je určený pre zadávateľa, dodávateľa aj užívateľa, čiže komukoľvek, kto so systémom bude pracovať alebo sa chce dozvedieť na čo slúži. Po prečítaní tohto dokumentu by mala byť jasná plánovaná funkčnosť systému.
-Tento dokumnet je záväzným dokumentom pre obe strany teda pre zadávateľa aj pre prevádzkovateľa.
+Tento dokument je záväzným dokumentom pre obe strany teda pre zadávateľa aj pre prevádzkovateľa.
 
 \subsection{Rozsah využitia systému}
 Hlavným cieľom dopĺňanej funkcionality je možnosť vytvorenia synchronizačného súboru a jeho následné editovanie pomocou interaktívnych nástrojov.
@@ -99,7 +99,13 @@ Aplikácia má slúžiť na vzdelávanie, a na tvorenie obsahu pre vzdelávanie 
 V aplikácii MediaBlockPlayer* funkcionalita "Create SyncFile" umožňuje vytvoriť nový SyncFile* na základe audio nahrávky, zodpovedajúceho skriptu a interakcie používateľa. Pretože vytvorenie SyncFile-u sa zriedka podarí na jedno sedenie, je potrebná samostatná funkcionalita "Edit SyncFile". 
 
 \subsubsection{}
-Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, bude určený len pre desktop použitie. Rovnako ako celá MediaBlock Player bude môcť po downloade aplikácie pracovať aj off-line. Používateľ si na začiatku editovania vyberá ScriptFile s texom, AudioFile so zvukom a SyncFile s už existujúcim synchronizovaným súborom. Ak si nevyberie žiadny súbor SyncFile, bude vytvorený nový SyncFile. V opačnom prípade používateľ bude editovať vybraný súbor. 
+Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, bude určený len pre desktop použitie. 
+
+\subsubsection{}
+„EDIT SyncFile“ bude môcť po downloade aplikácie pracovať aj off-line.
+
+\subsubsection{}
+Používateľ si na začiatku editovania vyberá ScriptFile s texom, AudioFile so zvukom a SyncFile s už existujúcim synchronizovaným súborom. Ak si nevyberie žiadny súbor SyncFile, bude vytvorený nový SyncFile. V opačnom prípade používateľ bude editovať vybraný súbor. 
 
 \subsubsection{}
 Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho SyncFilu.
@@ -114,13 +120,16 @@ Funkcionalita Edit SyncFile umožní pridať alebo odobrať časové značky, pr
 Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly.
 
 \subsubsection{}
-Pri vytváraní súboru zobraziť text zo ScriptFile v poradí v akom je uložený v súbore, plus pridané alebo vynechané intervaly ("|", <SKIPPED>). Taktiež pre uľahčenie práce výrazniť blok v ktorom sa momentálne používateľ nachádza. Tento blok by mal byť READ-ONLY
+Pri vytváraní súboru zobraziť text zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané alebo vynechané intervaly ("|", <SKIPPED>). Celý text v okne bude read only.
+
+\subsubsection{}
+V okne zvýrazniť aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
 
 \subsubsection{}
 Možnosť spojiť/rozdeliť/upraviť vybraný blok používateľom. Ak je napríklad blok príliš krátky/dlhý, alebo sa v ňom nachádza chyba. 
 
 \subsubsection{}
-Možnosť posunúť sa na další/predchádzajúci blok pomocou buttonu, no iba v prípade že aktuálny blok má už časovú značku.
+Možnosť posunúť sa na další/predchádzajúci blok pomocou buttonu, no iba v prípade že aktuálny blok má už časovú značku. 
 
 \subsubsection{}
 Možnosť posunúť značku o daný počet sekund dopredu/dozadu. Pričom nemože prejsť už inú nastavenú značku.
@@ -132,3 +141,4 @@ Počas tvorby sa vytvorí technická dokumentácia, ktorá bude slúžiť v prí
 Používateľské rozhranie bude vhodne navrhnuté pre intuitívne a jednoduché editovanie SyncFile pričom si zachová vzhľad podľa už existujúcich častí a podľa predstavy zadávateľa.
 
 \end{document}
+
