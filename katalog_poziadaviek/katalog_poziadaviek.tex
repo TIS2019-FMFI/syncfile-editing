@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[slovak]{babel}
+\usepackage[T1]{fontenc}
 
 \title{Katalóg požiadaviek}
 \author{Andrea Hajná, Michal Horváth, Šimon Drastich, Robert Sternmuller}
@@ -7,10 +9,12 @@
 
 % zmení titulok na strane s obsahom
 \renewcommand{\contentsname}{Obsah}
+% obsah bude zobrazovat iba \section a \subsection
+\setcounter{tocdepth}{2}
 
 
 \usepackage{hyperref}
-\usepackage{indentfirst} 
+\usepackage{indentfirst}
 
 \begin{document}
 
@@ -18,7 +22,29 @@
 %====   Titulna strana
 %============================================================
 
-\maketitle % TODO:Michal:naformatovat
+% \maketitle <- nahradene
+
+\thispagestyle{empty}
+
+\begin{center}
+\sc\large
+Univerzita Komenského v Bratislave\\
+Fakulta matematiky, fyziky a informatiky
+
+
+\vfill
+
+{\huge Katalóg požiadaviek \\ pre informačný systém}\\
+Media Block Player - audiovizuálne jazykové vzdelávanie
+\end{center}
+
+\vfill
+
+{
+\noindent
+\textsc{Oktobér 2019}\\
+Andrea Hajná, Michal Horváth, Šimon Drastich, Robert Sternmuller
+}
 
 \newpage
 
@@ -49,7 +75,7 @@ Hlavným cieľom dopĺňanej funkcionality je možnosť vytvorenia synchronizač
 \textbf{Blok} - je to krátka časť textu a zároveň časový interval, v ktorom sa táto časť textu vysloví na audio nahrávke. . V texte sú bloky vymedzené oddeľovacím znakom „|” (pipeline). V synchronizačnom súbore časovou značkou konca bloku napríklad 24 s.  Blok obsahuje 1 – 5 slov logicky spojených, bloky sú často prirodzene oddelené čiarkou alebo spojkou, prípadne pauzou v reči. Blok by mal byť ľahko opakovateľný na jedno počutie, aj bez pohľadu na skript. Bloky určuje používateľ priamo v skripte v cudzom jazyku v ľubovoľnom textovom editore (mimo aplikácie Media Block Player). Podobne v prípadnom paralelnom preklade.
 
 
-\subsection{Odkazy a referencie}    
+\subsection{Odkazy a referencie}
 \textbf{Media Block Player}       \url{https://kempelen.dai.fmph.uniba.sk/lb/}
 
 
@@ -69,7 +95,7 @@ Media Block Player je aplikácia na učenie cudzích jazykov. Pomáha používat
 \subsection{Funkcie systému}
 Používateľ môže vytvárať vlastné synchronizačné súbory ktoré si môže ukladať, učiť sa z nich alebo ich môže zdieľať s ostatnými používateľmi prostredníctvom online knižnice do ktorej súbory pridá a s ktorej môže aj samotný používateľ čerpať a učiť sa. Pri vytváraní vzdelávacieho materiálu sa vytvorí tzv. synchronizačný súbor, ktorý obsahuje informácie o tom v akých časových intervaloch sú vytvorené zvukové bloky.
 
-Keď sa používateľ rozhodne pre tvorbu nového synchronizačného súboru potrebuje mať na to k dispozícií audio nahrávku a k nej relevantný textový súbor v prípade záujmu aj súbor s prekladom danej nahrávky. Keď má pripravené tieto súbory tak môže začať. 
+Keď sa používateľ rozhodne pre tvorbu nového synchronizačného súboru potrebuje mať na to k dispozícií audio nahrávku a k nej relevantný textový súbor v prípade záujmu aj súbor s prekladom danej nahrávky. Keď má pripravené tieto súbory tak môže začať.
 
 Na obrazovke bude mať textové okno v ktorom bude text deliť na bloky pomocou editovacej funkcie. Dané textové bloky bude synchronizovať s audio nahrávkou pomocou tlačidiel. Po štarte začne prehrávať audio a v správnom momente ho stopne. Ak sa používateľ pomýlil má možnosť posúvať čas konca bloku do predu a do zadu podľa potreby s presnosťou na 0,01 sekúnd. Začiatok bloku je samotný začiatok audio nahrávky a potom každý ďalší ma za začiatok vždy koniec posledného bloku. Ak je v nahrávke napríklad reklama alebo nežiadúca hudba má používateľ možnosť pridať blok skipped ktorý má tiež začiatok a koniec a rovnako sa edituje ako ostatné bloky ale pridá sa tým značka skipped a tieto bloky sa budú vynechávať. Takto vznikne sada blokov kde každý má začiatok a koniec a keby mal použivateľ náhodou pocit že chce nejaké dva bloky zlepiť alebo nejaký blok ešte posunúť či rozdeliť na viaceré bloky tak sa môže pohybovať medzi danými blokmi dopredu a dozadu. Zároveň môže mazať skipped intervaly v prípade potreby. Týmto postupom sa vytvorí synchronizačný súbor ktorý si môže uložiť na lokálny disk a učiť sa z neho po prípade ho zdieľať do vyššie spominaného online katalógu pre verejnosť alebo len pre seba. Proces učenia prebieha spôsobom, že sa prehráva audio podľa vytvorených blokov a taktiež sa na obrazovku môže vypisovať text daného bloku. Používateľ si môže blok prehrávať toľko krát koľko sám uzná za vhodné. Používateľ si vie navyše zvoliť rôzne nastavenia a režimy (skupiny nastavení). Používateľ bude mať k dispozícii niekoľko režimov, ktoré už majú predvolené určité parametre, ktoré môže používateľ ešte prípadne pozmeniť. Z nastavenia parametrov má na výber: smer prehrávania (či chce bloky prehrávať zaradom alebo náhodne pomiešané), aká dlhá bude pauza medzi jednotlivými blokmi, počet opakovaní blokov, dĺžka pauzy medzi opakovaniami bloku, či chce zobraziť text ktorý sa bude prehrávať, alebo či chce použiť nejaký z dostupných paralelných prekladov.  Možnosť zobrazenia paralelných prekladov závisí od toho, či používateľ ich ma k dispozícií, alebo nie. Je to len doplnková možnosť. Je to rozšírená, nie nutná funkcionalita, kde si používateľ môže precvičovať  okrem správnej fonetiky aj svoju slovnú zásobu.
 
@@ -96,16 +122,16 @@ Aplikácia má slúžiť na vzdelávanie, a na tvorenie obsahu pre vzdelávanie 
 \section{Špecifické požiadavky}
 
 \subsection{Funkčné požiadavky}
-V aplikácii MediaBlockPlayer* funkcionalita "Create SyncFile" umožňuje vytvoriť nový SyncFile* na základe audio nahrávky, zodpovedajúceho skriptu a interakcie používateľa. Pretože vytvorenie SyncFile-u sa zriedka podarí na jedno sedenie, je potrebná samostatná funkcionalita "Edit SyncFile". 
+V aplikácii MediaBlockPlayer* funkcionalita "Create SyncFile" umožňuje vytvoriť nový SyncFile* na základe audio nahrávky, zodpovedajúceho skriptu a interakcie používateľa. Pretože vytvorenie SyncFile-u sa zriedka podarí na jedno sedenie, je potrebná samostatná funkcionalita "Edit SyncFile".
 
 \subsubsection{}
-Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, bude určený len pre desktop použitie. 
+Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, bude určený len pre desktop použitie.
 
 \subsubsection{}
 „EDIT SyncFile“ bude môcť po downloade aplikácie pracovať aj off-line.
 
 \subsubsection{}
-Používateľ si na začiatku editovania vyberá ScriptFile s texom, AudioFile so zvukom a SyncFile s už existujúcim synchronizovaným súborom. Ak si nevyberie žiadny súbor SyncFile, bude vytvorený nový SyncFile. V opačnom prípade používateľ bude editovať vybraný súbor. 
+Používateľ si na začiatku editovania vyberá ScriptFile s texom, AudioFile so zvukom a SyncFile s už existujúcim synchronizovaným súborom. Ak si nevyberie žiadny súbor SyncFile, bude vytvorený nový SyncFile. V opačnom prípade používateľ bude editovať vybraný súbor.
 
 \subsubsection{}
 Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho SyncFilu.
@@ -114,7 +140,7 @@ Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho Syn
 Funkcionalita Edit SyncFile umožní uložiť aj nedokončený SyncFile.
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní pridať alebo odobrať časové značky, pričom si vie znova sputiť už vytvorený blok na kontrolu správnosti. 
+Funkcionalita Edit SyncFile umožní pridať alebo odobrať časové značky, pričom si vie znova sputiť už vytvorený blok na kontrolu správnosti.
 
 \subsubsection{}
 Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly.
@@ -126,10 +152,10 @@ Pri vytváraní súboru zobraziť text zo ScriptFile v okne a v poradí v akom j
 V okne zvýrazniť aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
 
 \subsubsection{}
-Možnosť spojiť/rozdeliť/upraviť vybraný blok používateľom. Ak je napríklad blok príliš krátky/dlhý, alebo sa v ňom nachádza chyba. 
+Možnosť spojiť/rozdeliť/upraviť vybraný blok používateľom. Ak je napríklad blok príliš krátky/dlhý, alebo sa v ňom nachádza chyba.
 
 \subsubsection{}
-Možnosť posunúť sa na další/predchádzajúci blok pomocou buttonu, no iba v prípade že aktuálny blok má už časovú značku. 
+Možnosť posunúť sa na další/predchádzajúci blok pomocou buttonu, no iba v prípade že aktuálny blok má už časovú značku.
 
 \subsubsection{}
 Možnosť posunúť značku o daný počet sekund dopredu/dozadu. Pričom nemože prejsť už inú nastavenú značku.
