@@ -19,7 +19,7 @@
 \begin{document}
 
 %============================================================
-%====   Titulna strana
+%====   Titulná strana
 %============================================================
 
 % \maketitle <- nahradene
@@ -72,7 +72,7 @@ Hlavným cieľom dopĺňanej funkcionality je možnosť vytvorenia synchronizač
 \subsection{Definície a pojmy}
 \textbf{Synchronizačný súbor} - je to typ súboru ktorý obsahuje informácie o vytvorených blokoch z prislúchajúcej audio nahrávky. Každý blok nesie informáciu o tom kedy blok začína a kedy má končiť. Tento súbor vlastne synchronizuje audio nahrávku s textom.
 
-\textbf{Blok} - je to krátka časť textu a zároveň časový interval, v ktorom sa táto časť textu vysloví na audio nahrávke. . V texte sú bloky vymedzené oddeľovacím znakom „|” (pipeline). V synchronizačnom súbore časovou značkou konca bloku napríklad 24 s.  Blok obsahuje 1 – 5 slov logicky spojených, bloky sú často prirodzene oddelené čiarkou alebo spojkou, prípadne pauzou v reči. Blok by mal byť ľahko opakovateľný na jedno počutie, aj bez pohľadu na skript. Bloky určuje používateľ priamo v skripte v cudzom jazyku v ľubovoľnom textovom editore (mimo aplikácie Media Block Player). Podobne v prípadnom paralelnom preklade.
+\textbf{Blok} - je to krátka časť textu a zároveň časový interval, v ktorom sa táto časť textu vysloví na audio nahrávke. . V texte sú bloky vymedzené oddeľovacím znakom „|” (pipeline). V synchronizačnom súbore časovou značkou konca bloku napríklad 24 s.  Blok obsahuje 1 – 5 slov logicky spojených, bloky sú často prirodzene oddelené čiarkou alebo spojkou, prípadne pauzou v reči. Blok by mal byť ľahko opakovateľný na jedno počutie, aj bez pohľadu na skript. Bloky určuje používateľ priamo v skripte v cudzom jazyku v ľubovoľnom textovom editore kde si ich môže pripraviť ale zároveň ich vie editovať v prípade potreby aj v MediaBlockPlayeru. Podobne v prípadnom paralelnom preklade.
 
 
 \subsection{Odkazy a referencie}
@@ -90,29 +90,29 @@ V nasledujúcej kapitole sa čitateľ oboznámi perspektívou, funkciami produkt
 \section{Všeobecný popis}
 
 \subsection{Perspektíva produktu }
-Media Block Player je aplikácia na učenie cudzích jazykov. Pomáha používateľovi učiť sa nielen vizuálne ale aj zvukom, ale taktiež spojením oboch týchto medií. Takýto súbor sa nazýva Sync File. Sync File spája audio s vizualizáciou textu, v praxi to znamená že ku každej vete na učenie, je k dispozícií aj zvuk ako sa daná veta číta. My sa zameriame na editor ktorý vytvára tieto súbory. Kedže pri učení zapája tak zrakové vnemy ako aj sluch, je to výborný nástroj na učenie jazykov. Veľkou výhodou je že používateľ si sám môže vytvárať a zdielať materiály na učenie. Teda aplikácia nie je viazaná na obmezdené množstvo materiálu ku každému jazyku, ale na komunitu, ktorá sa može vzájomne pomáhať učiť sa a vytvárať neobmedzené množstvo súborov na učenie. Z dlhodobého hľadiska sa táto aplikácia može stať obrovskou knižnicou na učenie lubovoľého jazyka.
+Media Block Player je aplikácia na učenie cudzích jazykov. Pomáha používateľovi učiť sa nielen vizuálne ale aj zvukom, ale taktiež spojením oboch týchto médií. Takýto súbor sa nazýva Sync File. Sync File spája audio s vizualizáciou textu, v praxi to znamená že ku každej vete na učenie, je k dispozícií aj zvuk ako sa daná veta číta. My sa zameriame na editor ktorý vytvára tieto súbory. Keďže pri učení zapája tak zrakové vnemy ako aj sluch, je to výborný nástroj na učenie jazykov. Veľkou výhodou je že používateľ si sám môže vytvárať a zdieľať materiály na učenie. Teda aplikácia nie je viazaná na obmedzené množstvo materiálu ku každému jazyku, ale na komunitu, ktorá sa môže vzájomne pomáhať učiť sa a vytvárať neobmedzené množstvo súborov na učenie. Z dlhodobého hľadiska sa táto aplikácia môže stať obrovskou knižnicou na učenie ľubovoľného jazyka.
 
 \subsection{Funkcie systému}
 Používateľ môže vytvárať vlastné synchronizačné súbory ktoré si môže ukladať, učiť sa z nich alebo ich môže zdieľať s ostatnými používateľmi prostredníctvom online knižnice do ktorej súbory pridá a s ktorej môže aj samotný používateľ čerpať a učiť sa. Pri vytváraní vzdelávacieho materiálu sa vytvorí tzv. synchronizačný súbor, ktorý obsahuje informácie o tom v akých časových intervaloch sú vytvorené zvukové bloky.
 
 Keď sa používateľ rozhodne pre tvorbu nového synchronizačného súboru potrebuje mať na to k dispozícií audio nahrávku a k nej relevantný textový súbor v prípade záujmu aj súbor s prekladom danej nahrávky. Keď má pripravené tieto súbory tak môže začať.
 
-Na obrazovke bude mať textové okno v ktorom bude text deliť na bloky pomocou editovacej funkcie. Dané textové bloky bude synchronizovať s audio nahrávkou pomocou tlačidiel. Po štarte začne prehrávať audio a v správnom momente ho stopne. Ak sa používateľ pomýlil má možnosť posúvať čas konca bloku do predu a do zadu podľa potreby s presnosťou na 0,01 sekúnd. Začiatok bloku je samotný začiatok audio nahrávky a potom každý ďalší ma za začiatok vždy koniec posledného bloku. Ak je v nahrávke napríklad reklama alebo nežiadúca hudba má používateľ možnosť pridať blok skipped ktorý má tiež začiatok a koniec a rovnako sa edituje ako ostatné bloky ale pridá sa tým značka skipped a tieto bloky sa budú vynechávať. Takto vznikne sada blokov kde každý má začiatok a koniec a keby mal použivateľ náhodou pocit že chce nejaké dva bloky zlepiť alebo nejaký blok ešte posunúť či rozdeliť na viaceré bloky tak sa môže pohybovať medzi danými blokmi dopredu a dozadu. Zároveň môže mazať skipped intervaly v prípade potreby. Týmto postupom sa vytvorí synchronizačný súbor ktorý si môže uložiť na lokálny disk a učiť sa z neho po prípade ho zdieľať do vyššie spominaného online katalógu pre verejnosť alebo len pre seba. Proces učenia prebieha spôsobom, že sa prehráva audio podľa vytvorených blokov a taktiež sa na obrazovku môže vypisovať text daného bloku. Používateľ si môže blok prehrávať toľko krát koľko sám uzná za vhodné. Používateľ si vie navyše zvoliť rôzne nastavenia a režimy (skupiny nastavení). Používateľ bude mať k dispozícii niekoľko režimov, ktoré už majú predvolené určité parametre, ktoré môže používateľ ešte prípadne pozmeniť. Z nastavenia parametrov má na výber: smer prehrávania (či chce bloky prehrávať zaradom alebo náhodne pomiešané), aká dlhá bude pauza medzi jednotlivými blokmi, počet opakovaní blokov, dĺžka pauzy medzi opakovaniami bloku, či chce zobraziť text ktorý sa bude prehrávať, alebo či chce použiť nejaký z dostupných paralelných prekladov.  Možnosť zobrazenia paralelných prekladov závisí od toho, či používateľ ich ma k dispozícií, alebo nie. Je to len doplnková možnosť. Je to rozšírená, nie nutná funkcionalita, kde si používateľ môže precvičovať  okrem správnej fonetiky aj svoju slovnú zásobu.
+Na obrazovke bude mať textové okno v ktorom bude text deliť na bloky pomocou editovacej funkcie. Dané textové bloky bude synchronizovať s audio nahrávkou pomocou tlačidiel. Po štarte začne prehrávať audio a v správnom momente ho stopne. Ak sa používateľ pomýlil má možnosť posúvať čas konca bloku dopredu a dozadu podľa potreby s presnosťou na 0,01 sekúnd. Začiatok bloku je samotný začiatok audio nahrávky a potom každý ďalší ma za začiatok vždy koniec posledného bloku. Ak je v nahrávke napríklad reklama alebo nežiadúca hudba má používateľ možnosť pridať blok skipped ktorý má tiež začiatok a koniec a rovnako sa edituje ako ostatné bloky ale pridá sa tým značka skipped a tieto bloky sa budú vynechávať. Takto vznikne sada blokov kde každý má začiatok a koniec a keby mal používateľ náhodou pocit že chce nejaké dva bloky zlepiť alebo nejaký blok ešte posunúť či rozdeliť na viaceré bloky tak sa môže pohybovať medzi danými blokmi dopredu a dozadu. Zároveň môže mazať skipped intervaly v prípade potreby. Týmto postupom sa vytvorí synchronizačný súbor ktorý si môže uložiť na lokálny disk a učiť sa z neho po prípade ho zdieľať do vyššie spomínaného online katalógu pre verejnosť alebo len pre seba. Proces učenia prebieha spôsobom, že sa prehráva audio podľa vytvorených blokov a taktiež sa na obrazovku môže vypisovať text daného bloku. Používateľ si môže blok prehrávať toľko krát koľko sám uzná za vhodné. Používateľ si vie navyše zvoliť rôzne nastavenia a režimy (skupiny nastavení). Používateľ bude mať k dispozícii niekoľko režimov, ktoré už majú predvolené určité parametre, ktoré môže používateľ ešte prípadne pozmeniť. Z nastavenia parametrov má na výber: smer prehrávania (či chce bloky prehrávať zaradom alebo náhodne pomiešané), aká dlhá bude pauza medzi jednotlivými blokmi, počet opakovaní blokov, dĺžka pauzy medzi opakovaniami bloku, či chce zobraziť text ktorý sa bude prehrávať, alebo či chce použiť nejaký z dostupných paralelných prekladov.  Možnosť zobrazenia paralelných prekladov závisí od toho, či používateľ ich ma k dispozícií, alebo nie. Je to len doplnková možnosť. Je to rozšírená, nie nutná funkcionalita, kde si používateľ môže precvičovať  okrem správnej fonetiky aj svoju slovnú zásobu.
 
 
 \subsection{Charakteristika používateľa }
-So systémom Media Block Player budú pracovať používateľia ktorý môžu zastávať obe z nasledujúcich rolí súčasne:
+So systémom Media Block Player budú pracovať používatelia ktorý môžu zastávať obe z nasledujúcich rolí súčasne:
 
-a) Tvorca synchronizačných súborou pre výučbu cudzích jazykov. Výsledný súbor si môže uložiť viditeľný iba pre svoje konto alebo ho môže zverejniť pre širšiu verejnosť.
+a) Tvorca synchronizačných súborov pre výučbu cudzích jazykov. Výsledný súbor si môže uložiť viditeľný iba pre svoje konto alebo ho môže zverejniť pre širšiu verejnosť.
 
 b) Žiak ktorý sa môže učiť a cvičiť z vlastných alebo už vytvorených synchronizovaných súborov z databázy Media Block Playeru.
 
 
 \subsection{Všeobecné obmedzenia}
-Bude fungovať ako webová stránka. Požiadavky na velkosť a formát multimédií použitých v systéme. Systém bude používať predvolené zvukové zariadenie operačného systému.
+Bude fungovať ako webová stránka. Požiadavky na veľkosť a formát multimédií použitých v systéme. Systém bude používať predvolené zvukové zariadenie operačného systému.
 
 \subsection{Predpoklady a závislosti}
-Aplikácia má slúžiť na vzdelávanie, a na tvorenie obsahu pre vzdelávanie preto by mala mať intuitívne, jednoduché a prehľadné používateľské rozhranie. Použivateľské rozhranie bude celé v angličtine.
+Aplikácia má slúžiť na vzdelávanie, a na tvorenie obsahu pre vzdelávanie preto by mala mať intuitívne, jednoduché a prehľadné používateľské rozhranie. Používateľské rozhranie bude celé v angličtine.
 
 
 %============================================================
@@ -125,10 +125,10 @@ Aplikácia má slúžiť na vzdelávanie, a na tvorenie obsahu pre vzdelávanie 
 V aplikácii MediaBlockPlayer* funkcionalita ``Create SyncFile'' umožňuje vytvoriť nový SyncFile* na základe audio nahrávky, zodpovedajúceho skriptu a interakcie používateľa. Pretože vytvorenie SyncFile-u sa zriedka podarí na jedno sedenie, je potrebná samostatná funkcionalita ``Edit SyncFile''.
 
 \subsubsection{}
-Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, bude určený len pre desktop použitie.
+Modul „EDIT SyncFile“ má nahradiť súčasný button „Create SyncFile“, pričom očakávané minimálne rozlíšenie je 1024x768.
 
 \subsubsection{}
-„EDIT SyncFile“ bude môcť po downloade aplikácie pracovať aj off-line.
+„EDIT SyncFile“ bude môcť po downloade aplikácie pracovať aj bez prístupu na internet, ale súbory budú vyberané len z lokálneho disku. 
 
 \subsubsection{}
 Používateľ si na začiatku editovania vyberá ScriptFile s texom, AudioFile so zvukom a SyncFile s už existujúcim synchronizovaným súborom. Ak si nevyberie žiadny súbor SyncFile, bude vytvorený nový SyncFile. V opačnom prípade používateľ bude editovať vybraný súbor.
@@ -140,35 +140,34 @@ Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho Syn
 Funkcionalita Edit SyncFile umožní uložiť aj nedokončený SyncFile.
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní vybranému bloku pridať alebo odobrať časovú značku konca bloku, pričom si vie znova sputiť vybraný blok s už priradenou časovou značkou na kontrolu správnosti.
+Funkcionalita Edit SyncFile umožní vybranému bloku pridať alebo odobrať časovú značku konca bloku, pričom si vie znova spustiť vybraný blok s už priradenou časovou značkou na kontrolu správnosti.
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly.
+Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly za aktuálne označený blok.
 
 \subsubsection{}
-Pri vytváraní súboru zobraziť text zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané vynechané (Skipped) intervaly. Celý text v okne bude read only.
+Pri vytváraní súboru aplikácia zobrazuje zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané vynechané (Skipped) intervaly ako bloky. Okno bude iba read only pre používateľa aby sa ľahšie vyznal pri vytváraní súborov.
 
 \subsubsection{}
-V okne zvýrazniť aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
+V okne aplikácia zvýrazňuje aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
 
 \subsubsection{}
-Možnosť spustenia editora vybraného bloku. Editor umožní upraviť text editovaného bloku, rozdeliť editovaný blok na dva bloky a spojiť vybraný blok s následujúcim blokom.
+Možnosť spustenia editora vybraného bloku. Editor umožní upraviť text editovaného bloku, rozdeliť editovaný blok na dva bloky a spojiť vybraný blok s následujúcim textovým blokom (nie skipped). V prípade toho že bloky ktoré ideme spájať majú už časovú značku tak ich časy spojíme do jedného. To platí aj vtedy ak má iba jeden časovú stopu. Ak blok ktorý rozdeľujeme na dva už má časovú stopu tak bude musieť používateľ pridať čas v ktorom sa majú rozdeliť.
 
 \subsubsection{}
-Možnosť posunúť sa na další/predchádzajúci blok pomocou buttonu, no iba v prípade že aktuálne vybraný blok má už priradenú časovú značku konca bloku.
+Možnosť presunúť sa na další/predchádzajúci blok pomocou buttonov. 
 
 \subsubsection{}
-Možnosť posunúť časovú značku konca bloku dopredu/dozadu o používaťeľom zvolenú časovú jednotku. Pričom nemože prejsť už inú nastavenú značku.
+Možnosť posunúť časovú značku konca bloku dopredu/dozadu pomocou buttonovov plus a mínus o používateľom zvolený počet milisekúnd. Pričom keď posúvame časovú značku dopredu na bloku ktorý má za sebou existujúci ďalší blok tak posúva automaticky začiatok nasledovného bloku spolu s koncom aktuálneho bloku.
 
 \subsection{Kvalitatívne požiadavky}
-Počas tvorby sa vytvorí technická dokumentácia, ktorá bude slúžiť v prípade ďaľšieho vývoja.
+Počas tvorby sa vytvorí technická dokumentácia, ktorá bude slúžiť v prípade ďalšieho vývoja.
 
 \subsection{Požiadavky rozhrania}
-Používateľské rozhranie bude navrhnuté na bázy webového rozhrania a bude bežať v priehliadači webu. Používateľské rozhranie sa bude responzívne meniť podľa velkosti okna prehliadača s optimalizovaním pre desktopové prostredie.
+Používateľské rozhranie bude navrhnuté v podobe webového rozhrania a bude bežať v prehliadači webu. Používateľské rozhranie sa bude responzívne meniť podľa veľkosti okna prehliadača s optimalizovaním pre desktopové prostredie.
 
-Do aplikácie možno nahrať ScriptFile vo formáte .txt, AudioFile vo formáte .mp3 a SyncFile vo formáte .mbpsf. Z aplikácie možno stiahnuť ScriptFile vo formáte .txt a SyncFile vo formáte .mbpsf.
+Do aplikácie možno nahrať ScriptFile vo formáte .txt, AudioFile vo formáte .mp3 a SyncFile vo formáte .mbpsf. Po vytvorení nového Syncfilu je z aplikácie možné stiahnuť si ScriptFile vo formáte .txt a SyncFile vo formáte .mbpsf.
 
 Rozhranie aplikácie bude vhodne navrhnuté pre intuitívne a jednoduché používanie funkcii editora. Vzhľad prostredia zostane v súlade s už existujúcimi časťami aplikácie.
 
 \end{document}
-
