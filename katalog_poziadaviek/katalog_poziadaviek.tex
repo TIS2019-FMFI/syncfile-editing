@@ -140,16 +140,22 @@ Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho Syn
 Funkcionalita Edit SyncFile umožní uložiť aj nedokončený SyncFile.
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní vybranému bloku pridať alebo odobrať časovú značku konca bloku, pričom si vie znova spustiť vybraný blok s už priradenou časovou značkou na kontrolu správnosti.
+Funkcionalita Edit SyncFile umožní vybranému bloku pridať alebo odobrať časovú značku konca bloku. 
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly za aktuálne označený blok.
+Ak má vybraný blok a predchádzajúci blok priradenú časovú značku, tak si používateľ vie prehrať vybraný blok na kontrolu správnosti.
 
 \subsubsection{}
-Pri vytváraní súboru aplikácia zobrazuje zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané vynechané (Skipped) intervaly ako bloky. Okno bude iba read only pre používateľa aby sa ľahšie vyznal pri vytváraní súborov.
+Funkcionalita Edit SyncFile umožní pridať alebo odoberať vynechané (Skipped) intervaly za aktuálne označený blok. Po otvorení editora aplikácia automaticky vloží vynechaný (Skipped) interval pred prvý blok ak sa tam už nenachádza.
 
 \subsubsection{}
-V okne aplikácia zvýrazňuje aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
+Pri vytváraní súboru aplikácia zobrazuje celý text zo ScriptFile v textovom okne spolu s vynechanými (Skipped) intervalmi. Textové okno je read only.
+
+\subsection{}
+Text blokov, ktoré majú priradenú časovú značku, aplikácia podčiarkne. 
+
+\subsubsection{}
+V okne aplikácia zvýrazňuje text aktuálne vybraného blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
 
 \subsubsection{}
 Možnosť spustenia editora vybraného bloku. Editor umožní upraviť text editovaného bloku, rozdeliť editovaný blok na dva bloky a spojiť vybraný blok s následujúcim textovým blokom (nie skipped). V prípade toho že bloky ktoré ideme spájať majú už časovú značku tak ich časy spojíme do jedného. To platí aj vtedy ak má iba jeden časovú stopu. Ak blok ktorý rozdeľujeme na dva už má časovú stopu tak bude musieť používateľ pridať čas v ktorom sa majú rozdeliť.
@@ -169,5 +175,7 @@ Používateľské rozhranie bude navrhnuté v podobe webového rozhrania a bude 
 Do aplikácie možno nahrať ScriptFile vo formáte .txt, AudioFile vo formáte .mp3 a SyncFile vo formáte .mbpsf. Po vytvorení nového Syncfilu je z aplikácie možné stiahnuť si ScriptFile vo formáte .txt a SyncFile vo formáte .mbpsf.
 
 Rozhranie aplikácie bude vhodne navrhnuté pre intuitívne a jednoduché používanie funkcii editora. Vzhľad prostredia zostane v súlade s už existujúcimi časťami aplikácie.
+
+Aplikácia neumožnuje paralelne pracovať s viacerými textami (prekladmi). Pri zmene ScriptFile si používateľ musí zmeniť paralelné texty v externom editore.
 
 \end{document}
