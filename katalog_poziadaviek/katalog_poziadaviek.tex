@@ -140,25 +140,40 @@ Funkcionalita Edit SyncFile umožní upraviť časové značky existujúceho Syn
 Funkcionalita Edit SyncFile umožní uložiť aj nedokončený SyncFile.
 
 \subsubsection{}
-Funkcionalita Edit SyncFile umožní vybranému bloku pridať alebo odobrať časovú značku konca bloku, pričom si vie znova spustiť vybraný blok s už priradenou časovou značkou na kontrolu správnosti.
+Funkcionalita Edit SyncFile umožní ľubovóľnemu vybranému bloku pridať alebo odobrať časovú značku konca bloku, pričom si vie  spustiť vybraný blok s už priradenou časovou značkou na kontrolu správnosti, ak aj predchádzajúci blok má časovú značku.
 
 \subsubsection{}
 Funkcionalita Edit SyncFile umožní Pridať alebo odoberať vynechané (Skipped) intervaly za aktuálne označený blok.
 
 \subsubsection{}
-Pri vytváraní súboru aplikácia zobrazuje zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané vynechané (Skipped) intervaly ako bloky. Okno bude iba read only pre používateľa aby sa ľahšie vyznal pri vytváraní súborov.
+Pri vytváraní súboru aplikácia zobrazuje text zo ScriptFile v okne a v poradí v akom je uložený v súbore, plus pridané vynechané (Skipped) intervaly ako bloky. Okno bude iba read only pre používateľa aby sa ľahšie vyznal pri vytváraní súborov.
 
 \subsubsection{}
 V okne aplikácia zvýrazňuje aktuálny blok v ktorom sa používateľ nachádza pre lepšiu orientáciu v texte.
 
 \subsubsection{}
-Možnosť spustenia editora vybraného bloku. Editor umožní upraviť text editovaného bloku, rozdeliť editovaný blok na dva bloky a spojiť vybraný blok s následujúcim textovým blokom (nie skipped). V prípade toho že bloky ktoré ideme spájať majú už časovú značku tak ich časy spojíme do jedného. To platí aj vtedy ak má iba jeden časovú stopu. Ak blok ktorý rozdeľujeme na dva už má časovú stopu tak bude musieť používateľ pridať čas v ktorom sa majú rozdeliť.
+Možnosť spustenia editora vybraného bloku. Editor umožní upraviť text editovaného bloku, rozdeliť editovaný blok na dva bloky a spojiť vybraný blok s následujúcim textovým blokom (nie skipped). 
 
 \subsubsection{}
-Možnosť presunúť sa na další/predchádzajúci blok pomocou buttonov. 
+Pri spájaní blokov ktoré už majú časovú značku tak ich časy spojíme do jedného. To platí aj vtedy ak má iba jeden časovú stopu. 
 
 \subsubsection{}
-Možnosť posunúť časovú značku konca bloku dopredu/dozadu pomocou buttonovov plus a mínus o používateľom zvolený počet milisekúnd. Pričom keď posúvame časovú značku dopredu na bloku ktorý má za sebou existujúci ďalší blok tak posúva automaticky začiatok nasledovného bloku spolu s koncom aktuálneho bloku.
+Rozdeliť bloky môžem pridaním znaku pipeline "|", systém však ale umožňuje pridať iba jednu pipeline pri jednom rozdeľovaní.
+
+\subsubsection{}
+Pri rozdeľovaní bloku sa prvá časť stáva aktuálnym blokom s ktorým používateľ pracuje. 
+
+\subsubsection{}
+Ak rozdelujeme blok ktorý už časovú stopu má tak začiatok prvého bude určený pôvodným nerozdeleným blokom a používateľ nastaví jeho časová značku konca ktorá určí začiatok druhého novo vzniknutého bloku a koniec druhého bloku je určený pôvodným nerozdeleným blokom.
+
+\subsubsection{}
+Možnosť presunúť sa na ďalší/predchádzajúci blok pomocou buttonov. 
+
+\subsubsection{}
+Možnosť posunúť časovú značku konca bloku dopredu/dozadu pomocou buttonovov plus a mínus o používateľom zvolený počet stotín sekúnd. Pričom keď posúvame časovú značku dopredu na bloku ktorý má za sebou existujúci ďalší blok tak posúva automaticky začiatok nasledovného bloku spolu s koncom aktuálneho bloku.
+
+\subsubsection{}
+Editor umožňuje stiahnuť editované súbory a ukončiť editor alebo ukončiť editor rovno bez ukladania súborov pomocou buttonov Save a Cancel. Po ukončení budeme presmerovaný na domovskú stránku. 
 
 \subsection{Kvalitatívne požiadavky}
 Počas tvorby sa vytvorí technická dokumentácia, ktorá bude slúžiť v prípade ďalšieho vývoja.
