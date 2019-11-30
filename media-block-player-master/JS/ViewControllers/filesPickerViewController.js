@@ -3,6 +3,7 @@
 class FilesPickerViewController extends ViewController {
 
     constructor() {
+        // upravit data
         super();
 
         this.fileName;
@@ -12,6 +13,7 @@ class FilesPickerViewController extends ViewController {
     }
 
     renderHtml(html) {
+        // TODO: upravit, issue14
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
                 <div class="row row-100 m12">
@@ -64,12 +66,16 @@ class FilesPickerViewController extends ViewController {
     }
 
     setupProperties() {
+        // TODO: po uprave html vytvorit nove properties, 
+        // rewrittenAudioFilePicker sa premenuje na scriptFilePicker
         this.audioFilePicker = $('#audio-file-picker');
         this.rewrittenAudioFilePicker = $('#rewritten-audio-file-picker');
         this.startCreatingButton = $('#start-creating-button');
     }
 
     setupEventListeners() {
+        // TODO: po uprave html vytvorit nove event listeners,
+        // premenovat: rewrittenAutio -> script
         this.audioPickerValueChanged = this.audioPickerValueChanged.bind(this);
         this.rewrittenAudioPickerValueChanged = this.rewrittenAudioPickerValueChanged.bind(this);
         this.creatingButtonClicked = this.creatingButtonClicked.bind(this);
@@ -80,6 +86,8 @@ class FilesPickerViewController extends ViewController {
     }
 
     presentNextController() {
+        // TODO: SyncFileCreateViewController sa premenuje na SyncFileEditViewController
+        // je potreba vytvorit 
         const syncFileCreateViewController = new SyncFileCreateViewController();
         syncFileCreateViewController.sound = this.sound;
         syncFileCreateViewController.playbackSound = this.playbackSound;
@@ -91,6 +99,7 @@ class FilesPickerViewController extends ViewController {
     // Private Methods
 
     audioPickerValueChanged() {
+        // TODO: mozno bude potreba upravit
         const audioFile = this.audioFilePicker[0].files[0];
         if (audioFile === undefined) {
             this.setupStartCreatingButton();
@@ -108,7 +117,8 @@ class FilesPickerViewController extends ViewController {
         this.setupStartCreatingButton();
     }
 
-    rewrittenAudioPickerValueChanged() {
+    scritFilePickerValueChanged() {
+        // TODO: upravit?
         const textFile = this.rewrittenAudioFilePicker[0].files[0];
         if (textFile === undefined) {
             this.setupStartCreatingButton();
@@ -123,7 +133,13 @@ class FilesPickerViewController extends ViewController {
         this.setupStartCreatingButton();
     }
 
+    syncFilePickerValueChanged() {
+        // TODO: implementovat
+    }
+
     setupStartCreatingButton() {
+        // TODO: premenovat rewrittenAudio
+        // menit nazov buttonu na Create alebo Edit podla toho ci je nahrany script file
         const audioPickerHasFile = this.audioFilePicker[0].files[0] !== undefined;
         const rewrittenAudioPickerHasFile = this.rewrittenAudioFilePicker[0].files[0] !== undefined;
         const shouldEnableCreatingButton = audioPickerHasFile && rewrittenAudioPickerHasFile;
@@ -135,6 +151,7 @@ class FilesPickerViewController extends ViewController {
     }
 
     creatingButtonClicked() {
+        // TODO premenovat na editingButtonClicked
         this.presentNextController();
     }
 
@@ -144,6 +161,7 @@ class FilesPickerViewController extends ViewController {
     /// @param text - text you want to split
     /// @return method returns array of strings (blocks)
     parseBlocks(text) {
+        // TODO: deprecated, tuto metodu nahradi createSyncFileEditorData()
         var result = []
         const parsedBlocks = text.split("|");
         parsedBlocks.forEach(block => {
@@ -153,6 +171,10 @@ class FilesPickerViewController extends ViewController {
             }
         });
         return result;
+    }
+
+    createSyncFileEditorData(){
+        // TODO: implementovat po tom ako sa vytvori trieda SyncFileEditorData
     }
 
     /// Encode file to base64 encoding

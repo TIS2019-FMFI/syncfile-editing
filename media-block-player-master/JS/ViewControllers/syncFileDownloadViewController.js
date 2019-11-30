@@ -10,6 +10,7 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     renderHtml(html) {
+        // TODO: upravit, issue14
         const htmlView = `
             <section id="SyncFileDownloadViewController" class="container">
                 <div class="row row-100">
@@ -33,12 +34,22 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
+        // TODO: po uprave html vytvorit propertier
         this.fileNameLabel = $('#file-name-label');
         this.fileLinkDownload = $('#file-download');
     }
 
+    setupEventListeners() {
+        // TODO: po uprave html vytvorit event listeners
+    }
+
     viewDidLoad() {
+        // TODO: kedy sa metoda vola?
         this.showSyncFileDownload();
+    }
+
+    presentNextController() {
+        // TODO: vratit sa do editora
     }
 
     // Private Methods
@@ -47,6 +58,7 @@ class SyncFileDownloadViewController extends ViewController {
     /// skip blocks array. Then it will create html download link with
     /// {filename}.mbpsf file
     showSyncFileDownload() {
+        // TODO: zmenit podla SyncFileEditorData triedy
         const syncFileName = `${this.fileName}.mbpsf`;
         const syncFileObject = new Object();
         syncFileObject.blocks = this.blocksEndTimes;
@@ -57,6 +69,10 @@ class SyncFileDownloadViewController extends ViewController {
         this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
         this.fileLinkDownload.attr('download', syncFileName);
         this.fileLinkDownload.html('DOWNLOAD');
+    }
+
+    showScriptFileDownload(){
+        // TODO: implementovat podla SyncFileEditorData triedy
     }
 
 }
