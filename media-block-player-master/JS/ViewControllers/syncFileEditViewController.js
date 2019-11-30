@@ -1,5 +1,5 @@
 /// Class for creating synchornization file
-class SyncFileCreateViewController extends ViewController {
+class SyncFileEditViewController extends ViewController {
 
     constructor() {
         super();
