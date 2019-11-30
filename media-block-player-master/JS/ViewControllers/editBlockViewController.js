@@ -1,6 +1,6 @@
 // Class for editing one scriptFile block for syncFile editor.
 // Enetered from syncFileEditor and will exit back to syncFileEditor.
-class editBlockViewController extends ViewController {
+class EditBlockViewController extends ViewController {
 
     constructor() {
         // TODO: upravit
