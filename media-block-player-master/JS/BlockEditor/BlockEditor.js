@@ -16,10 +16,12 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
 
         //
-        //Configuring time from existing SyncFileData.  
+        //Configuring time of blocks from existing SyncFileData.  
         //
         if (!SyncFileData == null){
             times = SyncFileData["blocks"].concat(SyncFileData["skips"]);
+            times.sort();
+
             for (var i = 0; i < times.length; i++) {
                 if (initSkipped(times[i])){
                     insertSkippedBlock(time);
@@ -32,6 +34,7 @@ class BlockEditor {
     }
 
 
+
     //
     //Is skipped in SyncFileData for initialize skipped blocks.
     //
@@ -41,6 +44,7 @@ class BlockEditor {
         }
         return false;
     }
+
 
 
     //
@@ -67,6 +71,7 @@ class BlockEditor {
     }
     
 
+
     //
     //Time
     //
@@ -86,6 +91,7 @@ class BlockEditor {
             return "0.00"; 
         }
     }
+
 
 
     //
@@ -134,22 +140,21 @@ class BlockEditor {
     }
 
 
-    //
-    //Skipped
-    //
-    insertSkippedBlock(){
-        skiped = new Block();
-        this.blocks.splice(this.currentBlockIndex+1, 0, skiped);
-    }
 
-    insertSkippedBlock(time){
+    //
+    //Skipped Intervals
+    //
+    insertSkippedBlock(time = null){
         skiped = new Block(null,time);
         this.blocks.splice(this.currentBlockIndex+1, 0, skiped);
     }
 
-    removeSkippedBlock(){                                                       //TODO čo ak skipped nie je?
+    removeSkippedBlock(){
         if (this.block[this.currentBlockIndex].isSkipped()){
             this.blocks.splice(this.currentBlockIndex, 1);        
+        }
+        else{
+            throw "This block is not skipped.";
         }
     }
 
@@ -158,8 +163,9 @@ class BlockEditor {
     }
 
 
+
     //
-    //Edit
+    //Merge/Split Block
     //
     splitSelectedBlock(text1, text2){
         this.blocks.splice(this.currentBlockIndex, 1);
@@ -168,10 +174,11 @@ class BlockEditor {
 
     }
 
-        //TODO čo ak je ďalší skipped tiež by bolo možno dobré vyhodiť chybu.
-
     mergeSelectedBlockWithNextBlock(){
         if (!this.blocks.length >= this.currentBlockIndex){
+            if(this.blocks[this.currentBlockIndex].isSkipped()){
+                throw "Next block is skipped, you cannot merge block with skipped interval.";
+            }
             text1 = this.blocks[this.currentBlockIndex].getText();
             text2 = this.blocks[this.currentBlockIndex+1].getText();
             newBlock = new Block(text1.concat(" ", text2))
@@ -180,7 +187,7 @@ class BlockEditor {
             this.blocks.splice(this.currentBlockIndex, 0, newBlock);
         } 
         else{
-            exception = "Nemáš ďalší block"; //TODO
+            throw "Next block doesn´t exist.";
         }
     }
 }
