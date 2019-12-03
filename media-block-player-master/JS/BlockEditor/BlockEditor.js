@@ -4,7 +4,6 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-
     }
 
     init(){
@@ -63,7 +62,6 @@ class BlockEditor {
     }
     
 
-
     //
     //Time
     //
@@ -85,7 +83,6 @@ class BlockEditor {
     }
 
 
-
     //
     //Text
     //
@@ -97,13 +94,15 @@ class BlockEditor {
         var resText = [];
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].isSkipped()){
-                resText.push("<Skipped>")
+                resText.push(null);
+                //resText.push("<Skipped>"); Zmena v návrhu.
             }
             else{
                 resText.push(this.blocks[i].getText());
             }
         }
-        return resText.join(" | ");
+        return resText
+        //return resText.join(" | ");  Zmena v návrhu.
     }
 
     getScriptFileData(){
@@ -132,7 +131,6 @@ class BlockEditor {
     }
 
 
-
     //
     //Skipped Intervals
     //
@@ -154,7 +152,6 @@ class BlockEditor {
         console.log(this.blocks[this.currentBlockIndex].getText());
         return this.blocks[this.currentBlockIndex].isSkipped();
     }
-
 
 
     //
@@ -180,7 +177,6 @@ class BlockEditor {
             var newBlock = new Block(text1.concat(" ", text2))
 
             this.blocks.splice(this.currentBlockIndex, this.currentBlockIndex+2);
-            console.log("aha");
             this.blocks.splice(this.currentBlockIndex, 0, newBlock);
         } 
         else{
