@@ -1,30 +1,35 @@
 class BlockEditor {
     constructor(ScriptFileData, SyncFileData = null) {
-
+        this.ScriptFileData = ScriptFileData;
+        this.SyncFileData = SyncFileData;
         this.blocks = [];
-        ScriptFileDataAsArray = ScriptFileData.split("|");
+        this.currentBlockIndex = 0;
 
-        //
-        //Initializing blocks from existing ScriptFile.
-        //
+    }
+
+    init(){
+        this.initBlocks();
+        this.initBlocksTime();
+    }
+
+    initBlocks(){
+        var ScriptFileDataAsArray = this.ScriptFileData.split("|");
+        //TODO odchytiť prípad keď príde viacero pipeline za sebou a zmeniť na jednu pipeline a zároveň to dať najavo používateľovi výnimkou do alertu.
+
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
-            block = new Block(ScriptFileDataAsArray[i].trim());
+            var block = new Block(ScriptFileDataAsArray[i].trim());
             this.blocks.push(block);
         }
+    }
 
-        this.currentBlockIndex = 0;
-        this.SyncFileData = SyncFileData;
-
-        //
-        //Configuring time of blocks from existing SyncFileData.  
-        //
-        if (!SyncFileData == null){
-            times = SyncFileData["blocks"].concat(SyncFileData["skips"]);
-            times.sort();
+    initBlocksTime(){
+        if (!(this.SyncFileData == null)){
+            var times = this.SyncFileData["blocks"].concat(this.SyncFileData["skips"]);
+            times.sort(function(a,b) { return a - b;});
 
             for (var i = 0; i < times.length; i++) {
-                if (initSkipped(times[i])){
-                    insertSkippedBlock(time);
+                if (this.SyncFileData["skips"].includes(times[i])){
+                    this.insertSkippedBlock(i, times[i]);
                 }
                 else{
                     this.blocks[i].setTime(times[i]);
@@ -32,19 +37,6 @@ class BlockEditor {
             }        
         }
     }
-
-
-
-    //
-    //Is skipped in SyncFileData for initialize skipped blocks.
-    //
-    initSkipped(time){
-        if (this.SyncFileData["skips"].includes(time)){
-            return true;
-        }
-        return false;
-    }
-
 
 
     //
@@ -102,9 +94,9 @@ class BlockEditor {
     }
 
     getTextOfAllBlocks() {
-        resText = [];
+        var resText = [];
         for (var i = 0; i < this.blocks.length; i++) {
-            if (currentBlock.isSkipped()){
+            if (this.blocks[i].isSkipped()){
                 resText.push("<Skipped>")
             }
             else{
@@ -115,25 +107,25 @@ class BlockEditor {
     }
 
     getScriptFileData(){
-        scriptFileOutput = [];
+        var scriptFileOutput = [];
         for (var i = 0; i < this.blocks.length; i++) {
-            currentBlock = this.blocks[i];
+            var currentBlock = this.blocks[i];
             if (!currentBlock.isSkipped()){
-                scriptFileOutput.push(currentBlock);
+                scriptFileOutput.push(currentBlock.getText());
             }
         }
         return scriptFileOutput.join(" | \n");
     }
 
     getSyncFileData(){
-        blocks = [];
-        skips = [];
+        var blocks = [];
+        var skips = [];
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].isSkipped()){
-                skips.push(this.blocks[i]);
+                skips.push(this.blocks[i].getTime());
             }
             else{
-                blocks.push(this.blocks[i]);
+                blocks.push(this.blocks[i].getTime());
             }
         }
         return {"blocks" : blocks, "skips" : skips};
@@ -144,21 +136,22 @@ class BlockEditor {
     //
     //Skipped Intervals
     //
-    insertSkippedBlock(time = null){
-        skiped = new Block(null,time);
-        this.blocks.splice(this.currentBlockIndex+1, 0, skiped);
+    insertSkippedBlock(index = this.currentBlockIndex, time = null){
+        var skiped = new Block(null,time);
+        this.blocks.splice(index, 0, skiped);
     }
 
     removeSkippedBlock(){
-        if (this.block[this.currentBlockIndex].isSkipped()){
+        if (this.blocks[this.currentBlockIndex].isSkipped()){
             this.blocks.splice(this.currentBlockIndex, 1);        
         }
         else{
-            throw "This block is not skipped.";
+            throw "This block is not skipped interval.";
         }
     }
 
     isSelectedBlockSkipped(){
+        console.log(this.blocks[this.currentBlockIndex].getText());
         return this.blocks[this.currentBlockIndex].isSkipped();
     }
 
@@ -176,14 +169,18 @@ class BlockEditor {
 
     mergeSelectedBlockWithNextBlock(){
         if (!this.blocks.length >= this.currentBlockIndex){
-            if(this.blocks[this.currentBlockIndex].isSkipped()){
+            if(this.isSelectedBlockSkipped()){
+                throw "You cannot merge skipped interval.";
+            }
+            if(this.blocks[this.currentBlockIndex+1].isSkipped()){
                 throw "Next block is skipped, you cannot merge block with skipped interval.";
             }
-            text1 = this.blocks[this.currentBlockIndex].getText();
-            text2 = this.blocks[this.currentBlockIndex+1].getText();
-            newBlock = new Block(text1.concat(" ", text2))
+            var text1 = this.blocks[this.currentBlockIndex].getText();
+            var text2 = this.blocks[this.currentBlockIndex+1].getText();
+            var newBlock = new Block(text1.concat(" ", text2))
 
-            this.blocks.splice(this.currentBlockIndex, 2);
+            this.blocks.splice(this.currentBlockIndex, this.currentBlockIndex+2);
+            console.log("aha");
             this.blocks.splice(this.currentBlockIndex, 0, newBlock);
         } 
         else{
