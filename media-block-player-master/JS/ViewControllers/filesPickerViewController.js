@@ -21,6 +21,12 @@ class FilesPickerViewController extends ViewController {
                         <h1 class="center">Choose files for creating</h1>
                     </div>
                 </div>
+
+
+
+
+
+
                 <div class="row row-50">
                     <div class="col s6">
                         <form action="#">
@@ -49,6 +55,28 @@ class FilesPickerViewController extends ViewController {
                         </form>
                     </div>
                 </div>
+
+				
+				
+				<div class="row row-50 center">
+                    <div class="col s6">
+                        <form action="#">
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span><i class="material-icons right">description</i>SyncFile</span>
+                                    <input id="sync-file-picker" type="file" accept=".mbpsf" />
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+
+
+
+
                 <div class="row row-50">
                     <div class="col s12 center">
                         <!--<button id="start-creating-button" disabled style="font-size:20px;">Start creating</button>-->
