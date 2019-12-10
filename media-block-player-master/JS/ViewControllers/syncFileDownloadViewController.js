@@ -12,22 +12,25 @@ class SyncFileDownloadViewController extends ViewController {
     renderHtml(html) {
         // TODO: upravit, issue14
         const htmlView = `
-            <section id="SyncFileDownloadViewController" class="container">
-                <div class="row row-100">
-                    <div class="col s12">
-                        <h2 id="file-name-label" class="center"></h2>
-                    </div>
-                </div>
-                <div class="row row-50">
-                    <div class="col s12 center">
-                        <a id="file-download" class="waves-effect waves-light btn-large"><i class="material-icons right">get_app</i>DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="row row-100">
-                    <div class="col s12">
-                        <a class="btn right" href="index.html">Back to my menu</a>
-                    </div>
-                </div>
+            <section id="FilesPickerViewController" class="container">
+				<div class = "myMERGE">
+					<h4>AudioFile:</h4>
+					<input id = "audio-file" type="text" value="audio">
+				</div>
+				<div class = "myMERGE">
+					<h4>ScriptFile:</h4>
+					<input id = "script-file" type="text" value="text">
+				</div>
+				<div class = "myMERGE">
+					<h4>SyncFile:</h4>
+					<input id = "sync-file" type="text" value="syncfile">
+				</div>
+				<div class = "myMERGE">
+					<a id="save" class="btn m-lr-10">Save&Exit</a>
+					<a id="unsave" class="btn m-lr-10">Exit without saving</a>
+					<a id="back" class="btn m-lr-10">Back to setting time</a>
+				</div>
+
             </section>
         `;
         super.renderHtml(htmlView);
