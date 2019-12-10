@@ -15,7 +15,22 @@ class EditBlockViewController extends ViewController {
     renderHtml(html) {
         // TODO: upravit, issue14
         const htmlView = `
-
+            <section id="FilesPickerViewController" class="container">
+				<div class = "myMERGE">
+					<h2>EDIT, SPLIT or MERGE the Curret Block</h2>
+				</div>
+				<div class = "myMERGE">
+					<textarea id="actual-text" readonly>
+					</textarea>
+				</div>
+				<div class = "myMERGE">
+					<h6>Edit text or add "|" to Split into two blocks or<a id="merge" class="btn m-lr-10">Merge with the next block</a></h6>
+				</div>
+				<div class = "myMERGE">
+					<a id="apply" class="btn m-lr-10">Apply edited changes to the Script</a>
+					<a id="cancel" class="btn m-lr-10">Cancel</a>
+				</div>
+            </section>
         `;
         super.renderHtml(htmlView);
     }
