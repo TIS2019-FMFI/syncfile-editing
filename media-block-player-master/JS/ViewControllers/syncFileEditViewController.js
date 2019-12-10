@@ -1,5 +1,5 @@
 /// Class for creating synchornization file
-class SyncFileCreateViewController extends ViewController {
+class SyncFileEditViewController extends ViewController {
 
     constructor() {
         super();
@@ -17,34 +17,46 @@ class SyncFileCreateViewController extends ViewController {
     }
 
     renderHtml(html) {
+        // TODO: upravit, issue14
         const htmlView = `
             <section id="SyncFileCreateViewController" class="container">
-                <div class="row row-150">
-                    <h2 id="actual-text" class="center"></h2>
-                </div>
-                <div class="row row-50 center">
-                    <input class="w-45 m-lr-10" id="backward-speed" type="number" min="0.1" max="10" step="0.1" value="0.3">
+				<div class = "my">
+					<textarea id="actual-text" readonly>
+					</textarea>
+				</div>
+				<div class = "my2">
+				    <a class="btn m-lr-10" id="play-pause-button"><i id="play-pause-icon" class="material-icons">play_circle_outline</i></a>
                     <a class="btn m-lr-10" id="backward-button"><i class="material-icons">fast_rewind</i></a>
-                    <a class="btn m-lr-10" id="play-pause-button"><i id="play-pause-icon" class="material-icons">play_circle_outline</i></a>
-                    <a class="btn m-lr-10" id="forward-button"><i class="material-icons">fast_forward</i></a>
-                    <input class="w-45 m-lr-10" id="forward-speed" type="number" min="0.1" max="10" step="0.1" value="0.3">
-                </div>
-                <div class="row row-50 center">
-                    <a id="play-actual-block-button" class="btn"><i class="material-icons right">replay</i>Play actual block</a>
-                </div>
-                <div class="row row-50 center">
-                    <a id="skip-block-button" class="btn m-lr-10">Skip time</a>
-                    <a id="next-block-button" class="btn m-lr-10">NEXT BLOCK</a>
-                </div>
-                <div class="row row-100">
+					<input class="w-45 m-lr-10" id="speed" type="number" min="0.1" max="10" step="0.1" value="0.3">
+                    <a class="btn m-lr-10" id="forward-button"><i class="material-icons">fast_forward</i></a>                    
+				</div>
+				<div class = "my2">
+					<a id="accept" class="btn m-lr-10">Accept</a>
+                    <a id="replay" class="btn"><i class="material-icons center">replay</i></a>              
+				</div>
+				<div class = "my2">
+					<a id="skip-block" class="btn m-lr-10">SKIP interval</a>
+					<a id="remove-skipped-interval" class="btn m-lr-10">Remove Skipped Interval</a>
+				</div>
+				<div class = "my2">
+					<a id="edit-blok" class="btn m-lr-10">Edit Block</a>
+					<a id="save-exit" class="btn m-lr-10">Save & Exit</a>
+				</div>
+				<div class="my2">
                     <a class="btn-small right" href="index.html">Back to my menu</a>
                 </div>
+				<div class = "my3">
+					<a id="next-block-button" class="btn m-lr-10"><-</a>
+					<a id="previous-block-button" class="btn m-lr-10">-></a>
+				</div>
             </section>
         `;
         super.renderHtml(htmlView);
     }
 
     setupProperties() {
+        // TODO: po uprave html vytvorit nove properties
+        
         // Labels
         this.actualBlockText = $('#actual-text');
         this.playPauseIcon = $('#play-pause-icon');
@@ -63,6 +75,8 @@ class SyncFileCreateViewController extends ViewController {
     }
 
     setupEventListeners() {
+        // TODO: po uprave html vytvorit nove listeners
+
         this.playPauseButtonClicked = this.playPauseButtonClicked.bind(this);
         this.backwardButtonClicked = this.backwardButtonClicked.bind(this);
         this.forwardButtonClicked = this.forwardButtonClicked.bind(this);
@@ -114,10 +128,12 @@ class SyncFileCreateViewController extends ViewController {
     }
 
     viewDidLoad() {
+        // TODO: skontrolovat ako a kde sa funckia vola a ci je ju treba upravit
         this.actualBlockText.text( this.blocks[this.textBlockIndex] );
     }
 
     presentNextController() {
+        // TODO: upravit predavanie dat cez SyncFileEditorData triedy
         const syncFileDownloadViewController = new SyncFileDownloadViewController();
         syncFileDownloadViewController.fileName = this.fileName;
         syncFileDownloadViewController.blocksEndTimes = this.blocksEndTimes;
@@ -128,77 +144,46 @@ class SyncFileCreateViewController extends ViewController {
     // Private Methods
 
     playPauseButtonClicked() {
-        if (this.sound.playing()) {
-            this.sound.pause();
-            this.sound.seek( this.sound.seek() - 0.05 );
-            this.actualSeek = this.sound.seek();
-            this.playPauseIcon.text('play_circle_outline');
-        } else {
-            this.sound.play();
-            this.playPauseIcon.text('pause_circle_outline');
-        }
+        // TODO: implementovat
     }
 
     backwardButtonClicked() {
-        this.sound.seek( this.sound.seek() - Number(this.backwardSpeedInput.val()) );
-        this.actualSeek = this.sound.seek();
+        // TODO: implementovat
     }
 
     forwardButtonClicked() {
-        this.sound.seek( this.sound.seek() + Number(this.forwardSpeedInput.val()) );
-        this.actualSeek = this.sound.seek();
+        // TODO: implementovat
     }
 
-    playActualButtonClicked() {
-        var lastPosition = 0;
-        if (this.blocksEndTimes.length > 0) {
-            lastPosition = this.blocksEndTimes[this.blocksEndTimes.length - 1];
-        }
-        const playbackLength = (this.actualSeek - lastPosition) * 1000;
-        this.playbackSound._sprite.actual = [lastPosition * 1000, playbackLength];
-        this.playbackSound.pause();
-        this.playbackSound.play('actual');
+    replayButtonClicked() {
+        // TODO: implementovat
     }
 
-    skipBlockButtonClicked() {
-        this.addActualSeekBlock();
-        this.skipBlock.push( Math.round( this.sound.seek() * 100 ) / 100 );
+    okNextButtonClicked() {
+        // TODO: implementovat
+    }
+
+    addSkipButtonClicked() {
+        // TODO: implementovat
+    }
+
+    removeSkipButtonClicked() {
+        // TODO: implementovat
+    }
+
+    previousBlockButtonClicked() {
+        // TODO: implementovat
     }
 
     nextBlockButtonClicked() {
-        if (this.creatingDone) {
-            this.presentNextController();
-        } else if (this.textBlockIndex === this.blocks.length - 1) {
-            this.addActualSeekBlock();
-            this.fileCreatingFinished();
-        } else {
-            this.addActualSeekBlock();
-            this.textBlockIndex++;
-            this.actualBlockText.text( this.blocks[this.textBlockIndex] );
-        }
+        // TODO: implementovat
     }
 
-    addActualSeekBlock() {
-        this.actualSeek = this.sound.seek();
-        this.blocksEndTimes.push( Math.round( this.sound.seek() * 100 ) / 100 );
+    editBlockButtonClicked() {
+        // TODO: implementovat
     }
 
-    audioReachedEnd() {
-        const duration = this.sound.duration(); // last seek
-        this.blocksEndTimes.push( Math.round( duration * 100 ) / 100 );
-        this.fileCreatingFinished();
+    saveExitButtonClicked() {
+        // TODO: implementovat
     }
-
-    fileCreatingFinished() {
-        this.backwardButton.attr('disabled', true);
-        this.playPauseButton.attr('disabled', true);
-        this.forwardButton.attr('disabled', true);
-        this.skipBlockButton.attr('disabled', true);
-        this.playActualBlockButton.attr('disabled', true);
-        this.playPauseIcon.text('play_circle_outline');
-        this.actualBlockText.text('Sync file creating is done.');
-        this.nextBlockButton.text('FINISH');
-        this.creatingDone = true;
-    }
-
 }
