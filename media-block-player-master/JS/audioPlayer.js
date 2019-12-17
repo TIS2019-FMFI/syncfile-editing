@@ -8,8 +8,14 @@ class AudioPlayer{
 constructor(audioFile){
 	this.currentTime = "";
 	this.audioFile = audioFile;
-	this.audio = new Howl({
-		src: [audioFile]       
+	this.audio;
+	this.sound;
+	
+	this.getBase64(this.audioFile).then( data => {
+        this.audio = new Howl({
+            src: data
+		});
+          
     });
 	
 }
@@ -27,14 +33,19 @@ playInterval(time1, time2){
 	if (this.audio.playing()){
 		this.audio.pause();
 	}
-	var duration = (parseInt(time2)*1000 - parseInt(time1)*1000);  
-	var sound = new Howl({
-		src: [this.audioFile], 
-		sprite: {
-			interval: [parseInt(time1)*1000, duration]
-		}	
-	});
-	sound.play('interval');
+	//if (this.sound === undefined){
+		var duration = (parseInt(time2)*1000 - parseInt(time1)*1000);  
+		this.getBase64(this.audioFile).then( data => {
+			this.sound= new Howl({
+				src: data,
+				sprite: {
+					interval: [parseInt(time1)*1000, duration]
+				}
+			});
+			this.sound.play('interval');
+			  
+		});
+	//}
 }
 
 
@@ -71,5 +82,18 @@ rewindAudioToZero(){
 	this.audio.stop();
 	//this.audio.play();
 }
+
+/// Encode file to base64 encoding
+    /// @param file - file you want to encode
+    /// @return - base64 string of file
+    getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
 
 }
