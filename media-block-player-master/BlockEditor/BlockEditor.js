@@ -1,0 +1,206 @@
+class BlockEditor {
+    constructor(ScriptFileData, SyncFileData = null) {
+        this.ScriptFileData = ScriptFileData;
+        this.SyncFileData = SyncFileData;
+        this.blocks = [];
+        this.currentBlockIndex = 0;
+    }
+
+    init(){
+        this.initBlocks();
+        this.initBlocksTime();
+    }
+
+    initBlocks(){
+        var ScriptFileDataAsArray = this.ScriptFileData.split("|");
+        //TODO odchytiť prípad keď príde viacero pipeline za sebou a zmeniť na jednu pipeline a zároveň to dať najavo používateľovi výnimkou do alertu.
+
+        for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
+            var block = new Block(ScriptFileDataAsArray[i].trim());
+            this.blocks.push(block);
+        }
+    }
+
+    initBlocksTime(){
+        if (!(this.SyncFileData == null)){
+            var times = this.SyncFileData["blocks"].concat(this.SyncFileData["skips"]);
+            times.sort(function(a,b) { return a - b;});
+
+            for (var i = 0; i < times.length; i++) {
+                if (this.SyncFileData["skips"].includes(times[i])){
+                    this.insertSkippedBlock(i, times[i]);
+                }
+                else{
+                    this.blocks[i].setTime(times[i]);
+                }
+            }        
+        }
+    }
+
+
+    //
+    //Indexes
+    //
+    selectFirstBlock(){
+        this.currentBlockIndex = 0;
+    }
+
+    selectNextBlock(){
+        if (this.currentBlockIndex+1 < this.blocks.length){
+        this.currentBlockIndex++;
+        }
+    }
+
+    selectPreviousBlock(){
+        if (this.currentBlockIndex > 0){
+        this.currentBlockIndex--;
+        }
+    }
+
+    getCurrentBlockIndex(){
+        return this.currentBlockIndex;
+    }
+    
+
+    //
+    //Time
+    //
+    setTimeToSelectedBlock(time){
+        this.blocks[this.currentBlockIndex].setTime(time);
+    }
+
+    getTimeOfSelectedBlock(){
+        return this.blocks[this.currentBlockIndex].getTime();
+    }
+
+    getTimeOfPreviousBlock(){
+        if (this.currentBlockIndex > 0){
+            return this.blocks[this.currentBlockIndex-1].getTime();
+        }
+        else{
+            return "0.00"; 
+        }
+    }
+
+
+    //
+    //Text
+    //
+    getTextOfSelectedBlock(){
+        return this.blocks[this.currentBlockIndex].getText();
+    }
+
+    setTextOfSelectedBlock(txt){
+        this.blocks[this.currentBlockIndex].setText(txt);
+    }
+
+    getTextOfAllBlocks() {
+        var resText = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].isSkipped()){
+                resText.push(null);
+                //resText.push("<Skipped>"); Zmena v návrhu.
+            }
+            else{
+                resText.push(this.blocks[i].getText());
+            }
+        }
+        return resText
+        //return resText.join(" | ");  Zmena v návrhu.
+    }
+
+    getScriptFileData(){
+        var scriptFileOutput = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            var currentBlock = this.blocks[i];
+            if (!currentBlock.isSkipped()){
+                scriptFileOutput.push(currentBlock.getText());
+            }
+        }
+        return scriptFileOutput.join(" | \n");
+    }
+
+    getSyncFileData(){
+        var blocks = [];
+        var skips = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].isSkipped()){
+                skips.push(this.blocks[i].getTime());
+            }
+            else{
+                blocks.push(this.blocks[i].getTime());
+            }
+        }
+        return {"blocks" : blocks, "skips" : skips};
+    }
+
+
+    //
+    //Skipped Intervals
+    //
+    insertSkippedBlock(index = this.currentBlockIndex, time = null){
+        var skiped = new Block(null,time);
+        this.blocks.splice(index, 0, skiped);
+    }
+
+    removeSkippedBlock(){
+        if (this.blocks[this.currentBlockIndex].isSkipped()){
+            this.blocks.splice(this.currentBlockIndex, 1);        
+        }
+        else{
+            throw "This block is not skipped interval.";
+        }
+    }
+
+    isSelectedBlockSkipped(){
+        console.log(this.blocks[this.currentBlockIndex].getText());
+        return this.blocks[this.currentBlockIndex].isSkipped();
+    }
+
+
+    //
+    //Merge/Split Block
+    //
+    splitSelectedBlock(text1, text2){
+        this.blocks.splice(this.currentBlockIndex, 1);
+        this.blocks.splice(this.currentBlockIndex, 0, new Block(text1));
+        this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2));
+
+    }
+
+    mergeSelectedBlockWithNextBlock(){
+        if (!this.blocks.length >= this.currentBlockIndex){
+            if(this.isSelectedBlockSkipped()){
+                throw "You cannot merge skipped interval.";
+            }
+            if(this.blocks[this.currentBlockIndex+1].isSkipped()){
+                throw "Next block is skipped, you cannot merge block with skipped interval.";
+            }
+            var text1 = this.blocks[this.currentBlockIndex].getText();
+            var text2 = this.blocks[this.currentBlockIndex+1].getText();
+            var newBlock = new Block(text1.concat(" ", text2))
+
+            this.blocks.splice(this.currentBlockIndex, this.currentBlockIndex+2);
+            this.blocks.splice(this.currentBlockIndex, 0, newBlock);
+        } 
+        else{
+            throw "Next block doesn´t exist.";
+        }
+    }
+
+
+    mergeIsPossible(){
+        if (!this.blocks.length >= this.currentBlockIndex){
+            if(this.isSelectedBlockSkipped()){
+                throw "You cannot merge skipped interval.";
+            }
+            if(this.blocks[this.currentBlockIndex+1].isSkipped()){
+                throw "Next block is skipped, you cannot merge block with skipped interval.";
+            }
+            return this.blocks[this.currentBlockIndex+1].getText();
+        } 
+        else{
+            throw "Next block doesn´t exist.";
+        }
+    }
+}
