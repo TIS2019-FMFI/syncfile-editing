@@ -43,7 +43,6 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupEventListeners() {
-        // TODO: po uprave html vytvorit event listeners
         this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
         this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
         this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
@@ -65,32 +64,45 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     presentNextController() {
-        // TODO: vratit sa do editora
+        const syncFileEditViewController = new SyncFileEditViewController();
+
+        syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
+
+        this.navigationController.present(syncFileEditViewController);
     }
 
     // Private Methods
     
     saveButtonClicked(){
-
+        // TODO: implementovat
+        showScriptFileDownload();
+        showSyncFileDownload();
+        window.locatin.href = 'index.html';
     }
 
     unsaveButtonClicked() {
-
+        window.locatin.href = 'index.html';
     }
     
     backButtonClicked() {
-
+        syncFileEditorData.selectFirstBlock();
+        presentNextController();
     }
 
     audioFileNameChanged() {
+        // TODO: implementovat
+        // mozno tuto metodu netreba
 
     }
 
     scriptFileNameChanged() {
+        // TODO: implementovat
+        // potreba zistit ci sa script file zmenil
 
     }
 
     syncFileNameChanged() {
+        // TODO: implementovat
 
     }
 
