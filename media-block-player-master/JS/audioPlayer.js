@@ -5,20 +5,11 @@
 
 class AudioPlayer{
 	
-constructor(audioFile){
+    constructor(audioFile) {
 	this.currentTime = "";
-	this.audioFile = audioFile;
-	this.audio;
+	this.audio = audioFile;
 	this.sound;
-	
-	this.getBase64(this.audioFile).then( data => {
-        this.audio = new Howl({
-            src: data
-		});
-          
-    });
-	
-}
+	}
 
 //this method return currentTime of audio
 getCurrentTime(){

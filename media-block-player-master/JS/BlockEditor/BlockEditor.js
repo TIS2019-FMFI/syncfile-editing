@@ -41,7 +41,7 @@ class BlockEditor {
     //
     //Indexes
     //
-    seleftFirstBlock(){
+    selectFirstBlock(){
         this.currentBlockIndex = 0;
     }
 
@@ -88,6 +88,10 @@ class BlockEditor {
     //
     getTextOfSelectedBlock(){
         return this.blocks[this.currentBlockIndex].getText();
+    }
+
+    setTextOfSelectedBlock(txt){
+        this.blocks[this.currentBlockIndex].setText(txt);
     }
 
     getTextOfAllBlocks() {
@@ -178,6 +182,22 @@ class BlockEditor {
 
             this.blocks.splice(this.currentBlockIndex, this.currentBlockIndex+2);
             this.blocks.splice(this.currentBlockIndex, 0, newBlock);
+        } 
+        else{
+            throw "Next block doesn´t exist.";
+        }
+    }
+
+
+    mergeIsPossible(){
+        if (!this.blocks.length >= this.currentBlockIndex){
+            if(this.isSelectedBlockSkipped()){
+                throw "You cannot merge skipped interval.";
+            }
+            if(this.blocks[this.currentBlockIndex+1].isSkipped()){
+                throw "Next block is skipped, you cannot merge block with skipped interval.";
+            }
+            return this.blocks[this.currentBlockIndex+1].getText();
         } 
         else{
             throw "Next block doesn´t exist.";
