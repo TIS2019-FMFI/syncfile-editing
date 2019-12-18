@@ -4,13 +4,10 @@ class SyncFileDownloadViewController extends ViewController {
     constructor() {
         super();
 
-        this.fileName;
-        this.blocksEndTimes;
-        this.skipBlock;
+        this.syncFileEditorData;
     }
 
     renderHtml(html) {
-        // TODO: upravit, issue14
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
@@ -37,13 +34,29 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
-        // TODO: po uprave html vytvorit propertier
-        this.fileNameLabel = $('#file-name-label');
-        this.fileLinkDownload = $('#file-download');
+        this.audioFileNameLabel = $('#audio-file');
+        this.scriptFileNameLabel = $('script-file');
+        this.syncFileNameLabel = $('#sync-file');
+        this.saveButton = $('#save');
+        this.unsaveButton = $('#unsave');
+        this.backButton = $('#back');
     }
 
     setupEventListeners() {
         // TODO: po uprave html vytvorit event listeners
+        this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
+        this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
+        this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
+        this.saveButtonClicked = this.saveButtonClicked.bind(this);
+        this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
+        this.backButtonClicked = this.backButtonClicked.bind(this);
+
+        this.audioFileNameLabel.change(this.audioPickerValueChanged);
+        this.scriptFileNameLabel.change(this.scriptPickerValueChanged);
+        this.syncFileNameLabel.change(this.syncPickerValueChanged);
+        this.saveButton.on('click', this.saveButtonClicked);
+        this.unsaveButton.on('click', this.unsaveButtonClicked);
+        this.backButton.on('click', this.backButtonClicked);
     }
 
     viewDidLoad() {
@@ -56,6 +69,30 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     // Private Methods
+    
+    saveButtonClicked(){
+
+    }
+
+    unsaveButtonClicked() {
+
+    }
+    
+    backButtonClicked() {
+
+    }
+
+    audioFileNameChanged() {
+
+    }
+
+    scriptFileNameChanged() {
+
+    }
+
+    syncFileNameChanged() {
+
+    }
 
     /// This method create json object from blocks end times array and
     /// skip blocks array. Then it will create html download link with
