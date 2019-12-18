@@ -146,6 +146,7 @@ class FilesPickerViewController extends ViewController {
         const fileReader = new FileReader();
         fileReader.onload = () => {
             this.syncFile = fileReader.result;
+            this.syncFile = JSON.parse(this.syncFile);
         };
         fileReader.readAsText(syncFile);
     }
