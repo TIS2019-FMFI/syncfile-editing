@@ -37,30 +37,26 @@ class SyncFileDownloadViewController extends ViewController {
         this.audioFileNameInput = $('#audio-file');
         this.scriptFileNameInput = $('script-file');
         this.syncFileNameInput = $('#sync-file');
+
         this.saveButton = $('#save');
         this.unsaveButton = $('#unsave');
         this.backButton = $('#back');
     }
 
     setupEventListeners() {
-        this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
-        this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
-        this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
+        //this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
+        //this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
+        //this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
         this.saveButtonClicked = this.saveButtonClicked.bind(this);
         this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
         this.backButtonClicked = this.backButtonClicked.bind(this);
 
-        this.audioFileNameInput.change(this.audioPickerValueChanged);
-        this.scriptFileNameInput.change(this.scriptPickerValueChanged);
-        this.syncFileNameInput.change(this.syncPickerValueChanged);
+        //this.audioFileNameInput.change(this.audioPickerValueChanged);
+        //this.scriptFileNameInput.change(this.scriptPickerValueChanged);
+        //this.syncFileNameInput.change(this.syncPickerValueChanged);
         this.saveButton.on('click', this.saveButtonClicked);
         this.unsaveButton.on('click', this.unsaveButtonClicked);
         this.backButton.on('click', this.backButtonClicked);
-    }
-
-    viewDidLoad() {
-        // TODO: kedy sa metoda vola?
-        this.showSyncFileDownload();
     }
 
     presentNextController() {
@@ -74,10 +70,10 @@ class SyncFileDownloadViewController extends ViewController {
     // Private Methods
     
     saveButtonClicked(){
-        // TODO: implementovat
-        showScriptFileDownload();
-        showSyncFileDownload();
+        showScriptFileDownload(); // TODO: doplnit podmienku ak sa script file zmenil
+        showSyncFileDownload();  
         window.locatin.href = 'index.html';
+        // chceme skutocne exit?
     }
 
     unsaveButtonClicked() {
