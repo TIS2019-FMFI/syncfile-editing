@@ -34,9 +34,9 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
-        this.audioFileNameLabel = $('#audio-file');
-        this.scriptFileNameLabel = $('script-file');
-        this.syncFileNameLabel = $('#sync-file');
+        this.audioFileNameInput = $('#audio-file');
+        this.scriptFileNameInput = $('script-file');
+        this.syncFileNameInput = $('#sync-file');
         this.saveButton = $('#save');
         this.unsaveButton = $('#unsave');
         this.backButton = $('#back');
@@ -50,9 +50,9 @@ class SyncFileDownloadViewController extends ViewController {
         this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
         this.backButtonClicked = this.backButtonClicked.bind(this);
 
-        this.audioFileNameLabel.change(this.audioPickerValueChanged);
-        this.scriptFileNameLabel.change(this.scriptPickerValueChanged);
-        this.syncFileNameLabel.change(this.syncPickerValueChanged);
+        this.audioFileNameInput.change(this.audioPickerValueChanged);
+        this.scriptFileNameInput.change(this.scriptPickerValueChanged);
+        this.syncFileNameInput.change(this.syncPickerValueChanged);
         this.saveButton.on('click', this.saveButtonClicked);
         this.unsaveButton.on('click', this.unsaveButtonClicked);
         this.backButton.on('click', this.backButtonClicked);
@@ -89,42 +89,32 @@ class SyncFileDownloadViewController extends ViewController {
         presentNextController();
     }
 
-    audioFileNameChanged() {
-        // TODO: implementovat
-        // mozno tuto metodu netreba
-
-    }
-
-    scriptFileNameChanged() {
-        // TODO: implementovat
-        // potreba zistit ci sa script file zmenil
-
-    }
-
-    syncFileNameChanged() {
-        // TODO: implementovat
-
-    }
-
     /// This method create json object from blocks end times array and
     /// skip blocks array. Then it will create html download link with
     /// {filename}.mbpsf file
     showSyncFileDownload() {
-        // TODO: zmenit podla SyncFileEditorData triedy
-        const syncFileName = `${this.fileName}.mbpsf`;
-        const syncFileObject = new Object();
-        syncFileObject.blocks = this.blocksEndTimes;
-        syncFileObject.skips = this.skipBlock;
-        const syncFileJSON = JSON.stringify(syncFileObject);
+        const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
+        const syncFileData = syncFileEditorData.getSyncFileData();
 
-        this.fileNameLabel.text(syncFileName);
-        this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
-        this.fileLinkDownload.attr('download', syncFileName);
-        this.fileLinkDownload.html('DOWNLOAD');
+        this.fileDownload(syncFileName, syncFileText);
     }
 
     showScriptFileDownload(){
-        // TODO: implementovat podla SyncFileEditorData triedy
+        const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
+        const scriptFileData = syncFileEditorData.getScriptFileData();
+
+        this.fileDownload(scriptFileName, scriptFileText);
+    }
+
+    fileDownload(fileName, fileText) {
+        // https://stackoverflow.com/a/18197341
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileText));
+        element.setAttribute('download', fileName);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 
 }
