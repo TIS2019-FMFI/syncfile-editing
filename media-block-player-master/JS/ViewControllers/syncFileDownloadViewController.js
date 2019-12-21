@@ -4,10 +4,13 @@ class SyncFileDownloadViewController extends ViewController {
     constructor() {
         super();
 
-        this.syncFileEditorData;
+        this.fileName;
+        this.blocksEndTimes;
+        this.skipBlock;
     }
 
     renderHtml(html) {
+        // TODO: upravit, issue14
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
@@ -34,83 +37,45 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
-        this.audioFileNameInput = $('#audio-file');
-        this.scriptFileNameInput = $('script-file');
-        this.syncFileNameInput = $('#sync-file');
-
-        this.saveButton = $('#save');
-        this.unsaveButton = $('#unsave');
-        this.backButton = $('#back');
+        // TODO: po uprave html vytvorit propertier
+        this.fileNameLabel = $('#file-name-label');
+        this.fileLinkDownload = $('#file-download');
     }
 
     setupEventListeners() {
-        //this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
-        //this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
-        //this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
-        this.saveButtonClicked = this.saveButtonClicked.bind(this);
-        this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
-        this.backButtonClicked = this.backButtonClicked.bind(this);
+        // TODO: po uprave html vytvorit event listeners
+    }
 
-        //this.audioFileNameInput.change(this.audioPickerValueChanged);
-        //this.scriptFileNameInput.change(this.scriptPickerValueChanged);
-        //this.syncFileNameInput.change(this.syncPickerValueChanged);
-        this.saveButton.on('click', this.saveButtonClicked);
-        this.unsaveButton.on('click', this.unsaveButtonClicked);
-        this.backButton.on('click', this.backButtonClicked);
+    viewDidLoad() {
+        // TODO: kedy sa metoda vola?
+        this.showSyncFileDownload();
     }
 
     presentNextController() {
-        const syncFileEditViewController = new SyncFileEditViewController();
-
-        syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
-
-        this.navigationController.present(syncFileEditViewController);
+        // TODO: vratit sa do editora
     }
 
     // Private Methods
-    
-    saveButtonClicked(){
-        showScriptFileDownload(); // TODO: doplnit podmienku ak sa script file zmenil
-        showSyncFileDownload();  
-        window.locatin.href = 'index.html';
-        // chceme skutocne exit?
-    }
-
-    unsaveButtonClicked() {
-        window.locatin.href = 'index.html';
-    }
-    
-    backButtonClicked() {
-        syncFileEditorData.selectFirstBlock();
-        presentNextController();
-    }
 
     /// This method create json object from blocks end times array and
     /// skip blocks array. Then it will create html download link with
     /// {filename}.mbpsf file
     showSyncFileDownload() {
-        const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
-        const syncFileData = syncFileEditorData.getSyncFileData();
+        // TODO: zmenit podla SyncFileEditorData triedy
+        const syncFileName = `${this.fileName}.mbpsf`;
+        const syncFileObject = new Object();
+        syncFileObject.blocks = this.blocksEndTimes;
+        syncFileObject.skips = this.skipBlock;
+        const syncFileJSON = JSON.stringify(syncFileObject);
 
-        this.fileDownload(syncFileName, syncFileText);
+        this.fileNameLabel.text(syncFileName);
+        this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
+        this.fileLinkDownload.attr('download', syncFileName);
+        this.fileLinkDownload.html('DOWNLOAD');
     }
 
     showScriptFileDownload(){
-        const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
-        const scriptFileData = syncFileEditorData.getScriptFileData();
-
-        this.fileDownload(scriptFileName, scriptFileText);
-    }
-
-    fileDownload(fileName, fileText) {
-        // https://stackoverflow.com/a/18197341
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileText));
-        element.setAttribute('download', fileName);
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        // TODO: implementovat podla SyncFileEditorData triedy
     }
 
 }

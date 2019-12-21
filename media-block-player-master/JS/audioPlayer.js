@@ -5,20 +5,11 @@
 
 class AudioPlayer{
 	
-constructor(audioFile){
+    constructor(audioFile) {
 	this.currentTime = "";
-	this.audioFile = audioFile;
-	this.audio;
+	this.audio = audioFile;
 	this.sound;
-	
-	this.getBase64(this.audioFile).then( data => {
-        this.audio = new Howl({
-            src: data
-		});
-          
-    });
-	
-}
+	}
 
 //this method return currentTime of audio
 getCurrentTime(){
@@ -27,25 +18,16 @@ getCurrentTime(){
 }
 
 
-//this method create new Howl object - sound in specific interval
+//this method create new sprite- sound in specific interval
 // and play this interval
 playInterval(time1, time2){
 	if (this.audio.playing()){
 		this.audio.pause();
 	}
-	//if (this.sound === undefined){
-		var duration = (parseInt(time2)*1000 - parseInt(time1)*1000);  
-		this.getBase64(this.audioFile).then( data => {
-			this.sound= new Howl({
-				src: data,
-				sprite: {
-					interval: [parseInt(time1)*1000, duration]
-				}
-			});
-			this.sound.play('interval');
-			  
-		});
-	//}
+	
+	var duration = (parseInt(time2)*1000 - parseInt(time1)*1000);  
+	this.audio._sprite.interval = [parseInt(time1)*1000, duration];
+	this.audio.play('interval');
 }
 
 
@@ -55,6 +37,11 @@ playAudio(){
 		this.audio.play();
 	}
 }
+
+audioIsPlaying(){
+	return this.audio.playing();
+}
+
 
 
 //this method stops the audio, reset seek to 0
