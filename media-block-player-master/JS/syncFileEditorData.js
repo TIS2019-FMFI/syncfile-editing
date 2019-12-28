@@ -135,4 +135,8 @@ class SyncFileEditorData {
     f() {
         console.log("Robk");
     }
+
+    getScriptFileEdited() {
+        return this.blocksEditor.getScriptFileEdited();
+    }
 }
