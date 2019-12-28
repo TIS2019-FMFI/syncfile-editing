@@ -70,10 +70,11 @@ class SyncFileDownloadViewController extends ViewController {
     // Private Methods
     
     saveButtonClicked(){
-        showScriptFileDownload(); // TODO: doplnit podmienku ak sa script file zmenil
+        if (this.syncFileEditorData.getScriptFileEdited()) {
+            showScriptFileDownload();
+        } 
         showSyncFileDownload();  
-        window.locatin.href = 'index.html';
-        // chceme skutocne exit?
+        window.locatin.href = 'index.html'; // chceme skutocne exit?
     }
 
     unsaveButtonClicked() {
@@ -85,9 +86,6 @@ class SyncFileDownloadViewController extends ViewController {
         presentNextController();
     }
 
-    /// This method create json object from blocks end times array and
-    /// skip blocks array. Then it will create html download link with
-    /// {filename}.mbpsf file
     showSyncFileDownload() {
         const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
         const syncFileData = syncFileEditorData.getSyncFileData();
