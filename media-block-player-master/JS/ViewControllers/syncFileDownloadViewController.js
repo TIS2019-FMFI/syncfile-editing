@@ -87,6 +87,7 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     showSyncFileDownload() {
+        // TODO: pridat validator mena, cez JS alebo HTML5
         const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
         const syncFileData = syncFileEditorData.getSyncFileData();
 
@@ -94,6 +95,7 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     showScriptFileDownload(){
+        // TODO: pridat validator mena, cez JS alebo HTML5
         const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
         const scriptFileData = syncFileEditorData.getScriptFileData();
 
