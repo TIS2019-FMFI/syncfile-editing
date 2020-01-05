@@ -66,7 +66,14 @@ class SyncFileEditViewController extends ViewController {
         // TODO: po uprave html vytvorit nove properties
         
         // Labels
-        //this.actualBlockText = $('#actual-text');
+        this.audioFileNameInput = $('#audio-file');	       
+        this.scriptFileNameInput = $('script-file');	        
+        this.fileNameLabel = $('#file-name-label');
+        this.syncFileNameInput = $('#sync-file');	        
+        this.fileLinkDownload = $('#file-download');
+        this.saveButton = $('#save');	
+        this.unsaveButton = $('#unsave');	
+        this.backButton = $('#back');
         this.text = $('#text');
         this.playPauseIcon = $('#play-pause-icon');
 
@@ -100,6 +107,9 @@ class SyncFileEditViewController extends ViewController {
         this.saveExitButtonClicked = this.saveExitButtonClicked.bind(this);
         this.nextBlockButtonClicked = this.nextBlockButtonClicked.bind(this);
         this.previousBlockButtonClicked = this.previousBlockButtonClicked.bind(this);
+        this.saveButtonClicked = this.saveButtonClicked.bind(this);	
+        this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);	
+        this.backButtonClicked = this.backButtonClicked.bind(this);
 
         this.playPauseButton.on('click', this.playPauseButtonClicked);
         this.backwardButton.on('click', this.backwardButtonClicked);
@@ -112,6 +122,9 @@ class SyncFileEditViewController extends ViewController {
         this.saveExit.on('click', this.saveExitButtonClicked);
         this.nextBlockButton.on('click', this.nextBlockButtonClicked);
         this.previousBlockButton.on('click', this.previousBlockButtonClicked);
+        this.saveButton.on('click', this.saveButtonClicked);	
+        this.unsaveButton.on('click', this.unsaveButtonClicked);	
+        this.backButton.on('click', this.backButtonClicked);
     }
 
     viewDidLoad() {

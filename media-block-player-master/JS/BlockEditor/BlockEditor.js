@@ -4,6 +4,7 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
+        this.scriptFileEdited = false;
 		this.init();
     }
 
@@ -17,8 +18,6 @@ class BlockEditor {
             alert("You have multiple pipelines in text we will replace them with one.");
         }
         var ScriptFileDataAsArray = this.ScriptFileData.replace(/\|+\|+/g, "|").split("|");
-        console.log(ScriptFileDataAsArray)
-        //TODO odchytiť prípad keď príde viacero pipeline za sebou a zmeniť na jednu pipeline a zároveň to dať najavo používateľovi výnimkou do alertu.
 
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
             var block = new Block(ScriptFileDataAsArray[i].trim());
@@ -108,6 +107,7 @@ class BlockEditor {
     }
 
     setTextOfSelectedBlock(txt){
+        this.scriptFileEdited = true;
         this.blocks[this.currentBlockIndex].setText(txt);
     }
 
@@ -176,6 +176,7 @@ class BlockEditor {
     //Merge/Split Block
     //
     splitSelectedBlock(text1, text2){
+        this.scriptFileEdited = true;
         this.blocks.splice(this.currentBlockIndex, 1);
         this.blocks.splice(this.currentBlockIndex, 0, new Block(text1));
         this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2));
@@ -183,6 +184,7 @@ class BlockEditor {
     }
 
     mergeSelectedBlockWithNextBlock(){
+        this.scriptFileEdited = true;
         if (!this.blocks.length >= this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
@@ -204,6 +206,7 @@ class BlockEditor {
 
 
     mergeIsPossible(){
+        this.scriptFileEdited = true;
         if (!this.blocks.length >= this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
@@ -217,4 +220,8 @@ class BlockEditor {
             throw "Next block doesn´t exist.";
         }
     }
+
+    getScriptFileEdited() {	
+        return this.scriptFileEdited;	
+    } 
 }
