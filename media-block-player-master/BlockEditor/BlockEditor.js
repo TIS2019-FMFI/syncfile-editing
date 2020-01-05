@@ -4,8 +4,6 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-        this.scriptFileEdited = false;
-		this.init();
     }
 
     init(){
@@ -20,7 +18,6 @@ class BlockEditor {
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
             var block = new Block(ScriptFileDataAsArray[i].trim());
             this.blocks.push(block);
-			
         }
     }
 
@@ -94,7 +91,6 @@ class BlockEditor {
     }
 
     setTextOfSelectedBlock(txt){
-        this.scriptFileEdited = true;
         this.blocks[this.currentBlockIndex].setText(txt);
     }
 
@@ -157,7 +153,7 @@ class BlockEditor {
     }
 
     isSelectedBlockSkipped(){
-        //console.log(this.blocks[this.currentBlockIndex].getText());
+        console.log(this.blocks[this.currentBlockIndex].getText());
         return this.blocks[this.currentBlockIndex].isSkipped();
     }
 
@@ -166,7 +162,6 @@ class BlockEditor {
     //Merge/Split Block
     //
     splitSelectedBlock(text1, text2){
-        this.scriptFileEdited = true;
         this.blocks.splice(this.currentBlockIndex, 1);
         this.blocks.splice(this.currentBlockIndex, 0, new Block(text1));
         this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2));
@@ -174,7 +169,6 @@ class BlockEditor {
     }
 
     mergeSelectedBlockWithNextBlock(){
-        this.scriptFileEdited = true;
         if (!this.blocks.length >= this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
@@ -209,9 +203,4 @@ class BlockEditor {
             throw "Next block doesn´t exist.";
         }
     }
-  
-   getScriptFileEdited() {
-        return this.scriptFileEdited;
-    } 
-  }
 }

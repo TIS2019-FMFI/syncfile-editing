@@ -1,4 +1,4 @@
-class syncFileEditorData {
+class SyncFileEditorData {
 
     constructor(audioFile, scriptFileData, syncFileData) {
         //subory
@@ -13,8 +13,8 @@ class syncFileEditorData {
         //nazvy suborov - stringy
         this.audioFileName;
         this.scriptFileName;
-        this.syncFileData;
-        }
+        this.syncFileName;
+    }
 
     selectFirstBlock() {
         this.blocksEditor.selectFirstBlock();
@@ -37,10 +37,25 @@ class syncFileEditorData {
     }
 
     playSelectedBlock() {
-        //to do ako sa mysli toto
-        time1 = this.blocksEditor.getTimeOfPreviousBlock();
-        time2 = this.blocksEditor.getTimeOfSelectedBlock();
-        this.audioPlayer.playInterval(time1, time2);
+        var time1;
+		var time2;
+		if(!this.blocksEditor.isSelectedBlockSkipped()){
+			if(this.blocksEditor.getCurrentBlockIndex() == 0) {
+				time1 = "0";
+				time2 = this.blocksEditor.getTimeOfSelectedBlock();
+			}
+			else if (this.blocksEditor.getCurrentBlockIndex() == this.blocksEditor.blocks.length){
+				time1 = this.blocksEditor.getTimeOfPreviousBlock();
+				time2 = this.blocksEditor.getTimeOfSelectedBlock(); // TO DO aky cas ked je na poslednom bloku
+				
+			}
+			else{
+				time1 = this.blocksEditor.getTimeOfPreviousBlock();
+				time2 = this.blocksEditor.getTimeOfSelectedBlock();
+			}
+			console.log(time1, time2);
+			this.audioPlayer.playInterval(time1, time2);
+		}
     }
 
     getScriptFileData() {
@@ -53,6 +68,10 @@ class syncFileEditorData {
 
     getTextOfSelectedBlock() {
         return this.blocksEditor.getTextOfSelectedBlock();
+    }
+	
+	setTextOfSelectedBlock(txt) {
+        this.blocksEditor.setTextOfSelectedBlock(txt);
     }
 
     getTextOfAllBlocks() {
@@ -74,10 +93,18 @@ class syncFileEditorData {
     mergeSelectedBlockWithNextBlock() {
         this.blocksEditor.mergeSelectedBlockWithNextBlock();
     }
+	
+	mergeIsPossible() {
+        return this.blocksEditor.mergeIsPossible();
+    }
 
     playAudio() {
         this.audioPlayer.playAudio();
     }
+	
+	audioIsPlaying(){
+		return  this.audioPlayer.audioIsPlaying();
+	}
 
     stopAudio() {
         this.audioPlayer.stopAudio();
@@ -104,7 +131,8 @@ class syncFileEditorData {
         return syncFileName;
     }
 
-    f() {
-        console.log("Robk");
+    getScriptFileEdited() {
+        return this.blocksEditor.getScriptFileEdited();
     }
 }
+

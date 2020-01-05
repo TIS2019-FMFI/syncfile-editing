@@ -3,24 +3,20 @@
 class EditBlockViewController extends ViewController {
 
     constructor() {
-        // TODO: upravit
         super();
 
-        this.fileName;
-        this.sound;
-        this.playbackSound;
-        this.blocks;
+        this.syncFileEditorData;
+        this.clickedMerge = false;
     }
 
     renderHtml(html) {
-        // TODO: upravit, issue14
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
-					<h2>EDIT, SPLIT or MERGE the Curret Block</h2>
+					<h2>EDIT, SPLIT or MERGE the Current Block</h2>
 				</div>
 				<div class = "myMERGE">
-					<textarea id="actual-text" readonly>
+					<textarea id="actual-text">
 					</textarea>
 				</div>
 				<div class = "myMERGE">
@@ -36,40 +32,99 @@ class EditBlockViewController extends ViewController {
     }
 
     setupProperties() {
-        // TODO: po uprave html vytvorit nove properties, 
+        this.merge = $('#merge');
+        this.apply = $('#apply');
+        this.cancel = $('#cancel');
+        this.actualText = $('#actual-text');
     }
 
     setupEventListeners() {
-        // TODO: po uprave html vytvorit nove event listeners,
+        this.mergeButtonClicked = this.mergeButtonClicked.bind(this);
+        this.applyButtonClicked = this.applyButtonClicked.bind(this);
+        this.cancelButtonClicked = this.cancelButtonClicked.bind(this);
+
+        this.merge.on('click', this.mergeButtonClicked);
+        this.apply.on('click', this.applyButtonClicked);
+        this.cancel.on('click', this.cancelButtonClicked);
+
+    }
+	
+	viewDidLoad() {
+        this.actualText.val(this.syncFileEditorData.getTextOfSelectedBlock()); 
     }
 
     presentNextController() {
-        // TODO: zavolat syncFileEditorViewController a odovzdat mu SyncFileEditorData
         const syncFileEditViewController = new SyncFileEditViewController();
-        syncFileCreateViewController.sound = this.sound;
-        syncFileCreateViewController.playbackSound = this.playbackSound;
-        syncFileCreateViewController.blocks = this.blocks;
-        syncFileCreateViewController.fileName = this.fileName;
+
+        syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
+
         this.navigationController.present(syncFileEditViewController);
     }
 
     // Private Methods
 
-    mergeButtonClicked() {
-        // TODO: implementovat
-        // zavolat mergeBlocks() a this.presentNextController() ?
+    mergeButtonClicked() { 
+		if(!this.clickedMerge){ //mergnut moze iba 1x, preto sa button nastavi na disabled
+			try {
+				var nextBlock = ' '.concat(this.syncFileEditorData.mergeIsPossible()); //mergeIsPossible vracia text nasledujuceho bloku ak je merge mozny
+				this.clickedMerge = true;
+				this.actualText.val(this.actualText.val() + nextBlock);
+			}
+			catch(error) {
+				console.error(error);
+				alert(error);
+			}
+		}
     }
 
     applyButtonClicked() {
-        // TODO: implementovat
-        // zavolat editBlock() a this.presentNextController() ?
+        try {
+            if (this.clickedMerge) {
+                this.syncFileEditorData.mergeSelectedBlockWithNextBlock();
+            }
+
+            var splitTextList = this.actualText.val().split("|");
+            var countOfPipelines = splitTextList.length - 1;
+
+            if (countOfPipelines == 1) {
+                var text1 = splitTextList[0].trim();
+                var text2 = splitTextList[1].trim();
+
+                if (text1.length > 0 && text2.length > 0) {
+                    this.syncFileEditorData.splitSelectedBlock(splitTextList[0].trim(), splitTextList[1].trim());
+                }
+                else {
+                    throw "You have empty block.";
+                }
+            }
+            else if (countOfPipelines == 0) {
+				console.log(this.actualText.val().trim());
+                this.syncFileEditorData.setTextOfSelectedBlock(this.actualText.val().trim());
+            }
+            else {
+				throw "You have multiple pipelines.";
+            }
+            this.presentNextController();
+        }
+        catch (error) {
+            console.error(error);
+            alert(error);
+        }
+
     }
 
     cancelButtonClicked() {
-        // TODO: implementovat
-        // pravdepodobne iba this.presentNextController() ?
+        try {
+            this.presentNextController();
+        }
+        catch (error) {
+            console.error(error);
+            alert(error);
+        }
+
     }
 
+/*
     mergeBlocks() {
         // TODO: implementovat
     }
@@ -81,4 +136,5 @@ class EditBlockViewController extends ViewController {
     editBlock() {
         // TODO: implementovat
     }
+	*/
 }

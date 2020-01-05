@@ -110,7 +110,6 @@ class FilesPickerViewController extends ViewController {
         syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
 
         this.navigationController.present(syncFileEditViewController);
-
     }
 
     // Private Methods
@@ -170,13 +169,13 @@ class FilesPickerViewController extends ViewController {
 
     createSyncFileEditorData() {
         try {
-            this.syncFileEditorData = new syncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
+            this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
             this.syncFileEditorData.audioFileName = this.audioFileName;
             this.syncFileEditorData.scriptFileName = this.scriptFileName;
             this.syncFileEditorData.syncFileName = this.syncFileName;
         }
         catch (error) {
-            alert("TODO: n�jdi si ma"); //TODO: Nevedel čo sem vypísať, neviem či taká situácia vôbec môže nastať.
+            alert('Unexpected fault'); //TODO: Nevedel čo sem vypísať, neviem či taká situácia vôbec môže nastať.
         }
     }
 

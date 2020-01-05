@@ -23,7 +23,7 @@ class Block {
     }
 
     isSkipped(){
-        if (this.text == null){
+        if (text == null){
             return true;
         }
         else{
