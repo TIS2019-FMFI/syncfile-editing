@@ -4,7 +4,6 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-        this.scriptFileEdited = false;
 		this.init();
     }
 
@@ -14,7 +13,11 @@ class BlockEditor {
     }
 
     initBlocks(){
-        var ScriptFileDataAsArray = this.ScriptFileData.split("|");
+        if ((/\|+\|+/).test(this.ScriptFileData)){
+            alert("You have multiple pipelines in text we will replace them with one.");
+        }
+        var ScriptFileDataAsArray = this.ScriptFileData.replace(/\|+\|+/g, "|").split("|");
+        console.log(ScriptFileDataAsArray)
         //TODO odchytiť prípad keď príde viacero pipeline za sebou a zmeniť na jednu pipeline a zároveň to dať najavo používateľovi výnimkou do alertu.
 
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
@@ -76,6 +79,17 @@ class BlockEditor {
         return this.blocks[this.currentBlockIndex].getTime();
     }
 
+    getTimeOfNextBlock(){
+        if (this.currentBlockIndex+1 < this.blocks.length){
+            return this.blocks[this.currentBlockIndex+1].getTime();
+        }
+        else{
+            return null; 
+        }
+    }
+
+
+
     getTimeOfPreviousBlock(){
         if (this.currentBlockIndex > 0){
             return this.blocks[this.currentBlockIndex-1].getTime();
@@ -94,7 +108,6 @@ class BlockEditor {
     }
 
     setTextOfSelectedBlock(txt){
-        this.scriptFileEdited = true;
         this.blocks[this.currentBlockIndex].setText(txt);
     }
 
@@ -102,15 +115,13 @@ class BlockEditor {
         var resText = [];
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].isSkipped()){
-                resText.push(null);
-                //resText.push("<Skipped>"); Zmena v návrhu.
+                resText.push("&lt;Skipped&gt;"); 
             }
             else{
                 resText.push(this.blocks[i].getText());
             }
         }
         return resText
-        //return resText.join(" | ");  Zmena v návrhu.
     }
 
     getScriptFileData(){
@@ -143,8 +154,8 @@ class BlockEditor {
     //Skipped Intervals
     //
     insertSkippedBlock(index = this.currentBlockIndex, time = null){
-        var skiped = new Block(null,time);
-        this.blocks.splice(index, 0, skiped);
+        var skipped = new Block(null,time);
+        this.blocks.splice(index, 0, skipped);
     }
 
     removeSkippedBlock(){
@@ -157,7 +168,6 @@ class BlockEditor {
     }
 
     isSelectedBlockSkipped(){
-        //console.log(this.blocks[this.currentBlockIndex].getText());
         return this.blocks[this.currentBlockIndex].isSkipped();
     }
 
@@ -166,7 +176,6 @@ class BlockEditor {
     //Merge/Split Block
     //
     splitSelectedBlock(text1, text2){
-        this.scriptFileEdited = true;
         this.blocks.splice(this.currentBlockIndex, 1);
         this.blocks.splice(this.currentBlockIndex, 0, new Block(text1));
         this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2));
@@ -174,7 +183,6 @@ class BlockEditor {
     }
 
     mergeSelectedBlockWithNextBlock(){
-        this.scriptFileEdited = true;
         if (!this.blocks.length >= this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
@@ -209,9 +217,4 @@ class BlockEditor {
             throw "Next block doesn´t exist.";
         }
     }
-  
-   getScriptFileEdited() {
-        return this.scriptFileEdited;
-    } 
-  }
 }
