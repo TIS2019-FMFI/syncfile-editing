@@ -87,8 +87,6 @@ class BlockEditor {
         }
     }
 
-
-
     getTimeOfPreviousBlock(){
         if (this.currentBlockIndex > 0){
             return this.blocks[this.currentBlockIndex-1].getTime();
@@ -220,8 +218,8 @@ class BlockEditor {
             throw "Next block doesn´t exist.";
         }
     }
-
-    getScriptFileEdited() {	
-        return this.scriptFileEdited;	
+  
+   getScriptFileEdited() {
+        return this.scriptFileEdited;
     } 
-}
+  }

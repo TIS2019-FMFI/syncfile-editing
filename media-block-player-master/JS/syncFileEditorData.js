@@ -14,7 +14,7 @@ class SyncFileEditorData {
         this.audioFileName;
         this.scriptFileName;
         this.syncFileName;
-        }
+    }
 
     selectFirstBlock() {
         this.blocksEditor.selectFirstBlock();
@@ -47,8 +47,6 @@ class SyncFileEditorData {
     getTimeOfNextBlock(){
         return this.blocksEditor.getTimeOfNextBlock();
 	}
-
-
 
     currentTime(){
         return this.audioPlayer.getCurrentTime();
@@ -104,7 +102,6 @@ class SyncFileEditorData {
         this.blocksEditor.setTextOfSelectedBlock(txt);
     }
 
-
     getTextOfAllBlocks() {
         return this.blocksEditor.getTextOfAllBlocks();
     }
@@ -152,8 +149,8 @@ class SyncFileEditorData {
 
     rewindAudioToTime(time){
         this.audioPlayer.rewindAudioTo(time);
-	}
-
+    }
+    
     rewindAudioToStartOfDocument() {
         this.audioPlayer.rewindAudioToZero();
     }
@@ -166,7 +163,7 @@ class SyncFileEditorData {
         return syncFileName;
     }
 
-    f() {
-        console.log("Robk");
+    getScriptFileEdited() {
+        return this.blocksEditor.getScriptFileEdited();
     }
 }

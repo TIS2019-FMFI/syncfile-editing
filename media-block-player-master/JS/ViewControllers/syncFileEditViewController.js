@@ -14,10 +14,10 @@ class SyncFileEditViewController extends ViewController {
         // TODO: upravit, issue14
         const htmlView = `
             <section id="SyncFileCreateViewController" class="container">
-				<div class = "my" id="block-area">
-                    <div id="text" style="overflow-y: scroll; border: 1px solid black; padding: 10px; height: 100%">
-					</div>
-				</div>
+            <div class = "my" id="block-area">
+            <div id="text" style="overflow-y: scroll; border: 1px solid black; padding: 10px; height: 100%">
+            </div>
+        </div>
 
 
 				<div class = "my2">
@@ -57,7 +57,6 @@ class SyncFileEditViewController extends ViewController {
 				</div>
 
             </section>
-
         `;
         super.renderHtml(htmlView);
     }
@@ -65,7 +64,7 @@ class SyncFileEditViewController extends ViewController {
     setupProperties() {
         // TODO: po uprave html vytvorit nove properties
         
-        // Labels
+        // Labels      
         this.audioFileNameInput = $('#audio-file');	       
         this.scriptFileNameInput = $('script-file');	        
         this.fileNameLabel = $('#file-name-label');
@@ -73,7 +72,7 @@ class SyncFileEditViewController extends ViewController {
         this.fileLinkDownload = $('#file-download');
         this.saveButton = $('#save');	
         this.unsaveButton = $('#unsave');	
-        this.backButton = $('#back');
+        this.backButton = $('#back');        
         this.text = $('#text');
         this.playPauseIcon = $('#play-pause-icon');
 
@@ -125,12 +124,14 @@ class SyncFileEditViewController extends ViewController {
         this.saveButton.on('click', this.saveButtonClicked);	
         this.unsaveButton.on('click', this.unsaveButtonClicked);	
         this.backButton.on('click', this.backButtonClicked);
+
     }
 
     viewDidLoad() {
         // TODO: skontrolovat ako a kde sa funckia vola a ci je ju treba upravit
         //this.actualBlockText.text( this.blocks[this.textBlockIndex] );
-		this.highlight();
+
+        this.highlight();
     }
 
 	highlight(){	
@@ -152,7 +153,7 @@ class SyncFileEditViewController extends ViewController {
         this.text.html(textarea);
         this.scrollContainer()
     }
-    
+
     scrollContainer() {
 
         var container = $("#text");
@@ -167,9 +168,14 @@ class SyncFileEditViewController extends ViewController {
 
     presentNextController() {
         // TODO: upravit predavanie dat cez SyncFileEditorData triedy
+		
         const syncFileDownloadViewController = new SyncFileDownloadViewController();
-        syncFileDownloadViewController.syncFileEditorData = this.syncFileEditorData;
+        syncFileDownloadViewController.fileName = this.fileName;
+        syncFileDownloadViewController.blocksEndTimes = this.blocksEndTimes;
+        syncFileDownloadViewController.skipBlock = this.skipBlock;
         this.navigationController.present(syncFileDownloadViewController);
+		
+	
     }
 
     // Private Methods
@@ -282,70 +288,71 @@ class SyncFileEditViewController extends ViewController {
     }
 
     previousBlockButtonClicked() {
-        
         this.syncFileEditorData.selectPreviousBlock();
-        this.check();
+		this.check();
     }
 
     nextBlockButtonClicked() {
-        
         this.syncFileEditorData.selectNextBlock();
-        this.check();
-        
+		this.check();
     }
 
     editBlockButtonClicked() {
+		
 		const editBlockViewController = new EditBlockViewController();
+
         editBlockViewController.syncFileEditorData = this.syncFileEditorData;
+
         this.navigationController.present(editBlockViewController);
-    }
 
+
+    }
     saveExitButtonClicked() {
-       this.presentNextController();
-    }
-
-    disableButtons(){
-            this.accept.removeClass("disabled");
-            this.replay.removeClass("disabled");
-            this.backwardButton.removeClass("disabled");
-            this.forwardButton.removeClass("disabled");
-            this.skipBlock.removeClass("disabled");
-            this.removeInterval.removeClass("disabled");
-            this.editBlock.removeClass("disabled");
-            this.saveExit.removeClass("disabled");
-            this.nextBlockButton.removeClass("disabled");
-            this.previousBlockButton.removeClass("disabled");
-	}
-
-    enableButtons(){
-            this.accept.addClass("disabled");
-            this.replay.addClass("disabled");
-            this.backwardButton.addClass("disabled");
-            this.forwardButton.addClass("disabled");
-            this.skipBlock.addClass("disabled");
-            this.removeInterval.addClass("disabled");
-            this.editBlock.addClass("disabled");
-            this.saveExit.addClass("disabled");
-            this.nextBlockButton.addClass("disabled");
-            this.previousBlockButton.addClass("disabled");
-	}
-
-    check(){
-		if (this.syncFileEditorData.getTimeOfBlock() == null){
-            this.replay.addClass("disabled");
-            this.backwardButton.addClass("disabled");
-            this.forwardButton.addClass("disabled");
-            this.accept.addClass("disabled");
-            this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
-            this.time2 = "0.00";
-        }else{
-            this.replay.removeClass("disabled");
-            this.backwardButton.removeClass("disabled");
-            this.forwardButton.removeClass("disabled");
-            this.accept.removeClass("disabled");
-            this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
-            this.time2 = this.syncFileEditorData.getTimeOfBlock();
-		}
-        this.highlight();
-	}
+        this.presentNextController();
+     }
+ 
+     disableButtons(){
+             this.accept.removeClass("disabled");
+             this.replay.removeClass("disabled");
+             this.backwardButton.removeClass("disabled");
+             this.forwardButton.removeClass("disabled");
+             this.skipBlock.removeClass("disabled");
+             this.removeInterval.removeClass("disabled");
+             this.editBlock.removeClass("disabled");
+             this.saveExit.removeClass("disabled");
+             this.nextBlockButton.removeClass("disabled");
+             this.previousBlockButton.removeClass("disabled");
+     }
+ 
+     enableButtons(){
+             this.accept.addClass("disabled");
+             this.replay.addClass("disabled");
+             this.backwardButton.addClass("disabled");
+             this.forwardButton.addClass("disabled");
+             this.skipBlock.addClass("disabled");
+             this.removeInterval.addClass("disabled");
+             this.editBlock.addClass("disabled");
+             this.saveExit.addClass("disabled");
+             this.nextBlockButton.addClass("disabled");
+             this.previousBlockButton.addClass("disabled");
+     }
+ 
+     check(){
+         if (this.syncFileEditorData.getTimeOfBlock() == null){
+             this.replay.addClass("disabled");
+             this.backwardButton.addClass("disabled");
+             this.forwardButton.addClass("disabled");
+             this.accept.addClass("disabled");
+             this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
+             this.time2 = "0.00";
+         }else{
+             this.replay.removeClass("disabled");
+             this.backwardButton.removeClass("disabled");
+             this.forwardButton.removeClass("disabled");
+             this.accept.removeClass("disabled");
+             this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
+             this.time2 = this.syncFileEditorData.getTimeOfBlock();
+         }
+         this.highlight();
+     }
 }

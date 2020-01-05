@@ -10,7 +10,6 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     renderHtml(html) {
-        // TODO: upravit, issue14
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
@@ -37,13 +36,32 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
-        // TODO: po uprave html vytvorit propertier
         this.fileNameLabel = $('#file-name-label');
         this.fileLinkDownload = $('#file-download');
+
+        this.audioFileNameInput = $('#audio-file');
+        this.scriptFileNameInput = $('script-file');
+        this.syncFileNameInput = $('#sync-file');
+
+        this.saveButton = $('#save');
+        this.unsaveButton = $('#unsave');
+        this.backButton = $('#back');
     }
 
     setupEventListeners() {
-        // TODO: po uprave html vytvorit event listeners
+        //this.audioFileNameChanged = this.audioFileNameChanged.bind(this);
+        //this.scriptFileNameChanged = this.scriptFileNameChanged.bind(this);
+        //this.syncFileNameChanged = this.syncFileNameChanged.bind(this);
+        this.saveButtonClicked = this.saveButtonClicked.bind(this);
+        this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
+        this.backButtonClicked = this.backButtonClicked.bind(this);
+
+        //this.audioFileNameInput.change(this.audioPickerValueChanged);
+        //this.scriptFileNameInput.change(this.scriptPickerValueChanged);
+        //this.syncFileNameInput.change(this.syncPickerValueChanged);
+        this.saveButton.on('click', this.saveButtonClicked);
+        this.unsaveButton.on('click', this.unsaveButtonClicked);
+        this.backButton.on('click', this.backButtonClicked);
     }
 
     viewDidLoad() {
@@ -52,14 +70,32 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     presentNextController() {
-        // TODO: vratit sa do editora
+        const syncFileEditViewController = new SyncFileEditViewController();
+
+        syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
+
+        this.navigationController.present(syncFileEditViewController);
     }
 
     // Private Methods
+    
+    saveButtonClicked(){
+        if (this.syncFileEditorData.getScriptFileEdited()) {
+            showScriptFileDownload();
+        } 
+        showSyncFileDownload();  
+        window.locatin.href = 'index.html'; // chceme skutocne exit?
+    }
 
-    /// This method create json object from blocks end times array and
-    /// skip blocks array. Then it will create html download link with
-    /// {filename}.mbpsf file
+    unsaveButtonClicked() {
+        window.locatin.href = 'index.html';
+    }
+    
+    backButtonClicked() {
+        syncFileEditorData.selectFirstBlock();
+        presentNextController();
+    }
+
     showSyncFileDownload() {
         // TODO: zmenit podla SyncFileEditorData triedy
         const syncFileName = `${this.fileName}.mbpsf`;
@@ -75,7 +111,22 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     showScriptFileDownload(){
-        // TODO: implementovat podla SyncFileEditorData triedy
+        // TODO: pridat validator mena, cez JS alebo HTML5
+        const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
+        const scriptFileData = syncFileEditorData.getScriptFileData();
+
+        this.fileDownload(scriptFileName, scriptFileText);
+    }
+
+    fileDownload(fileName, fileText) {
+        // https://stackoverflow.com/a/18197341
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileText));
+        element.setAttribute('download', fileName);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 
 }
