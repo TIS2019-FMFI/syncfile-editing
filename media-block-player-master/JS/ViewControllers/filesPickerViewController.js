@@ -105,14 +105,11 @@ class FilesPickerViewController extends ViewController {
     }
 
     presentNextController() {
-		
         const syncFileEditViewController = new SyncFileEditViewController();
 
         syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
 
         this.navigationController.present(syncFileEditViewController);
-		
-
     }
 
     // Private Methods

@@ -14,7 +14,7 @@ class SyncFileEditorData {
         this.audioFileName;
         this.scriptFileName;
         this.syncFileName;
-        }
+    }
 
     selectFirstBlock() {
         this.blocksEditor.selectFirstBlock();
@@ -74,7 +74,6 @@ class SyncFileEditorData {
         this.blocksEditor.setTextOfSelectedBlock(txt);
     }
 
-
     getTextOfAllBlocks() {
         return this.blocksEditor.getTextOfAllBlocks();
     }
@@ -132,11 +131,8 @@ class SyncFileEditorData {
         return syncFileName;
     }
 
-    f() {
-        console.log("Robk");
-    }
-
     getScriptFileEdited() {
         return this.blocksEditor.getScriptFileEdited();
     }
 }
+

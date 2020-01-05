@@ -4,8 +4,8 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-		this.init();
         this.scriptFileEdited = false;
+		this.init();
     }
 
     init(){
@@ -209,8 +209,9 @@ class BlockEditor {
             throw "Next block doesn´t exist.";
         }
     }
-
-    getScriptFileEdited() {
+  
+   getScriptFileEdited() {
         return this.scriptFileEdited;
     } 
+  }
 }
