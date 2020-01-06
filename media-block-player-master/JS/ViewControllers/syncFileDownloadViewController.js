@@ -42,9 +42,10 @@ class SyncFileDownloadViewController extends ViewController {
         this.audioFileNameInput = document.getElementById('audio-file');
         this.scriptFileNameInput = document.getElementById('script-file');
         this.syncFileNameInput = document.getElementById('sync-file');
-        //this.audioFileNameInput.value = this.syncFileEditorData.audioFileName;
-        //this.scripFileNameInput.value = this.syncFileEditorData.scriptFileName;
-        //this.syncFileNameInput.value = this.syncFileEditorData.syncFileName;
+
+        this.audioFileNameInput.value = this.syncFileEditorData.audioFileName + '.mp3';
+        this.scriptFileNameInput.value = this.syncFileEditorData.scriptFileName + '.txt';
+        this.syncFileNameInput.value = this.syncFileEditorData.syncFileName + '.mbpsf';
 
         this.saveButton = $('#save');
         this.unsaveButton = $('#unsave');
@@ -100,7 +101,7 @@ class SyncFileDownloadViewController extends ViewController {
 
     showSyncFileDownload() {
         // TODO: pridat validator mena, cez JS alebo HTML5
-        const syncFileName = this.syncFileNameInput.value + '.mbpsf';
+        const syncFileName = this.syncFileNameInput.value;
         const syncFileText = JSON.stringify(this.syncFileEditorData.getSyncFileData());
 
         console.log(syncFileText);
@@ -109,7 +110,7 @@ class SyncFileDownloadViewController extends ViewController {
 
     showScriptFileDownload(){
         // TODO: pridat validator mena, cez JS alebo HTML5
-        const scriptFileName = this.scriptFileNameInput.value + '.txt';
+        const scriptFileName = this.scriptFileNameInput.value;
         const scriptFileText = this.syncFileEditorData.getScriptFileData();
 
         this.fileDownload(scriptFileName, scriptFileText);

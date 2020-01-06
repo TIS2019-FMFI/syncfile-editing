@@ -107,6 +107,14 @@ class FilesPickerViewController extends ViewController {
     presentNextController() {
         const syncFileEditViewController = new SyncFileEditViewController();
 
+        this.syncFileEditorData.audioFileName = this.audioFileName;
+        this.syncFileEditorData.scripFileName = this.scriptFileName;
+        if (this.syncFileName == undefined) {
+            this.syncFileEditorData.syncFileName = this.scriptFileName;
+        } else {
+            this.syncFileEditorData.syncFileName = this.syncFileName;
+        }
+
         syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
 
         this.navigationController.present(syncFileEditViewController);
