@@ -39,9 +39,13 @@ class SyncFileDownloadViewController extends ViewController {
         this.fileNameLabel = $('#file-name-label');
         this.fileLinkDownload = $('#file-download');
 
-        this.audioFileNameInput = $('#audio-file');
-        this.scriptFileNameInput = $('script-file');
-        this.syncFileNameInput = $('#sync-file');
+        this.audioFileNameInput = document.getElementById('audio-file');
+        this.scriptFileNameInput = document.getElementById('script-file');
+        this.syncFileNameInput = document.getElementById('sync-file');
+
+        this.audioFileNameInput.value = this.syncFileEditorData.audioFileName + '.mp3';
+        this.scriptFileNameInput.value = this.syncFileEditorData.scriptFileName + '.txt';
+        this.syncFileNameInput.value = this.syncFileEditorData.syncFileName + '.mbpsf';
 
         this.saveButton = $('#save');
         this.unsaveButton = $('#unsave');
@@ -65,8 +69,6 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     viewDidLoad() {
-        // TODO: kedy sa metoda vola?
-        this.showSyncFileDownload();
     }
 
     presentNextController() {
@@ -80,40 +82,40 @@ class SyncFileDownloadViewController extends ViewController {
     // Private Methods
     
     saveButtonClicked(){
+        try {
+            this.validateInputs();
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+            return;
+        }
         if (this.syncFileEditorData.getScriptFileEdited()) {
             showScriptFileDownload();
         } 
-        showSyncFileDownload();  
-        window.locatin.href = 'index.html'; // chceme skutocne exit?
+        this.showSyncFileDownload();  
+        //window.location.href = 'index.html'; // chceme skutocne exit?
     }
 
     unsaveButtonClicked() {
-        window.locatin.href = 'index.html';
+        window.location.href = 'index.html';
     }
     
     backButtonClicked() {
-        syncFileEditorData.selectFirstBlock();
-        presentNextController();
+        this.syncFileEditorData.selectFirstBlock();
+        this.presentNextController();
     }
 
     showSyncFileDownload() {
-        // TODO: zmenit podla SyncFileEditorData triedy
-        const syncFileName = `${this.fileName}.mbpsf`;
-        const syncFileObject = new Object();
-        syncFileObject.blocks = this.blocksEndTimes;
-        syncFileObject.skips = this.skipBlock;
-        const syncFileJSON = JSON.stringify(syncFileObject);
+        const syncFileName = this.syncFileNameInput.value;
+        const syncFileText = JSON.stringify(this.syncFileEditorData.getSyncFileData());
 
-        this.fileNameLabel.text(syncFileName);
-        this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
-        this.fileLinkDownload.attr('download', syncFileName);
-        this.fileLinkDownload.html('DOWNLOAD');
+        this.fileDownload(syncFileName, syncFileText);
     }
 
     showScriptFileDownload(){
-        // TODO: pridat validator mena, cez JS alebo HTML5
-        const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
-        const scriptFileData = syncFileEditorData.getScriptFileData();
+        const scriptFileName = this.scriptFileNameInput.value;
+        const scriptFileText = this.syncFileEditorData.getScriptFileData();
 
         this.fileDownload(scriptFileName, scriptFileText);
     }
@@ -127,6 +129,15 @@ class SyncFileDownloadViewController extends ViewController {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
+    }
+
+    validateInputs(){
+        if (this.syncFileNameInput.value == ''){
+            throw 'SyncFile name can not have empty value';
+        }
+        if (this.scriptFileNameInput.value == ''){
+            throw 'ScriptFile name can not have empty value';
+        }
     }
 
 }

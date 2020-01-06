@@ -4,8 +4,8 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-        this.scriptFileEdited = false;
 		this.init();
+        this.scriptFileEdited = false;
     }
 
     init(){
@@ -183,29 +183,18 @@ class BlockEditor {
 
     mergeSelectedBlockWithNextBlock(){
         this.scriptFileEdited = true;
-        if (!this.blocks.length >= this.currentBlockIndex){
-            if(this.isSelectedBlockSkipped()){
-                throw "You cannot merge skipped interval.";
-            }
-            if(this.blocks[this.currentBlockIndex+1].isSkipped()){
-                throw "Next block is skipped, you cannot merge block with skipped interval.";
-            }
-            var text1 = this.blocks[this.currentBlockIndex].getText();
-            var text2 = this.blocks[this.currentBlockIndex+1].getText();
-            var newBlock = new Block(text1.concat(" ", text2))
+        var text1 = this.blocks[this.currentBlockIndex].getText();
+        var text2 = this.blocks[this.currentBlockIndex+1].getText();
+        var newBlock = new Block(text1.concat(" ", text2))
 
-            this.blocks.splice(this.currentBlockIndex, this.currentBlockIndex+2);
-            this.blocks.splice(this.currentBlockIndex, 0, newBlock);
-        } 
-        else{
-            throw "Next block doesn´t exist.";
-        }
+        this.blocks.splice(this.currentBlockIndex, 2);
+        this.blocks.splice(this.currentBlockIndex, 0, newBlock);
     }
 
 
     mergeIsPossible(){
         this.scriptFileEdited = true;
-        if (!this.blocks.length >= this.currentBlockIndex){
+        if (this.blocks.length > this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
             }
