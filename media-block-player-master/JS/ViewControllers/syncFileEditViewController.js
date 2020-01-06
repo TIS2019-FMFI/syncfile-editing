@@ -161,13 +161,9 @@ class SyncFileEditViewController extends ViewController {
     }
 
     presentNextController() {
-        // TODO: upravit predavanie dat cez SyncFileEditorData triedy
-		
-        const syncFileDownloadViewController = new SyncFileDownloadViewController();
+	const syncFileDownloadViewController = new SyncFileDownloadViewController();
         syncFileDownloadViewController.syncFileEditorData = this.syncFileEditorData;
         this.navigationController.present(syncFileDownloadViewController);
-		
-	
     }
 
     // Private Methods
