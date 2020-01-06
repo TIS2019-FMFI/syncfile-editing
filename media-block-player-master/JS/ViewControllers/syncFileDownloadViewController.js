@@ -56,17 +56,15 @@ class SyncFileDownloadViewController extends ViewController {
         this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
         this.backButtonClicked = this.backButtonClicked.bind(this);
 
-        //this.audioFileNameInput.change(this.audioPickerValueChanged);
-        //this.scriptFileNameInput.change(this.scriptPickerValueChanged);
-        //this.syncFileNameInput.change(this.syncPickerValueChanged);
+        this.audioFileNameInput.change(this.audioPickerValueChanged);
+        this.scriptFileNameInput.change(this.scriptPickerValueChanged);
+        this.syncFileNameInput.change(this.syncPickerValueChanged);
         this.saveButton.on('click', this.saveButtonClicked);
         this.unsaveButton.on('click', this.unsaveButtonClicked);
         this.backButton.on('click', this.backButtonClicked);
     }
 
     viewDidLoad() {
-        // TODO: kedy sa metoda vola?
-        this.showSyncFileDownload();
     }
 
     presentNextController() {
@@ -83,37 +81,33 @@ class SyncFileDownloadViewController extends ViewController {
         if (this.syncFileEditorData.getScriptFileEdited()) {
             showScriptFileDownload();
         } 
-        showSyncFileDownload();  
-        window.locatin.href = 'index.html'; // chceme skutocne exit?
+        this.showSyncFileDownload();  
+        this.showScriptFileDownload();
+        //window.location.href = 'index.html'; // chceme skutocne exit?
     }
 
     unsaveButtonClicked() {
-        window.locatin.href = 'index.html';
+        window.location.href = 'index.html';
     }
     
     backButtonClicked() {
-        syncFileEditorData.selectFirstBlock();
+        this.syncFileEditorData.selectFirstBlock();
         presentNextController();
     }
 
     showSyncFileDownload() {
-        // TODO: zmenit podla SyncFileEditorData triedy
-        const syncFileName = `${this.fileName}.mbpsf`;
-        const syncFileObject = new Object();
-        syncFileObject.blocks = this.blocksEndTimes;
-        syncFileObject.skips = this.skipBlock;
-        const syncFileJSON = JSON.stringify(syncFileObject);
+        // TODO: pridat validator mena, cez JS alebo HTML5
+        const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
+        const syncFileText = JSON.stringify(this.syncFileEditorData.getSyncFileData());
 
-        this.fileNameLabel.text(syncFileName);
-        this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
-        this.fileLinkDownload.attr('download', syncFileName);
-        this.fileLinkDownload.html('DOWNLOAD');
+        console.log(syncFileText);
+        this.fileDownload(syncFileName, syncFileText);
     }
 
     showScriptFileDownload(){
         // TODO: pridat validator mena, cez JS alebo HTML5
         const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
-        const scriptFileData = syncFileEditorData.getScriptFileData();
+        const scriptFileText = this.syncFileEditorData.getScriptFileData();
 
         this.fileDownload(scriptFileName, scriptFileText);
     }
