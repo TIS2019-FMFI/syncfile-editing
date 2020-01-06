@@ -39,9 +39,12 @@ class SyncFileDownloadViewController extends ViewController {
         this.fileNameLabel = $('#file-name-label');
         this.fileLinkDownload = $('#file-download');
 
-        this.audioFileNameInput = $('#audio-file');
-        this.scriptFileNameInput = $('script-file');
-        this.syncFileNameInput = $('#sync-file');
+        this.audioFileNameInput = document.getElementById('audio-file');
+        this.scriptFileNameInput = document.getElementById('script-file');
+        this.syncFileNameInput = document.getElementById('sync-file');
+        //this.audioFileNameInput.value = this.syncFileEditorData.audioFileName;
+        //this.scripFileNameInput.value = this.syncFileEditorData.scriptFileName;
+        //this.syncFileNameInput.value = this.syncFileEditorData.syncFileName;
 
         this.saveButton = $('#save');
         this.unsaveButton = $('#unsave');
@@ -56,9 +59,9 @@ class SyncFileDownloadViewController extends ViewController {
         this.unsaveButtonClicked = this.unsaveButtonClicked.bind(this);
         this.backButtonClicked = this.backButtonClicked.bind(this);
 
-        this.audioFileNameInput.change(this.audioPickerValueChanged);
-        this.scriptFileNameInput.change(this.scriptPickerValueChanged);
-        this.syncFileNameInput.change(this.syncPickerValueChanged);
+        //this.audioFileNameInput.change(this.audioPickerValueChanged);
+        //this.scriptFileNameInput.change(this.scriptPickerValueChanged);
+        //this.syncFileNameInput.change(this.syncPickerValueChanged);
         this.saveButton.on('click', this.saveButtonClicked);
         this.unsaveButton.on('click', this.unsaveButtonClicked);
         this.backButton.on('click', this.backButtonClicked);
@@ -97,7 +100,7 @@ class SyncFileDownloadViewController extends ViewController {
 
     showSyncFileDownload() {
         // TODO: pridat validator mena, cez JS alebo HTML5
-        const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
+        const syncFileName = this.syncFileNameInput.value + '.mbpsf';
         const syncFileText = JSON.stringify(this.syncFileEditorData.getSyncFileData());
 
         console.log(syncFileText);
@@ -106,7 +109,7 @@ class SyncFileDownloadViewController extends ViewController {
 
     showScriptFileDownload(){
         // TODO: pridat validator mena, cez JS alebo HTML5
-        const scriptFileName = `${this.scriptFileNameInput.value}.txt`;
+        const scriptFileName = this.scriptFileNameInput.value + '.txt';
         const scriptFileText = this.syncFileEditorData.getScriptFileData();
 
         this.fileDownload(scriptFileName, scriptFileText);
