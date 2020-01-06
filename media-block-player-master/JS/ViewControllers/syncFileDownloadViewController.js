@@ -103,7 +103,7 @@ class SyncFileDownloadViewController extends ViewController {
     
     backButtonClicked() {
         this.syncFileEditorData.selectFirstBlock();
-        presentNextController();
+        this.presentNextController();
     }
 
     showSyncFileDownload() {
