@@ -82,11 +82,18 @@ class SyncFileDownloadViewController extends ViewController {
     // Private Methods
     
     saveButtonClicked(){
+        try {
+            this.validateInputs();
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+            return;
+        }
         if (this.syncFileEditorData.getScriptFileEdited()) {
             showScriptFileDownload();
         } 
         this.showSyncFileDownload();  
-        this.showScriptFileDownload();
         //window.location.href = 'index.html'; // chceme skutocne exit?
     }
 
@@ -100,16 +107,13 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     showSyncFileDownload() {
-        // TODO: pridat validator mena, cez JS alebo HTML5
         const syncFileName = this.syncFileNameInput.value;
         const syncFileText = JSON.stringify(this.syncFileEditorData.getSyncFileData());
 
-        console.log(syncFileText);
         this.fileDownload(syncFileName, syncFileText);
     }
 
     showScriptFileDownload(){
-        // TODO: pridat validator mena, cez JS alebo HTML5
         const scriptFileName = this.scriptFileNameInput.value;
         const scriptFileText = this.syncFileEditorData.getScriptFileData();
 
@@ -125,6 +129,15 @@ class SyncFileDownloadViewController extends ViewController {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
+    }
+
+    validateInputs(){
+        if (this.syncFileNameInput.value == ''){
+            throw 'SyncFile name can not have empty value';
+        }
+        if (this.scriptFileNameInput.value == ''){
+            throw 'ScriptFile name can not have empty value';
+        }
     }
 
 }

@@ -4,8 +4,8 @@ class BlockEditor {
         this.SyncFileData = SyncFileData;
         this.blocks = [];
         this.currentBlockIndex = 0;
-        this.scriptFileEdited = false;
 		this.init();
+        this.scriptFileEdited = false;
     }
 
     init(){
