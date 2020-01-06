@@ -32,6 +32,34 @@ class SyncFileEditorData {
         this.blocksEditor.setTimeToSelectedBlock(this.audioPlayer.getCurrentTime());
     }
 
+    setTimeToBlock(time){
+        this.blocksEditor.setTimeToSelectedBlock(time);
+	}
+
+    getTimeOfBlock(){
+        return this.blocksEditor.getTimeOfSelectedBlock();
+	}
+
+    getTimeOfPrevBlock(){
+        return this.blocksEditor.getTimeOfPreviousBlock();
+	}
+
+    getTimeOfNextBlock(){
+        return this.blocksEditor.getTimeOfNextBlock();
+	}
+
+    currentTime(){
+        return this.audioPlayer.getCurrentTime();
+	}
+
+    currentIndex(){
+        return this.blocksEditor.getCurrentBlockIndex();
+	}
+
+    playInterval(time1, time2){
+        this.audioPlayer.playInterval(time1, time2);
+	}
+
     isSelectedBlockSkipped() {
         return this.blocksEditor.isSelectedBlockSkipped();
     }
@@ -115,10 +143,14 @@ class SyncFileEditorData {
     }
 
     rewindAudioToStartOfBlock() {
-        time = this.blocksEditor.getTimeOfSelectedBlock();
+        var time = this.blocksEditor.getTimeOfSelectedBlock();
         this.audioPlayer.rewindAudioTo(time);
     }
 
+    rewindAudioToTime(time){
+        this.audioPlayer.rewindAudioTo(time);
+    }
+    
     rewindAudioToStartOfDocument() {
         this.audioPlayer.rewindAudioToZero();
     }
@@ -135,4 +167,3 @@ class SyncFileEditorData {
         return this.blocksEditor.getScriptFileEdited();
     }
 }
-

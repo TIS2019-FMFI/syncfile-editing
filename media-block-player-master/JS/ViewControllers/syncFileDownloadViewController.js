@@ -4,7 +4,9 @@ class SyncFileDownloadViewController extends ViewController {
     constructor() {
         super();
 
-        this.syncFileEditorData;
+        this.fileName;
+        this.blocksEndTimes;
+        this.skipBlock;
     }
 
     renderHtml(html) {
@@ -34,6 +36,9 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     setupProperties() {
+        this.fileNameLabel = $('#file-name-label');
+        this.fileLinkDownload = $('#file-download');
+
         this.audioFileNameInput = $('#audio-file');
         this.scriptFileNameInput = $('script-file');
         this.syncFileNameInput = $('#sync-file');
@@ -57,6 +62,11 @@ class SyncFileDownloadViewController extends ViewController {
         this.saveButton.on('click', this.saveButtonClicked);
         this.unsaveButton.on('click', this.unsaveButtonClicked);
         this.backButton.on('click', this.backButtonClicked);
+    }
+
+    viewDidLoad() {
+        // TODO: kedy sa metoda vola?
+        this.showSyncFileDownload();
     }
 
     presentNextController() {
@@ -87,11 +97,17 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     showSyncFileDownload() {
-        // TODO: pridat validator mena, cez JS alebo HTML5
-        const syncFileName = `${this.syncFileNameInput.value}.mbpsf`;
-        const syncFileData = syncFileEditorData.getSyncFileData();
+        // TODO: zmenit podla SyncFileEditorData triedy
+        const syncFileName = `${this.fileName}.mbpsf`;
+        const syncFileObject = new Object();
+        syncFileObject.blocks = this.blocksEndTimes;
+        syncFileObject.skips = this.skipBlock;
+        const syncFileJSON = JSON.stringify(syncFileObject);
 
-        this.fileDownload(syncFileName, syncFileText);
+        this.fileNameLabel.text(syncFileName);
+        this.fileLinkDownload.attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(syncFileJSON));
+        this.fileLinkDownload.attr('download', syncFileName);
+        this.fileLinkDownload.html('DOWNLOAD');
     }
 
     showScriptFileDownload(){
