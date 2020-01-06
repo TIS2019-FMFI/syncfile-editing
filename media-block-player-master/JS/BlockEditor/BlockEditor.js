@@ -194,7 +194,7 @@ class BlockEditor {
 
     mergeIsPossible(){
         this.scriptFileEdited = true;
-        if (this.blocks.length >= this.currentBlockIndex){
+        if (this.blocks.length > this.currentBlockIndex){
             if(this.isSelectedBlockSkipped()){
                 throw "You cannot merge skipped interval.";
             }
