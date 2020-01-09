@@ -57,8 +57,10 @@ class EditBlockViewController extends ViewController {
         const syncFileEditViewController = new SyncFileEditViewController();
 
         syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
+		syncFileEditViewController.setTimes();
 
         this.navigationController.present(syncFileEditViewController);
+		
     }
 
     // Private Methods
@@ -98,7 +100,6 @@ class EditBlockViewController extends ViewController {
                 }
             }
             else if (countOfPipelines == 0) {
-				console.log(this.actualText.val().trim());
                 this.syncFileEditorData.setTextOfSelectedBlock(this.actualText.val().trim());
             }
             else {
@@ -124,17 +125,4 @@ class EditBlockViewController extends ViewController {
 
     }
 
-/*
-    mergeBlocks() {
-        // TODO: implementovat
-    }
-
-    splitBlocks() {
-        // TODO: implementovat
-    }
-
-    editBlock() {
-        // TODO: implementovat
-    }
-	*/
 }

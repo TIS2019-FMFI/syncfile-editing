@@ -6,9 +6,13 @@ class SyncFileEditViewController extends ViewController {
         
         this.syncFileEditorData;
         this.accepted = false;
-        this.time1 = "0.00";
+
+		this.time1 = "0.00";
         this.time2 = "0.00";
+		
+
     }
+	
 
     renderHtml(html) {
         // TODO: upravit, issue14
@@ -166,6 +170,11 @@ class SyncFileEditViewController extends ViewController {
         this.navigationController.present(syncFileDownloadViewController);
     }
 
+	setTimes(){
+		this.time1 =  this.syncFileEditorData.getTimeOfPrevBlock();
+        this.time2 = this.syncFileEditorData.getTimeOfBlock();
+	}
+
     // Private Methods
 
     playPauseButtonClicked() {
@@ -241,7 +250,7 @@ class SyncFileEditViewController extends ViewController {
             this.syncFileEditorData.playSelectedBlock();
 		}
         //prehraj aktualny blok, bud uz zadany alebo este v procese
-        console.log(this.time1, this.time2);
+        
     }
 
 
@@ -292,7 +301,6 @@ class SyncFileEditViewController extends ViewController {
         editBlockViewController.syncFileEditorData = this.syncFileEditorData;
 
         this.navigationController.present(editBlockViewController);
-
 
     }
     saveExitButtonClicked() {

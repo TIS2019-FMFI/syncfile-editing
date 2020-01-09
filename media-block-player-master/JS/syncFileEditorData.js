@@ -81,7 +81,6 @@ class SyncFileEditorData {
 				time1 = this.blocksEditor.getTimeOfPreviousBlock();
 				time2 = this.blocksEditor.getTimeOfSelectedBlock();
 			}
-			console.log(time1, time2);
 			this.audioPlayer.playInterval(time1, time2);
 		}
     }
