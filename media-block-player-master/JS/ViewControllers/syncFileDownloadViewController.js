@@ -90,10 +90,10 @@ class SyncFileDownloadViewController extends ViewController {
             alert(error);
             return;
         }
-        if (this.syncFileEditorData.getScriptFileEdited()) {
-            showScriptFileDownload();
-        } 
         this.showSyncFileDownload();  
+        if (this.syncFileEditorData.getScriptFileEdited()) {
+            this.showScriptFileDownload();
+        } 
         //window.location.href = 'index.html'; // chceme skutocne exit?
     }
 
@@ -121,7 +121,6 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     fileDownload(fileName, fileText) {
-        // https://stackoverflow.com/a/18197341
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileText));
         element.setAttribute('download', fileName);
