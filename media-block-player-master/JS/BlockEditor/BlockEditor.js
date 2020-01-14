@@ -108,6 +108,10 @@ class BlockEditor {
         this.scriptFileEdited = true;
         this.blocks[this.currentBlockIndex].setText(txt);
     }
+	
+	getAllBlocks() {
+        return this.blocks;
+    }
 
     getTextOfAllBlocks() {
         var resText = [];
