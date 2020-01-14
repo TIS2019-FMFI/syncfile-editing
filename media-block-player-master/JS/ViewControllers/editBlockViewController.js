@@ -100,6 +100,9 @@ class EditBlockViewController extends ViewController {
                 }
             }
             else if (countOfPipelines == 0) {
+                if (this.actualText.val().trim().length == 0) {
+                    throw "You have empty block.";
+                }
                 this.syncFileEditorData.setTextOfSelectedBlock(this.actualText.val().trim());
             }
             else {
