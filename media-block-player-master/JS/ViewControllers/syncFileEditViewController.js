@@ -302,11 +302,20 @@ class SyncFileEditViewController extends ViewController {
 
     editBlockButtonClicked() {
 		
-		const editBlockViewController = new EditBlockViewController();
+		var blocks = this.syncFileEditorData.getAllBlocks();
+		var actualIndex = this.syncFileEditorData.currentIndex();
+		
+		if(!blocks[actualIndex].isSkipped()){
+			
+			const editBlockViewController = new EditBlockViewController();
 
-        editBlockViewController.syncFileEditorData = this.syncFileEditorData;
+			editBlockViewController.syncFileEditorData = this.syncFileEditorData;
 
-        this.navigationController.present(editBlockViewController);
+			this.navigationController.present(editBlockViewController);
+		}
+		else{
+            alert("You cannot edit skipped block.");
+		}
 
     }
     saveExitButtonClicked() {
