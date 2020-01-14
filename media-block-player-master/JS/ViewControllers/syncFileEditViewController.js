@@ -135,12 +135,19 @@ class SyncFileEditViewController extends ViewController {
 	highlight(){	
 		var textarea = '';
 		var blocks = this.syncFileEditorData.getTextOfAllBlocks();
+		var blocksWithTime = this.syncFileEditorData.getAllBlocks();
+
 		for (let i = 0; i < blocks.length; i++) {
 			if (this.syncFileEditorData.blocksEditor.getCurrentBlockIndex() == i){
                 textarea = textarea.concat("<span id='current-block' style='background-color: yellow;'>" + blocks[i] + "</span>");
 			}
 			else{
-                textarea = textarea.concat(blocks[i]);
+				if(blocksWithTime[i].getTime() == undefined){
+					textarea = textarea.concat(blocks[i]);
+				}
+				else{
+					textarea = textarea.concat("<span style='text-decoration: underline;'>" + blocks[i] + "</span>");
+				}
             }
             
             if (i !== blocks.length - 1){
@@ -149,8 +156,7 @@ class SyncFileEditViewController extends ViewController {
 
 		}
         this.text.html(textarea);
-        this.scrollContainer()
-    }
+        this.scrollContainer()    }
 
     scrollContainer() {
 

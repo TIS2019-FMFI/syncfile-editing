@@ -104,6 +104,10 @@ class SyncFileEditorData {
     getTextOfAllBlocks() {
         return this.blocksEditor.getTextOfAllBlocks();
     }
+	
+	getAllBlocks() {
+        return this.blocksEditor.getAllBlocks();
+    }
 
     insertSkippedBlock() {
         this.blocksEditor.insertSkippedBlock();
