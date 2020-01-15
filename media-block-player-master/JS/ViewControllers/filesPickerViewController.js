@@ -171,20 +171,20 @@ class FilesPickerViewController extends ViewController {
     }
 
     createEditButtonClicked() {
-        this.createSyncFileEditorData()
-        this.presentNextController();
-    }
-
-    createSyncFileEditorData() {
         try {
-            this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
-            this.syncFileEditorData.audioFileName = this.audioFileName;
-            this.syncFileEditorData.scriptFileName = this.scriptFileName;
-            this.syncFileEditorData.syncFileName = this.syncFileName;
+            this.createSyncFileEditorData()
+            this.presentNextController();
         }
         catch (error) {
             alert('Unexpected fault'); //TODO: Nevedel čo sem vypísať, neviem či taká situácia vôbec môže nastať.
         }
+    }
+
+    createSyncFileEditorData() {
+        this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
+        this.syncFileEditorData.audioFileName = this.audioFileName;
+        this.syncFileEditorData.scriptFileName = this.scriptFileName;
+        this.syncFileEditorData.syncFileName = this.syncFileName;
     }
 
     /// Encode file to base64 encoding
