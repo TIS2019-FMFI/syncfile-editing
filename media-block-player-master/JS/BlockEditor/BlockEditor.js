@@ -15,10 +15,18 @@ class BlockEditor {
     }
 
     initBlocks(){
-        if ((/\|+\|+/).test(this.ScriptFileData)){
+        var ScriptFileDataAsArray = this.ScriptFileData
+
+        if ((/\|+\s*\|+/).test(ScriptFileDataAsArray)){
             alert("You have multiple pipelines in text we will replace them with one.");
+            
+            while ((/\|+\s*\|+/).test(ScriptFileDataAsArray)){
+                ScriptFileDataAsArray = ScriptFileDataAsArray.replace(/\|+\s*\|+/g, "|");
+            }
         }
-        var ScriptFileDataAsArray = this.ScriptFileData.replace(/\|+\|+/g, "|").split("|");
+
+        ScriptFileDataAsArray = ScriptFileDataAsArray.split("|");
+        
 
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
             var block = new Block(ScriptFileDataAsArray[i].trim());
