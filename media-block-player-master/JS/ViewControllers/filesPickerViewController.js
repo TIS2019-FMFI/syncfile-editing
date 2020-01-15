@@ -106,15 +106,7 @@ class FilesPickerViewController extends ViewController {
 
     presentNextController() {
         const syncFileEditViewController = new SyncFileEditViewController();
-
-        this.syncFileEditorData.audioFileName = this.audioFileName;
-        this.syncFileEditorData.scripFileName = this.scriptFileName;
-        if (this.syncFileName == undefined) {
-            this.syncFileEditorData.syncFileName = this.scriptFileName;
-        } else {
-            this.syncFileEditorData.syncFileName = this.syncFileName;
-        }
-
+        
         syncFileEditViewController.syncFileEditorData = this.syncFileEditorData;
 
         this.navigationController.present(syncFileEditViewController);
@@ -180,7 +172,11 @@ class FilesPickerViewController extends ViewController {
             this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
             this.syncFileEditorData.audioFileName = this.audioFileName;
             this.syncFileEditorData.scriptFileName = this.scriptFileName;
-            this.syncFileEditorData.syncFileName = this.syncFileName;
+            if (this.syncFileName == undefined) {
+                this.syncFileEditorData.syncFileName = this.scriptFileName;
+            } else {
+                this.syncFileEditorData.syncFileName = this.syncFileName;
+            }
         }
         catch (error) {
             alert('Unexpected fault'); //TODO: Nevedel čo sem vypísať, neviem či taká situácia vôbec môže nastať.
