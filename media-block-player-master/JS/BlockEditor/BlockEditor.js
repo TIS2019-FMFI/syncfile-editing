@@ -11,6 +11,7 @@ class BlockEditor {
     init(){
         this.initBlocks();
         this.initBlocksTime();
+        this.insertFirstSkipped();
     }
 
     initBlocks(){
@@ -22,7 +23,6 @@ class BlockEditor {
         for (var i = 0; i < ScriptFileDataAsArray.length; i++) {
             var block = new Block(ScriptFileDataAsArray[i].trim());
             this.blocks.push(block);
-			
         }
     }
 
@@ -39,6 +39,12 @@ class BlockEditor {
                     this.blocks[i].setTime(times[i]);
                 }
             }        
+        }
+    }
+
+    insertFirstSkipped(){
+        if (!this.isSelectedBlockSkipped()){
+            this.insertSkippedBlock(-1);
         }
     }
 
@@ -157,7 +163,7 @@ class BlockEditor {
     //
     insertSkippedBlock(index = this.currentBlockIndex, time = null){
         var skipped = new Block(null,time);
-        this.blocks.splice(index, 0, skipped);
+        this.blocks.splice(index+1, 0, skipped);
     }
 
     removeSkippedBlock(){
