@@ -22,7 +22,7 @@ constructor(audioFile){
 
 //this method return currentTime of audio
 getCurrentTime(){
-	this.currentTime = this.audio.seek().toString();;
+	this.currentTime = this.audio.seek().toString();
 	return this.currentTime;
 }
 

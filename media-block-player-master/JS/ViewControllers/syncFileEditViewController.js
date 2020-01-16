@@ -9,8 +9,6 @@ class SyncFileEditViewController extends ViewController {
 
 		this.time1 = "0.00";
         this.time2 = "0.00";
-		
-
     }
 	
 
@@ -122,14 +120,10 @@ class SyncFileEditViewController extends ViewController {
         this.saveExit.on('click', this.saveExitButtonClicked);
         this.nextBlockButton.on('click', this.nextBlockButtonClicked);
         this.previousBlockButton.on('click', this.previousBlockButtonClicked);
-
     }
 
     viewDidLoad() {
-        // TODO: skontrolovat ako a kde sa funckia vola a ci je ju treba upravit
-        //this.actualBlockText.text( this.blocks[this.textBlockIndex] );
         this.check();
-        this.highlight();
     }
 
 	highlight(){	
@@ -199,9 +193,8 @@ class SyncFileEditViewController extends ViewController {
                 if (this.syncFileEditorData.currentTime() < this.syncFileEditorData.getTimeOfNextBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){  //ak pri prehravani prejde do dalsieho bloku
                     this.time2 = this.syncFileEditorData.currentTime();
 			    }else{
-                    throw "Next Block";     
+                    throw "You have passed through the next block";     
 				}
-                
                 
             } else {
                 this.syncFileEditorData.rewindAudioToTime(this.time1);
@@ -217,15 +210,16 @@ class SyncFileEditViewController extends ViewController {
     }
 
     backwardButtonClicked() {
-        
         try{
             if (this.time2 == "0.00"){ //ak stlaci pred nastavenim bloku
                 throw "Not time set";  
 		    }else{
                 if (this.syncFileEditorData.getTimeOfPrevBlock() < this.time2 - this.speed.val()){ //ak by presiel do dalsieho bloku
                     this.time2 = this.time2 - this.speed.val();
+                    this.accept.removeClass("disabled");
+                    this.skipBlock.removeClass("disabled");
 			    }else{
-                    throw "Previous Block";     
+                    throw "You have passed previous Block";     
 			    }
             }
 		}catch(error){
@@ -236,15 +230,13 @@ class SyncFileEditViewController extends ViewController {
 
     forwardButtonClicked() {
         try{
-            if (this.time2 == "0.00"){ //ak stlaci pred nastavenim bloku
-                throw "Not time set";  
-		    }else{
-                if (this.syncFileEditorData.getTimeOfNextBlock() > this.time2 - (-this.speed.val()) || this.syncFileEditorData.getTimeOfNextBlock() == null){ //ak by presiel do dalsieho bloku
-                    this.time2 = this.time2 - (-this.speed.val());
-			    }else{
-                    throw "Next Block";     
-			    }
-            }    
+            if (this.syncFileEditorData.getTimeOfNextBlock() > this.time2 - (-this.speed.val()) || this.syncFileEditorData.getTimeOfNextBlock() == null){ //ak by presiel do dalsieho bloku
+                this.time2 = this.time2 - (-this.speed.val());
+                this.accept.removeClass("disabled");
+                this.skipBlock.removeClass("disabled");
+			}else{
+                throw "You have passed next Block";
+			}
 		}catch(error){
             console.error(error);
             alert(error);        
@@ -260,23 +252,19 @@ class SyncFileEditViewController extends ViewController {
             this.syncFileEditorData.playSelectedBlock();
 		}
         //prehraj aktualny blok, bud uz zadany alebo este v procese
-        
     }
 
 
     acceptButtonClicked() {
         try{
-            if (this.time2 == "0.00"){
-                throw "Not time set";  
-		    }else{
-                if (this.time2 < this.syncFileEditorData.getTimeOfNextBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){ //prekrocili sme do dalsieho bloku
+            if (this.time2 < this.syncFileEditorData.getTimeOfNextBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){ //prekrocili sme do dalsieho bloku
                 this.syncFileEditorData.setTimeToBlock(this.time2);
                 this.syncFileEditorData.selectNextBlock();
                 this.check();
-                }else{
-                    throw "Next Block";        
-				}
             }
+            else {
+                    throw "Next Block";        
+				 }
         }catch(error){
             console.error(error);
             alert(error);        
@@ -286,22 +274,18 @@ class SyncFileEditViewController extends ViewController {
 
     addSkipButtonClicked() {
         this.syncFileEditorData.insertSkippedBlock(this.syncFileEditorData.currentIndex(), this.time2);
-        console.log(this.time2);
-        console.log(this.syncFileEditorData.getTimeOfBlock());
-
         this.syncFileEditorData.selectNextBlock();
-        this.check();   
-        //this.highlight();
+        this.check();
     }
 
     removeSkipButtonClicked() {
         this.syncFileEditorData.removeSkippedBlock();
-        this.highlight();
+        this.check();
     }
 
     previousBlockButtonClicked() {
         this.syncFileEditorData.selectPreviousBlock();
-		this.check();
+        this.check();
     }
 
     nextBlockButtonClicked() {
@@ -361,24 +345,23 @@ class SyncFileEditViewController extends ViewController {
              this.previousBlockButton.addClass("disabled");
      }
  
-     check(){
-         if (this.syncFileEditorData.getTimeOfBlock() == null){
+
+     check() {
+         if (this.syncFileEditorData.getTimeOfBlock() == null) {
              this.replay.addClass("disabled");
              this.backwardButton.addClass("disabled");
              this.forwardButton.addClass("disabled");
-             this.accept.addClass("disabled");
-             this.skipBlock.addClass("disabled");
-             this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
-             this.time2 = "0.00";
-         }else{
+         }
+         else {
              this.replay.removeClass("disabled");
              this.backwardButton.removeClass("disabled");
              this.forwardButton.removeClass("disabled");
-             this.accept.removeClass("disabled");
-             this.skipBlock.removeClass("disabled");
-             this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
-             this.time2 = this.syncFileEditorData.getTimeOfBlock();
          }
+
+         this.accept.addClass("disabled");
+         this.skipBlock.addClass("disabled");
+         this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
+         this.time2 = this.syncFileEditorData.getTimeOfBlock();
          this.highlight();
      }
 }
