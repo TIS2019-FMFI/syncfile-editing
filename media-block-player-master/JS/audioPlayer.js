@@ -1,4 +1,4 @@
-
+// DEPRICATED //
 // This class is representing the audio player.
 // This class container all the methods control
 // the lecture audio.
