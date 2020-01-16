@@ -25,8 +25,8 @@ class SyncFileDownloadViewController extends ViewController {
 					<input id = "sync-file" type="text" value="syncfile">
 				</div>
 				<div class = "myMERGE">
-					<a id="save" class="btn m-lr-10">Save&Exit</a>
-					<a id="unsave" class="btn m-lr-10">Exit without saving</a>
+					<a id="save" class="btn m-lr-10">Save</a>
+					<a id="unsave" class="btn m-lr-10">Exit</a>
 					<a id="back" class="btn m-lr-10">Back to setting time</a>
 				</div>
 
