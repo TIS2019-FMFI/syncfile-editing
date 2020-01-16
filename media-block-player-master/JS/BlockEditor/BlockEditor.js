@@ -11,7 +11,6 @@ class BlockEditor {
     init(){
         this.initBlocks();
         this.initBlocksTime();
-        this.insertFirstSkipped();
     }
 
     initBlocks(){
@@ -37,7 +36,15 @@ class BlockEditor {
     initBlocksTime(){
         if (!(this.SyncFileData == null)){
             var times = this.SyncFileData["blocks"].concat(this.SyncFileData["skips"]);
-            times.sort(function(a,b) { return a - b;});
+            times.sort(function(a,b) { 
+                if (a == null) {
+                    return 1;
+                }
+                if (b == null) {
+                    return -1;
+                }
+                return a - b;
+            });
 
             for (var i = 0; i < times.length; i++) {
                 if (this.SyncFileData["skips"].includes(times[i])){
@@ -47,12 +54,6 @@ class BlockEditor {
                     this.blocks[i].setTime(times[i]);
                 }
             }        
-        }
-    }
-
-    insertFirstSkipped(){
-        if (!this.isSelectedBlockSkipped()){
-            this.insertSkippedBlock(-1);
         }
     }
 
@@ -165,13 +166,29 @@ class BlockEditor {
         return {"blocks" : blocks, "skips" : skips};
     }
 
+    isSyncFileValid(){
+        var nullEvidence = false;
+
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].getTime() == null && nullEvidence == false){
+                nullEvidence = true;
+            }
+            else if (this.blocks[i].getTime() != null && nullEvidence == true){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     //
     //Skipped Intervals
     //
     insertSkippedBlock(index = this.currentBlockIndex, time = null){
         var skipped = new Block(null,time);
-        this.blocks.splice(index+1, 0, skipped);
+        this.blocks.splice(index, 0, skipped);
+        console.log(this.blocks);
     }
 
     removeSkippedBlock(){
@@ -181,6 +198,7 @@ class BlockEditor {
         else{
             throw "This block is not skipped interval.";
         }
+        console.log(this.blocks);
     }
 
     isSelectedBlockSkipped(){

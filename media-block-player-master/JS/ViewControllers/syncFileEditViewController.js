@@ -128,7 +128,7 @@ class SyncFileEditViewController extends ViewController {
     viewDidLoad() {
         // TODO: skontrolovat ako a kde sa funckia vola a ci je ju treba upravit
         //this.actualBlockText.text( this.blocks[this.textBlockIndex] );
-
+        this.check();
         this.highlight();
     }
 
@@ -138,8 +138,12 @@ class SyncFileEditViewController extends ViewController {
 		var blocksWithTime = this.syncFileEditorData.getAllBlocks();
 
 		for (let i = 0; i < blocks.length; i++) {
-			if (this.syncFileEditorData.blocksEditor.getCurrentBlockIndex() == i){
-                textarea = textarea.concat("<span id='current-block' style='background-color: yellow;'>" + blocks[i] + "</span>");
+		    if (this.syncFileEditorData.blocksEditor.getCurrentBlockIndex() == i) {
+		        if (blocksWithTime[i].getTime() == undefined) {
+		            textarea = textarea.concat("<span id='current-block' style='background-color: yellow;'>" + blocks[i] + "</span>");
+		        } else {
+		            textarea = textarea.concat("<span id='current-block' style='background-color: yellow;text-decoration: underline;'>" + blocks[i] + "</span>");
+		        }
 			}
 			else{
 				if(blocksWithTime[i].getTime() == undefined){
@@ -281,8 +285,13 @@ class SyncFileEditViewController extends ViewController {
     }
 
     addSkipButtonClicked() {
-        this.syncFileEditorData.insertSkippedBlock();
-        this.highlight();
+        this.syncFileEditorData.insertSkippedBlock(this.syncFileEditorData.currentIndex(), this.time2);
+        console.log(this.time2);
+        console.log(this.syncFileEditorData.getTimeOfBlock());
+
+        this.syncFileEditorData.selectNextBlock();
+        this.check();   
+        //this.highlight();
     }
 
     removeSkipButtonClicked() {
@@ -319,7 +328,11 @@ class SyncFileEditViewController extends ViewController {
 
     }
     saveExitButtonClicked() {
-        this.presentNextController();
+        if (this.syncFileEditorData.blocksEditor.isSyncFileValid()) {
+            this.presentNextController();
+        } else {
+            alert("You need continual set of time marks.");
+        }
      }
  
      disableButtons(){
@@ -354,6 +367,7 @@ class SyncFileEditViewController extends ViewController {
              this.backwardButton.addClass("disabled");
              this.forwardButton.addClass("disabled");
              this.accept.addClass("disabled");
+             this.skipBlock.addClass("disabled");
              this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
              this.time2 = "0.00";
          }else{
@@ -361,6 +375,7 @@ class SyncFileEditViewController extends ViewController {
              this.backwardButton.removeClass("disabled");
              this.forwardButton.removeClass("disabled");
              this.accept.removeClass("disabled");
+             this.skipBlock.removeClass("disabled");
              this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
              this.time2 = this.syncFileEditorData.getTimeOfBlock();
          }
