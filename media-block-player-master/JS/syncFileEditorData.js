@@ -109,8 +109,8 @@ class SyncFileEditorData {
         return this.blocksEditor.getAllBlocks();
     }
 
-    insertSkippedBlock() {
-        this.blocksEditor.insertSkippedBlock();
+    insertSkippedBlock(index, time) {
+        this.blocksEditor.insertSkippedBlock(index, time);
     }
 
     removeSkippedBlock() {
