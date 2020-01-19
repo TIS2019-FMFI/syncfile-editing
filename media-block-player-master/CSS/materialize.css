@@ -9184,7 +9184,7 @@ input[type=range]::-ms-thumb {
         margin: 0;
         float: left;
     }
-
+	
     textarea{
         float: left;
         width: 100%;

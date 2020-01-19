@@ -25,8 +25,8 @@ playInterval(time1, time2){
 		this.audio.pause();
 	}
 	
-	var duration = (parseInt(time2)*1000 - parseInt(time1)*1000);  
-	this.audio._sprite.interval = [parseInt(time1)*1000, duration];
+	var duration = (parseFloat(time2)*1000 - parseFloat(time1)*1000);  
+	this.audio._sprite.interval = [parseFloat(time1)*1000, duration];
 	this.audio.play('interval');
 }
 

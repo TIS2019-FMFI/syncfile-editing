@@ -23,39 +23,44 @@ class SyncFileEditViewController extends ViewController {
 
 
 				<div class = "my2">
-				    <a class="btn m-lr-10" id="play-pause-button"><i id="play-pause-icon" class="material-icons">play_circle_outline</i></a>
-                    <a class="btn m-lr-10" id="backward-button"><i class="material-icons">fast_rewind</i></a>
+				    <a class="btn m-lr-10" title="Play/Pause to set current block duration" id="play-pause-button"><i id="play-pause-icon" class="material-icons">play_circle_outline</i></a>
+                    <a class="btn m-lr-10" id="backward-button" title="Reduce current block duration"><i class="material-icons">remove</i></a>
 					<input class="w-45 m-lr-10" id="speed" type="number" min="0.1" max="10" step="0.1" value="0.3">
-                    <a class="btn m-lr-10" id="forward-button"><i class="material-icons">fast_forward</i></a>                    
+                    <a class="btn m-lr-10" id="forward-button" title="Increase current block duration"><i class="material-icons">add</i></a>                    
 				</div>
 
 
 				<div class = "my2">
-					<a id="accept" class="btn m-lr-10">Accept</a>
-                    <a id="replay" class="btn"><i class="material-icons center">replay</i></a>              
+					<a id="accept" class="btn m-lr-10"title="Accept current block and move to next">Accept</a>
+                    <a id="replay" title="Replay current block" class="btn"><i class="material-icons center">replay</i></a>    
+					<span id="block_duration"></span>
 				</div>
 
 
 				<div class = "my2">
-					<a id="skip-block" class="btn m-lr-10">SKIP interval</a>
-					<a id="remove-skipped-interval" class="btn m-lr-10">Remove Skipped Interval</a>
+					<a id="skip-block" class="btn m-lr-10" title="Skip this unwanted audio interval">SKIP interval</a>
+					<a id="remove-skipped-interval" class="btn m-lr-10" title="Remove skipped interval">Remove Skipped Interval</a>
 				</div>
 
 
 				<div class = "my2">
-					<a id="edit-blok" class="btn m-lr-10">Edit Block</a>
-					<a id="save-exit" class="btn m-lr-10">Save & Exit</a>
+					<a id="edit-blok" class="btn m-lr-10" title="Edit, split or merge block">Edit Block</a>
+					<a id="save-exit" class="btn m-lr-10" title="Save SyncFile and Exit">Save & Exit</a>
 				</div>
 
 
 				<div class="my2">
                     <a class="btn-small right" href="index.html">Back to my menu</a>
                 </div>
-
+				
 
 				<div class = "my3">
-					<a id="previous-block-button" class="btn m-lr-10"><-</a>
-					<a id="next-block-button" class="btn m-lr-10">-></a>
+					<a id="previous-block-button" title="Move to previous block" class="btn m-lr-10"><-</a>
+					<a id="next-block-button" title="Move to next block" class="btn m-lr-10">-></a>
+				</div>
+				
+				<div class="my3">
+				<a id="help" title="Help" class="btn m-lr-10"><i class="material-icons center">help_outline</i></a>
 				</div>
 
             </section>
@@ -154,8 +159,22 @@ class SyncFileEditViewController extends ViewController {
 
 		}
         this.text.html(textarea);
-        this.scrollContainer()    }
+        this.scrollContainer();
+		this.unsetBlockDuration();
+	}
 
+	setBlockDuration(){
+		var duration = this.time2 - this.time1;
+		duration = Math.round(duration * 100) / 100
+		var blockDuration =$('#block_duration').text("   Current block duration: " + duration.toString() + " s"); 
+
+	}
+	
+	unsetBlockDuration(){
+		var blockDuration = $('#block_duration').text(""); 
+
+	}
+	
     scrollContainer() {
 
         var container = $("#text");
@@ -195,7 +214,7 @@ class SyncFileEditViewController extends ViewController {
 			    }else{
                     throw "You have passed through the next block";     
 				}
-                
+                this.setBlockDuration();
             } else {
                 this.syncFileEditorData.rewindAudioToTime(this.time1);
                 this.syncFileEditorData.playAudio();
@@ -203,6 +222,8 @@ class SyncFileEditViewController extends ViewController {
                 this.enableButtons();
 
             }
+			
+
         }catch(error){
             console.error(error);
             alert(error);
@@ -218,6 +239,8 @@ class SyncFileEditViewController extends ViewController {
                     this.time2 = this.time2 - this.speed.val();
                     this.accept.removeClass("disabled");
                     this.skipBlock.removeClass("disabled");
+					this.setBlockDuration();
+
 			    }else{
                     throw "You have passed previous Block";     
 			    }
@@ -234,6 +257,8 @@ class SyncFileEditViewController extends ViewController {
                 this.time2 = this.time2 - (-this.speed.val());
                 this.accept.removeClass("disabled");
                 this.skipBlock.removeClass("disabled");
+				this.setBlockDuration();
+
 			}else{
                 throw "You have passed next Block";
 			}
