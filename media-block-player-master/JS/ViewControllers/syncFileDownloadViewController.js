@@ -19,10 +19,16 @@ class SyncFileDownloadViewController extends ViewController {
 				<div class = "myMERGE">
 					<h4>ScriptFile:</h4>
 					<input id = "script-file" type="text" value="text">
+                    <div class="helper-text grey-text text-darken-1">
+                        Enter the name of the ScriptFile. If no changes were made, ScriptFile won't be downloaded.
+                    </div>
 				</div>
 				<div class = "myMERGE">
 					<h4>SyncFile:</h4>
 					<input id = "sync-file" type="text" value="syncfile">
+                    <div class="helper-text grey-text text-darken-1">
+                        Enter the name of the SyncFile.
+                    </div>
 				</div>
 				<div class = "myMERGE">
 					<a id="save" class="btn m-lr-10">Save</a>
