@@ -54,7 +54,7 @@ class FilesPickerViewController extends ViewController {
                 </div>
 
 
-				<div class="row row-50 center">
+				<div class="row row-50">
                     <div class="col s6">
                         <form action="#">
                             <div class="file-field input-field">
@@ -67,6 +67,9 @@ class FilesPickerViewController extends ViewController {
                                 </div>
                             </div>
                         </form>
+                        <div class="helper-text grey-text text-darken-1">
+                            If no SyncFile uploaded, new SyncFile will be created.
+                        </div>
                     </div>
 				</div>
                 <div class="row row-50">
