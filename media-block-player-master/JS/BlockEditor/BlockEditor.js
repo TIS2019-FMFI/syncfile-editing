@@ -188,7 +188,6 @@ class BlockEditor {
     insertSkippedBlock(index = this.currentBlockIndex, time = null){
         var skipped = new Block(null,time);
         this.blocks.splice(index, 0, skipped);
-        console.log(this.blocks);
     }
 
     removeSkippedBlock(){
@@ -198,7 +197,6 @@ class BlockEditor {
         else{
             throw "This block is not skipped interval.";
         }
-        console.log(this.blocks);
     }
 
     isSelectedBlockSkipped(){
@@ -219,9 +217,10 @@ class BlockEditor {
 
     mergeSelectedBlockWithNextBlock(){
         this.scriptFileEdited = true;
-        var text1 = this.blocks[this.currentBlockIndex].getText();
-        var text2 = this.blocks[this.currentBlockIndex+1].getText();
-        var newBlock = new Block(text1.concat(" ", text2))
+        var block1 = this.blocks[this.currentBlockIndex];
+        var block2 = this.blocks[this.currentBlockIndex+1];
+        var text = block1.getText().concat(" ", block2.getText());
+        var newBlock = new Block(text, block2.getTime());
 
         this.blocks.splice(this.currentBlockIndex, 2);
         this.blocks.splice(this.currentBlockIndex, 0, newBlock);
