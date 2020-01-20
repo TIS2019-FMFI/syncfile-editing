@@ -60,7 +60,7 @@ pauseAudio(){
 //parameter time is string "2.5" - in seconds
 rewindAudioTo(time){
 	this.audio.stop();
-	this.audio.seek(parseInt(time));
+	this.audio.seek(parseFloat(time));
 	//this.audio.play();
 }
 
