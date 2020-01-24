@@ -156,13 +156,17 @@ class BlockEditor {
         var blocks = [];
         var skips = [];
         for (var i = 0; i < this.blocks.length; i++) {
-            if (this.blocks[i].isSkipped()){
-                skips.push(this.blocks[i].getTime());
-            }
-            else{
-                blocks.push(this.blocks[i].getTime());
+            if (this.blocks[i].getTime() != null){
+                var time = parseFloat(this.blocks[i].getTime()).toFixed(2);
+                if (this.blocks[i].isSkipped()){
+                    skips.push(time);
+                }
+                else{
+                    blocks.push(time);
+                }
             }
         }
+
         return {"blocks" : blocks, "skips" : skips};
     }
 
