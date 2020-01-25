@@ -349,12 +349,13 @@ class SyncFileEditViewController extends ViewController {
              this.replay.removeClass("disabled");
              this.backwardButton.removeClass("disabled");
              this.forwardButton.removeClass("disabled");
-             this.skipBlock.removeClass("disabled");
-             this.removeInterval.removeClass("disabled");
-             this.editBlock.removeClass("disabled");
              this.saveExit.removeClass("disabled");
              this.nextBlockButton.removeClass("disabled");
              this.previousBlockButton.removeClass("disabled");
+             if (!this.syncFileEditorData.isSelectedBlockSkipped()){
+                this.skipBlock.removeClass("disabled");
+                this.editBlock.removeClass("disabled");
+			 }
      }
  
      enableButtons(){
@@ -363,7 +364,6 @@ class SyncFileEditViewController extends ViewController {
              this.backwardButton.addClass("disabled");
              this.forwardButton.addClass("disabled");
              this.skipBlock.addClass("disabled");
-             this.removeInterval.addClass("disabled");
              this.editBlock.addClass("disabled");
              this.saveExit.addClass("disabled");
              this.nextBlockButton.addClass("disabled");
@@ -382,7 +382,15 @@ class SyncFileEditViewController extends ViewController {
              this.backwardButton.removeClass("disabled");
              this.forwardButton.removeClass("disabled");
          }
-
+         if (!this.syncFileEditorData.isSelectedBlockSkipped()){
+            this.editBlock.removeClass("disabled");
+            this.removeInterval.addClass("disabled");
+            this.skipBlock.removeClass("disabled");
+		 }else{
+            this.editBlock.addClass("disabled");
+            this.removeInterval.removeClass("disabled");
+            this.skipBlock.addClass("disabled");
+		 }
          this.accept.addClass("disabled");
          this.skipBlock.addClass("disabled");
          this.time1 = this.syncFileEditorData.getTimeOfPrevBlock();
