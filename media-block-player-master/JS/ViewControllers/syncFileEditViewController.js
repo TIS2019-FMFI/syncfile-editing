@@ -209,8 +209,8 @@ class SyncFileEditViewController extends ViewController {
                 this.syncFileEditorData.pauseAudio();
                 this.playPauseIcon.text('play_circle_outline');
                 this.disableButtons();
-                if (this.syncFileEditorData.currentTime() < this.syncFileEditorData.getTimeOfNextBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){  //ak pri prehravani prejde do dalsieho bloku
-                    this.time2 = this.syncFileEditorData.currentTime();
+                if (this.syncFileEditorData.currentTime() <= this.syncFileEditorData.getTimeOfBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){  //ak pri prehravani prejde do dalsieho bloku
+					this.time2 = this.syncFileEditorData.currentTime();
 			    }else{
                     throw "You have passed through the next block";     
 				}
