@@ -72,7 +72,7 @@ if (isset($_POST['username']) &&
                     <div class="row">
                         <div class="input-field col s6">
                             <span class="msg-error error"></span>
-                            <div class="g-recaptcha" data-sitekey="6LeN9X8UAAAAAM0AqDW5mzD2lFErojgDUwHoR1Bk"></div>
+                            <div class="g-recaptcha" data-sitekey="6LemLdMUAAAAAMljQga957135zoZ-AIT6-7nQwyz"></div>
                             <input type="checkbox" name="cap" id="cap" hidden required>
                         </div>
                     </div>
