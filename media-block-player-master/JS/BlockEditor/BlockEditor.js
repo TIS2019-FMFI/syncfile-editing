@@ -167,7 +167,7 @@ class BlockEditor {
             }
         }
 
-        return {"blocks" : blocks, "skips" : skips};
+        return {"blocks" : blocks.map(Number), "skips" : skips.map(Number)};
     }
 
     isSyncFileValid(){
