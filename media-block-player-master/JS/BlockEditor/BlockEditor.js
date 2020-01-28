@@ -35,16 +35,7 @@ class BlockEditor {
 
     initBlocksTime(){
         if (!(this.SyncFileData == null)){
-            var times = this.SyncFileData["blocks"].concat(this.SyncFileData["skips"]);
-            times.sort(function(a,b) { 
-                if (a == null) {
-                    return 1;
-                }
-                if (b == null) {
-                    return -1;
-                }
-                return a - b;
-            });
+            var times = this.SyncFileData["blocks"];
 
             for (var i = 0; i < times.length; i++) {
                 if (this.SyncFileData["skips"].includes(times[i])){
@@ -160,6 +151,7 @@ class BlockEditor {
                 var time = parseFloat(this.blocks[i].getTime()).toFixed(2);
                 if (this.blocks[i].isSkipped()){
                     skips.push(time);
+                    blocks.push(time);
                 }
                 else{
                     blocks.push(time);
