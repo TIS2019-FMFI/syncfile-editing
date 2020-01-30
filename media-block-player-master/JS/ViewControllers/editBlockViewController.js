@@ -13,7 +13,7 @@ class EditBlockViewController extends ViewController {
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
-					<h2>EDIT, SPLIT or MERGE the Current Block</h2>
+					<h2>Edit, Split or Merge block</h2>
 				</div>
 				<div class = "myMERGE">
 					<textarea id="actual-text">
@@ -26,6 +26,30 @@ class EditBlockViewController extends ViewController {
 					<a id="apply" class="btn m-lr-10">Apply edited changes to the Script</a>
 					<a id="cancel" class="btn m-lr-10">Cancel</a>
 				</div>
+				
+				<div class="row">
+                    <div class="col s12">
+                        <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
+                    </div>
+                    <div id="helpmodal" class="modal">
+                        <div class="modal-content">
+                            <h4>Edit, Split or Merge block</h4>
+                            <p>
+							In the editable text field you see the current block. You may either:
+-- edit text (e.g. correct a typo)
+-- split block into two by typing one pipeline '|' onto proper position
+-- [MERGE WITH THE NEXT BLOCK] (i.e. respective '|' will be removed)
+After editing hit button [APPLY EDITED CHANGES TO THE SCRIPT] - you will be moved back to page "Edit block time-marks".
+You may also ignore changes by hitting [CANCEL].
+
+							</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
+                </div>
+				
             </section>
         `;
         super.renderHtml(htmlView);
@@ -50,7 +74,9 @@ class EditBlockViewController extends ViewController {
     }
 	
 	viewDidLoad() {
-        this.actualText.val(this.syncFileEditorData.getTextOfSelectedBlock()); 
+        this.actualText.val(this.syncFileEditorData.getTextOfSelectedBlock());
+		var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);		
     }
 
     presentNextController() {

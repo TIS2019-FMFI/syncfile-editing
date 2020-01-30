@@ -136,6 +136,11 @@ class SyncFileEditorData {
 	audioIsPlaying(){
 		return  this.audioPlayer.audioIsPlaying();
 	}
+	
+	getDurationOfAllAudio(){
+		return  this.audioPlayer.getDurationOfAllAudio();
+	}
+	
 
     stopAudio() {
         this.audioPlayer.stopAudio();

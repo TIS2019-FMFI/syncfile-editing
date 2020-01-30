@@ -13,6 +13,9 @@ class SyncFileDownloadViewController extends ViewController {
         const htmlView = `
             <section id="FilesPickerViewController" class="container">
 				<div class = "myMERGE">
+					<h2>Save SyncFile, ScriptFile</h2>
+				</div>
+				<div class = "myMERGE">
 					<h4>AudioFile:</h4>
 					<input id = "audio-file" type="text" value="audio">
 				</div>
@@ -31,10 +34,32 @@ class SyncFileDownloadViewController extends ViewController {
                     </div>
 				</div>
 				<div class = "myMERGE">
-					<a id="save" class="btn m-lr-10">Save</a>
+					<a id="save" class="btn m-lr-10">Download</a>
 					<a id="unsave" class="btn m-lr-10">Exit</a>
-					<a id="back" class="btn m-lr-10">Back to setting time</a>
+					<a id="back" class="btn m-lr-10">BACK to Edit block time-marks</a>
 				</div>
+				
+				<div class="row">
+                    <div class="col s12">
+                        <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
+                    </div>
+                    <div id="helpmodal" class="modal">
+                        <div class="modal-content">
+                            <h4>Save SyncFile, ScriptFile</h4>
+                            <p>
+							If new SyncFile has just been created the default file name is based on the Script file name with suffix .mbpsf.
+You may change file names of SyncFile and optionally also of ScriptFile (in case it has been edited).
+[DOWNLOAD]: Edited SyncFile and optionally also of ScriptFile will be downloaded into your ‘Downloads’ folder. Use these files in the MediaBlockPlayer.
+[EXIT]: moves you to the MediaBlockPlayer main menu
+[BACK to Edit block time-marks]: nothing is saved and you may continue editing time-marks
+							</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
+                    
+                </div>
 
             </section>
         `;
@@ -75,6 +100,8 @@ class SyncFileDownloadViewController extends ViewController {
     }
 
     viewDidLoad() {
+		var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
     }
 
     presentNextController() {
