@@ -21,7 +21,7 @@ class FilesPickerViewController extends ViewController {
             <section id="FilesPickerViewController" class="container">
                 <div class="row row-100 m12">
                     <div class="col s12">
-                        <h1 class="center">Choose files for creating</h1>
+                        <h1 class="center">Choose files for creating SyncFile</h1>
                     </div>
                 </div>
                 <div class="row row-50">
@@ -82,12 +82,38 @@ class FilesPickerViewController extends ViewController {
                     <div class="col s12">
                         <a class="btn-small right" href="index.html">Back to my menu</a>
                     </div>
+					
+                
+				
+                    <div class="col s12 left">
+                        <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
+                    </div>
+                    <div id="helpmodal" class="modal">
+                        <div class="modal-content">
+                            <h4>Choose files for creating SyncFile</h4>
+                            <p>
+							Locate existing [AUDIO] file (.mp3 or .wav) and [ORIGINAL SCRIPT] file.
+Based on these two files the SyncFile (that synchronises AUDIO and SCRIPT) will be created in the next page.
+If you wish to edit already existing SyncFile (e.g. not yet fully completed) locate also the [SYNCFILE].
+Hit [START CREATING] to move to the next page ("Edit block time-marks")
+
+							</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
                 </div>
             </section>
         `;
         super.renderHtml(htmlView);
     }
 
+	viewDidLoad() {
+		var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);		
+    }
+	
     setupProperties() {
         this.audioFilePicker = $('#audio-file-picker');
         this.scriptFilePicker = $('#script-file-picker');
@@ -128,6 +154,7 @@ class FilesPickerViewController extends ViewController {
             this.setupStartCreatingButton();
         });
     }
+	
 
     scriptFilePickerValueChanged() {
         const textFile = this.scriptFilePicker[0].files[0];

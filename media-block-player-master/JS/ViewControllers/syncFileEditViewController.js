@@ -9,6 +9,7 @@ class SyncFileEditViewController extends ViewController {
 
 		this.time1 = "0.00";
         this.time2 = "0.00";
+		
     }
 	
 
@@ -16,6 +17,9 @@ class SyncFileEditViewController extends ViewController {
         // TODO: upravit, issue14
         const htmlView = `
             <section id="SyncFileCreateViewController" class="container">
+				<div class = "myMERGE">
+					<h2>Edit block time-marks</h2>
+				</div>
             <div class = "my" id="block-area">
             <div id="text" style="overflow-y: scroll; border: 1px solid black; padding: 10px; height: 100%">
             </div>
@@ -59,9 +63,43 @@ class SyncFileEditViewController extends ViewController {
 					<a id="next-block-button" title="Move to next block" class="btn m-lr-10">-></a>
 				</div>
 				
-				<div class="my3">
-				<a id="help" title="Help" class="btn m-lr-10"><i class="material-icons center">help_outline</i></a>
-				</div>
+				
+				
+				<div class="row">
+                    <div class="col s12">
+                        <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
+                    </div>
+                    <div id="helpmodal" class="modal">
+                        <div class="modal-content">
+                            <h4>Edit block time-marks</h4>
+                            <p>
+							This page allows you to create or edit SyncFile with the list of text block time-marks and <Skipped> interval time-marks. Time-marks indicate the END of the respective interval with precision of 0.01 sec.
+
+In the left multiline read-only text field you see the Script file with text blocks separated by '|'.
+Blocks that already have set  time-marks are underlined. Current block/time interval is highlighted.
+Optionally you can see also the position of the <Skipped> intervals with no speech or advertisement. These <Skipped> tags are actually NOT part of the located or edited SCRIPT file . Nevertheless their time-marks are saved in SyncFile.
+
+[Play/Pause]: Starts to play audio of the current block or <Skipped> interval. Hit [Pause] when you hear the end of the current text block. Before [ACCEPT]ing the time-mark you may:
+ --[REPLAY] the audio interval to check the correctness of block ending 
+  --reduce [-] or increase [+] the time-mark by preset correction (default 0.30 sec that you may change).
+If time-mark is correct then hit [ACCEPT] and do the same for the next block.
+
+If audio contains irrelevant intervals (music only, silence or advertisement.) you may hit [SKIP INTERVAL] instead of [ACCEPT] to mark out this unwanted interval. On the other hand: you may also [REMOVE SKIPPED INTERVAL].
+
+If you wish to edit the SCRIPT file or split one text block into two or merge two blocks into one then hit [EDIT BLOCK] that moves you to the page "Edit, Split or Merge block".
+
+Buttons [<-] and [->] allow you to move to any text block. However be aware that you can set time-mark ONLY if all the previous blocks have time-marks set.
+
+[SAVE & EXIT]: moves you to the page "Save SyncFile, ScriptFile"
+[BACK TO MENU]: moves you to the MediaBlockPlayer main menu, nothing will be saved.
+
+							</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
+                </div>
 
             </section>
         `;
@@ -129,7 +167,19 @@ class SyncFileEditViewController extends ViewController {
 
     viewDidLoad() {
         this.check();
+		var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+		
+		this.syncFileEditorData.audioFile.on('end', function(){this.checkAudio();}.bind(this));
     }
+	
+	checkAudio(){
+		this.syncFileEditorData.pauseAudio();
+		this.playPauseIcon.text('play_circle_outline');
+		this.disableButtons();
+		this.time2 = this.syncFileEditorData.getDurationOfAllAudio(); 
+		this.setBlockDuration();
+	}
 
 	highlight(){	
 		var textarea = '';

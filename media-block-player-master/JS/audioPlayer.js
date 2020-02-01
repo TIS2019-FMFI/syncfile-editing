@@ -13,8 +13,12 @@ class AudioPlayer{
 
 //this method return currentTime of audio
 getCurrentTime(){
-	this.currentTime = this.audio.seek().toString();;
+	this.currentTime = this.audio.seek().toString();
 	return this.currentTime;
+}
+
+getDurationOfAllAudio(){
+	return this.audio.duration().toString();;
 }
 
 
