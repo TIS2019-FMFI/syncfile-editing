@@ -194,7 +194,7 @@ Hit [START CREATING] to move to the next page ("Edit block time-marks")
             this.presentNextController();
         }
         catch (error) {
-            alert('Unexpected fault'); //TODO: Nevedel čo sem vypísať, neviem či taká situácia vôbec môže nastať.
+            alert('Unexpected fault');
         }
     }
 
