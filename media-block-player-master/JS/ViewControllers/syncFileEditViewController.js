@@ -328,7 +328,12 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
         this.playPauseIcon.text('play_circle_outline');
         
         if (this.time2 != "0.00"){ //ak chce v procese
-            this.syncFileEditorData.playInterval(this.time1, this.time2);
+            if(this.time1 == null){
+                alert("You need to set time of previous block.");
+            }
+            else{
+                this.syncFileEditorData.playInterval(this.time1, this.time2);
+            }
 		}else{ //nastaveny blok
             this.syncFileEditorData.playSelectedBlock();
 		}

@@ -72,11 +72,6 @@ class SyncFileEditorData {
 				time1 = "0";
 				time2 = this.blocksEditor.getTimeOfSelectedBlock();
 			}
-			else if (this.blocksEditor.getCurrentBlockIndex() == this.blocksEditor.blocks.length){
-				time1 = this.blocksEditor.getTimeOfPreviousBlock();
-				time2 = this.blocksEditor.getTimeOfSelectedBlock(); // TO DO aky cas ked je na poslednom bloku
-				
-			}
 			else{
 				time1 = this.blocksEditor.getTimeOfPreviousBlock();
 				time2 = this.blocksEditor.getTimeOfSelectedBlock();
