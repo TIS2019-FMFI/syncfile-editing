@@ -205,11 +205,10 @@ class BlockEditor {
     //
     splitSelectedBlock(text1, text2){
         this.scriptFileEdited = true;
-		var block = this.blocks[this.currentBlockIndex]; //bug 6
+        var time2 = this.blocks[this.currentBlockIndex].getTime();
         this.blocks.splice(this.currentBlockIndex, 1);
         this.blocks.splice(this.currentBlockIndex, 0, new Block(text1));
-        this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2)); //bug 6 block.getTime() ??? pokazi sa audio
-
+        this.blocks.splice(this.currentBlockIndex+1, 0, new Block(text2, time2));
     }
 
     mergeSelectedBlockWithNextBlock(){
