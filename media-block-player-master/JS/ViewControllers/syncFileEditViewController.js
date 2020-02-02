@@ -14,7 +14,6 @@ class SyncFileEditViewController extends ViewController {
 	
 
     renderHtml(html) {
-        // TODO: upravit, issue14
         const htmlView = `
             <section id="SyncFileCreateViewController" class="container">
 				<div class = "myMERGE">
@@ -107,8 +106,6 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     }
 
     setupProperties() {
-        // TODO: po uprave html vytvorit nove properties
-        
         // Labels      
         this.audioFileNameInput = $('#audio-file');	       
         this.scriptFileNameInput = $('script-file');	        
@@ -139,7 +136,6 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     }
 
     setupEventListeners() {
-        // TODO: po uprave html vytvorit nove listeners
         this.playPauseButtonClicked = this.playPauseButtonClicked.bind(this);
         this.backwardButtonClicked = this.backwardButtonClicked.bind(this);
         this.forwardButtonClicked = this.forwardButtonClicked.bind(this);
@@ -421,11 +417,15 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
              if (!this.syncFileEditorData.isSelectedBlockSkipped()){
                 this.accept.removeClass("disabled");
                 this.editBlock.removeClass("disabled");
-			 }
+             }
+             else{
+                this.removeInterval.removeClass("disabled");
+             }
      }
  
      enableButtons(){
              this.accept.addClass("disabled");
+             this.removeInterval.addClass("disabled");
              this.replay.addClass("disabled");
              this.backwardButton.addClass("disabled");
              this.forwardButton.addClass("disabled");
