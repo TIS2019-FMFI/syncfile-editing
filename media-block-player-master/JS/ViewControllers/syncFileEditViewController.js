@@ -251,6 +251,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     // Private Methods
 
     playPauseButtonClicked() {
+		this.syncFileEditorData.audioFile.on('end', function(){this.checkAudio();}.bind(this));
         try{
             if (this.time1 == null){ //blok pred nema cas znacku 
                 throw "Cant play";     
@@ -319,6 +320,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     }
 
     replayButtonClicked() {
+		this.syncFileEditorData.audioFile.off('end');
         this.playPauseIcon.text('play_circle_outline');
         
         if (this.time2 != "0.00"){ //ak chce v procese
