@@ -16,9 +16,6 @@ class SyncFileEditViewController extends ViewController {
     renderHtml(html) {
         const htmlView = `
             <section id="SyncFileCreateViewController" class="container">
-				<div class = "myMERGE">
-					<h2>Edit block time-marks</h2>
-				</div>
             <div class = "my" id="block-area">
             <div id="text" style="overflow-y: scroll; border: 1px solid black; padding: 10px; height: 100%">
             </div>
@@ -228,8 +225,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
         if (currentBlock.position().top > container.height()/ 2){
             container.scrollTop(container.scrollTop() + currentBlock.position().top/2);
         }
-        else if( currentBlock.position().top < container.height()/ 5){
-            container.scrollTop(container.scrollTop() -  50);
+        else if( currentBlock.position().top < container.height() / 4){
+            container.scrollTop(container.scrollTop() -  30);
         }
     }
 
