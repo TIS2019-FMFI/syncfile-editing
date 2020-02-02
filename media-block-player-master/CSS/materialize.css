@@ -59,11 +59,14 @@
 
 .row-100 {
   margin-top: 100px;
+
 }
 
 .row-150 {
   margin-top: 150px;
 }
+
+
 
  /**/
 
@@ -3554,6 +3557,7 @@ table span.badge {
 
 .row .col[class*="push-"], .row .col[class*="pull-"] {
   position: relative;
+
 }
 
 .row .col.s1 {
@@ -3638,6 +3642,7 @@ table span.badge {
   margin-left: auto;
   left: auto;
   right: auto;
+    
 }
 
 .row .col.offset-s1 {
