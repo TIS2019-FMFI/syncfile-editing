@@ -421,11 +421,15 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
              if (!this.syncFileEditorData.isSelectedBlockSkipped()){
                 this.accept.removeClass("disabled");
                 this.editBlock.removeClass("disabled");
-			 }
+             }
+             else{
+                this.removeInterval.removeClass("disabled");
+             }
      }
  
      enableButtons(){
              this.accept.addClass("disabled");
+             this.removeInterval.addClass("disabled");
              this.replay.addClass("disabled");
              this.backwardButton.addClass("disabled");
              this.forwardButton.addClass("disabled");
