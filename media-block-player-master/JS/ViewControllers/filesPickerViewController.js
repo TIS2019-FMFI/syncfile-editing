@@ -81,13 +81,9 @@ class FilesPickerViewController extends ViewController {
                 <div class="row row-100">
                     <div class="col s12">
                         <a class="btn-small right" href="index.html">Back to my menu</a>
-                    </div>
-					
-                
-				
-                    <div class="col s12 left">
                         <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
                     </div>
+
                     <div id="helpmodal" class="modal">
                         <div class="modal-content">
                             <h4>Choose files for creating SyncFile</h4>
