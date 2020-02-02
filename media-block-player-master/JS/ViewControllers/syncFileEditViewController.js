@@ -50,7 +50,7 @@ class SyncFileEditViewController extends ViewController {
 
 
 				<div class="my2">
-                    <a class="btn-small right" href="index.html">Back to my menu</a>
+                    <a id="back" class="btn-small right" href="index.html">Back to my menu</a>
                 </div>
 				
 
@@ -63,7 +63,7 @@ class SyncFileEditViewController extends ViewController {
 				
 				<div class="row">
                     <div class="col s12">
-                        <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
+                        <a id="help-button"class="btn-small right modal-trigger" href="#helpmodal">Help</a>
                     </div>
                     <div id="helpmodal" class="modal">
                         <div class="modal-content">
@@ -114,6 +114,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
         this.backButton = $('#back');        
         this.text = $('#text');
         this.playPauseIcon = $('#play-pause-icon');
+		this.helpButton = $('#help-button');
+		this.backButton = $('#back');
 
         // Inputs
         this.speed = $('#speed');
@@ -130,6 +132,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
         this.saveExit = $('#save-exit');
         this.nextBlockButton = $('#next-block-button');
         this.previousBlockButton = $('#previous-block-button');
+
     }
 
     setupEventListeners() {
@@ -411,6 +414,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
              this.saveExit.removeClass("disabled");
              this.nextBlockButton.removeClass("disabled");
              this.previousBlockButton.removeClass("disabled");
+			 this.helpButton.removeClass("disabled");
+			 this.backButton.removeClass("disabled");
              if (!this.syncFileEditorData.isSelectedBlockSkipped()){
                 this.accept.removeClass("disabled");
                 this.editBlock.removeClass("disabled");
@@ -431,6 +436,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
              this.saveExit.addClass("disabled");
              this.nextBlockButton.addClass("disabled");
              this.previousBlockButton.addClass("disabled");
+			 this.helpButton.addClass("disabled");
+			 this.backButton.addClass("disabled");
      }
  
 
