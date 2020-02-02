@@ -44,7 +44,6 @@ class Player {
         if (this.settings['pause'] == "99"){
           this.pause = 0;
         }
-        console.log(this.settings);
     }
 
     // This method starts playing the lecture.

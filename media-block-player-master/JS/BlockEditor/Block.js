@@ -2,7 +2,6 @@ class Block {
     constructor(text = null, time = null) {
         this.text = text;
         this.time = time;
-        //console.log(this.text,this.time);
     }
 
 
