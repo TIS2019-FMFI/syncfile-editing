@@ -79,8 +79,10 @@ class FilesPickerViewController extends ViewController {
                     </div>
                 </div>
                 <div class="row row-100">
-                    <div class="col s12">
+                    <div class="col s11">
                         <a class="btn-small right" href="index.html">Back to my menu</a>
+                    </div>
+                    <div class="col s1">
                         <a class="btn-small right modal-trigger" href="#helpmodal">Help</a>
                     </div>
 
