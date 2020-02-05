@@ -69,25 +69,26 @@ class SyncFileEditViewController extends ViewController {
                         <div class="modal-content">
                             <h4>Edit block time-marks</h4>
                             <p>
-							This page allows you to create or edit SyncFile with the list of text block time-marks and <Skipped> interval time-marks. Time-marks indicate the END of the respective interval with precision of 0.01 sec.
+							This page allows you to create or edit SyncFile with the list of text block time-marks and &ltSkipped&gt interval time-marks. Time-marks indicate the END of the respective interval with precision of 0.01 sec.<br><br>
+In the left multiline read-only text field you see the Script file with text blocks separated by '|'.<br>
+Blocks that already have set  time-marks are underlined. Current block/time interval is highlighted.<br>
+Optionally you can see also the position of the &ltSkipped&gt  intervals with no speech or advertisement. These &ltSkipped&gt  tags are actually NOT part of the located or edited SCRIPT file . Nevertheless their time-marks are saved in SyncFile.<br><br>
 
-In the left multiline read-only text field you see the Script file with text blocks separated by '|'.
-Blocks that already have set  time-marks are underlined. Current block/time interval is highlighted.
-Optionally you can see also the position of the <Skipped> intervals with no speech or advertisement. These <Skipped> tags are actually NOT part of the located or edited SCRIPT file . Nevertheless their time-marks are saved in SyncFile.
+[Play/Pause]: Starts to play audio of the current block or &ltSkipped&gt  interval. Hit [Pause] when you hear the end of the current text block. Before [ACCEPT]ing the time-mark you may:<br>
+ 
+  --[REPLAY] the audio interval to check the correctness of block ending <br>
+  --reduce [-] or increase [+] the time-mark by preset correction (default 0.30 sec that you may change).<br>
 
-[Play/Pause]: Starts to play audio of the current block or <Skipped> interval. Hit [Pause] when you hear the end of the current text block. Before [ACCEPT]ing the time-mark you may:
- --[REPLAY] the audio interval to check the correctness of block ending 
-  --reduce [-] or increase [+] the time-mark by preset correction (default 0.30 sec that you may change).
-If time-mark is correct then hit [ACCEPT] and do the same for the next block.
+If time-mark is correct then hit [ACCEPT] and do the same for the next block.<br><br>
 
-If audio contains irrelevant intervals (music only, silence or advertisement.) you may hit [SKIP INTERVAL] instead of [ACCEPT] to mark out this unwanted interval. On the other hand: you may also [REMOVE SKIPPED INTERVAL].
+If audio contains irrelevant intervals (music only, silence or advertisement.) you may hit [SKIP INTERVAL] instead of [ACCEPT] to mark out this unwanted interval. On the other hand: you may also [REMOVE SKIPPED INTERVAL].<br><br>
 
-If you wish to edit the SCRIPT file or split one text block into two or merge two blocks into one then hit [EDIT BLOCK] that moves you to the page "Edit, Split or Merge block".
+If you wish to edit the SCRIPT file or split one text block into two or merge two blocks into one then hit [EDIT BLOCK] that moves you to the page "Edit, Split or Merge block".<br><br>
 
-Buttons [<-] and [->] allow you to move to any text block. However be aware that you can set time-mark ONLY if all the previous blocks have time-marks set.
+Buttons [<-] and [->] allow you to move to any text block. However be aware that you can set time-mark ONLY if all the previous blocks have time-marks set.<br><br>
 
-[SAVE & EXIT]: moves you to the page "Save SyncFile, ScriptFile"
-[BACK TO MENU]: moves you to the MediaBlockPlayer main menu, nothing will be saved.
+[SAVE & EXIT]: moves you to the page "Save SyncFile, ScriptFile"<br>
+[BACK TO MENU]: moves you to the MediaBlockPlayer main menu, nothing will be saved.<br>
 
 							</p>
                         </div>

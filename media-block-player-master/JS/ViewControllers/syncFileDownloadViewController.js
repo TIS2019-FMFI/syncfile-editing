@@ -47,11 +47,11 @@ class SyncFileDownloadViewController extends ViewController {
                         <div class="modal-content">
                             <h4>Save SyncFile, ScriptFile</h4>
                             <p>
-							If new SyncFile has just been created the default file name is based on the Script file name with suffix .mbpsf.
-You may change file names of SyncFile and optionally also of ScriptFile (in case it has been edited).
-[DOWNLOAD]: Edited SyncFile and optionally also of ScriptFile will be downloaded into your ‘Downloads’ folder. Use these files in the MediaBlockPlayer.
-[EXIT]: moves you to the MediaBlockPlayer main menu
-[BACK to Edit block time-marks]: nothing is saved and you may continue editing time-marks
+If new SyncFile has just been created the default file name is based on the Script file name with suffix .mbpsf.<br>
+You may change file names of SyncFile and optionally also of ScriptFile (in case it has been edited).<br>
+[DOWNLOAD]: Edited SyncFile and optionally also of ScriptFile will be downloaded into your ‘Downloads’ folder. Use these files in the MediaBlockPlayer.<br>
+[EXIT]: moves you to the MediaBlockPlayer main menu<br>
+[BACK to Edit block time-marks]: nothing is saved and you may continue editing time-marks<br>
 							</p>
                         </div>
                         <div class="modal-footer">
