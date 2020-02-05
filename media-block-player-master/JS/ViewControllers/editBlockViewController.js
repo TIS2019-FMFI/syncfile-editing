@@ -34,14 +34,13 @@ class EditBlockViewController extends ViewController {
                     <div id="helpmodal" class="modal">
                         <div class="modal-content">
                             <h4>Edit, Split or Merge block</h4>
-                            <p>
-							In the editable text field you see the current block. You may either:
--- edit text (e.g. correct a typo)
--- split block into two by typing one pipeline '|' onto proper position
--- [MERGE WITH THE NEXT BLOCK] (i.e. respective '|' will be removed)
-After editing hit button [APPLY EDITED CHANGES TO THE SCRIPT] - you will be moved back to page "Edit block time-marks".
-You may also ignore changes by hitting [CANCEL].
-
+                            <p> 
+In the editable text field you see the current block. You may either:<br>
+-- edit text (e.g. correct a typo)<br>
+-- split block into two by typing one pipeline '|' onto proper position<br>
+-- [MERGE WITH THE NEXT BLOCK] (i.e. respective '|' will be removed)<br>
+After editing hit button [APPLY EDITED CHANGES TO THE SCRIPT] - you will be moved back to page "Edit block time-marks".<br>
+You may also ignore changes by hitting [CANCEL].<br>
 							</p>
                         </div>
                         <div class="modal-footer">

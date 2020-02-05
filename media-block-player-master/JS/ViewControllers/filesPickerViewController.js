@@ -88,10 +88,10 @@ class FilesPickerViewController extends ViewController {
                         <div class="modal-content">
                             <h4>Choose files for creating SyncFile</h4>
                             <p>
-							Locate existing [AUDIO] file (.mp3 or .wav) and [ORIGINAL SCRIPT] file.
-Based on these two files the SyncFile (that synchronises AUDIO and SCRIPT) will be created in the next page.
-If you wish to edit already existing SyncFile (e.g. not yet fully completed) locate also the [SYNCFILE].
-Hit [START CREATING] to move to the next page ("Edit block time-marks")
+							Locate existing [AUDIO] file (.mp3 or .wav) and [ORIGINAL SCRIPT] file.<br>
+Based on these two files the SyncFile (that synchronises AUDIO and SCRIPT) will be created in the next page.<br>
+If you wish to edit already existing SyncFile (e.g. not yet fully completed) locate also the [SYNCFILE].<br>
+Hit [START CREATING] to move to the next page ("Edit block time-marks").
 
 							</p>
                         </div>
