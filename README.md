@@ -16,16 +16,44 @@ https://kempelen.dai.fmph.uniba.sk/lb/
 ## Práca s aplikáciou
 
 ### Vytvorenie/Editácia synchronizačného súboru
-V hlavnom menu aplikácie je tlačítko "CREATE/EDIT SYNC FILE". Po stlačení tlačidla sa aplikácia presmeruje na obrazovku Choose files for creating SyncFile. Tu treba nahrať audio súbor, súbor s prepísanou audio nahrávkou a synchronizačný súbor. V prípade, že synchronizačný súbor nebude vybraný, vytvorí sa nový. Textový súbor musí byť rozdelený znakom "|" na bloky. K takto definovaným blokom sa bude priraďovať daná čast z audia. Po vybraní súborov sa aplikácia automaticky presmeruje na stránku Edit block time-marks, kde sa dajú blokom nastavovať časové stopy. Aplikácia umožňuje editovať text jednotlivých blokoch, prípadne ich rozdeľovať alebo spájať na stránke Edit, Split or Merge block, na ktorú ho aplikácia presmeruje po kliknutí na button Edit block. Ak chce užívateľ zmeny, ktoré vykonal uložiť, môže tak spraviť po kliknutí na tlačidlo Save&Exit. Vtedy sa aplikácia presmeruje na stránku Save SyncFile, ScriptFile, kde užívateľ môže zadať názvy súborov, ktoré chce uložiť, pričom sa stiahnu len tie, v ktorých nastala zmena.
+V hlavnom menu aplikácie je tlačítko "CREATE/EDIT SYNC FILE". Po stlačení tlačidla sa aplikácia presmeruje na obrazovku Choose files for creating SyncFile. Tu treba nahrať audio súbor, súbor s prepísanou audio nahrávkou a synchronizačný súbor. V prípade, že synchronizačný súbor nebude vybraný, vytvorí sa nový. Textový súbor musí byť rozdelený znakom "|" na bloky. K takto definovaným blokom sa bude priraďovať daná čast z audia. Po vybraní súborov sa aplikácia automaticky presmeruje na stránku Edit block time-marks, kde sa dajú blokom nastavovať časové stopy. Aplikácia umožňuje editovať text jednotlivých blokoch, prípadne ich rozdeľovať alebo spájať na stránke Edit, Split or Merge block, na ktorú ho aplikácia presmeruje po kliknutí na button Edit block. Ak chcete zmeny, ktoré ste vykonali uložiť, môžete tak spraviť po kliknutí na tlačidlo Save&Exit. Vtedy sa aplikácia presmeruje na stránku Save SyncFile, ScriptFile, kde zadáte názvy súborov, ktoré chcete uložiť, pričom sa stiahnu len tie, v ktorých nastala zmena. Na každej z týchto obrazoviek je help tlačidlo, ktorým si viete zobraziť vysvetľujúcu pomôcku k danej obrazovke.
+
+Choose files for creating SyncFile
+
+Tu treba nahrať audio súbor, súbor s prepísanou audio nahrávkou a synchronizačný súbor. V prípade, že synchronizačný súbor nebude vybraný, vytvorí sa nový.
+
+Edit block time-marks
+
+Na tejto obrazovke sa dajú blokom nastavovať časové značky.
 
 Ovládanie
 
-- play/pause (k) - spúšta a pozastavuje audio
-- backward (j) - posúva audio do zadu o zadaný počet sekúnd
-- forward (l) - posúva audio do predu o zadaný počet sekúnd
-- play actual block (m) - prehrá aktuálne vytváraný blok
-- skip block (s) - označí aktuálny blok za blok ktorý treba preskočiť, teda sa táto časť audia odignoruje
-- next block (n) - aktuálny blok sa uloží a presunie sa na vytváranie ďalšieho bloku
+- play/pause  - spúšta a pozastavuje audio
+- backward  - posúva audio do zadu o zadaný počet sekúnd
+- forward  - posúva audio do predu o zadaný počet sekúnd
+- replay - prehrá aktuálne vytváraný blok
+- accept - nastaví časovú značku bloku
+- skip interval  - označí aktuálny blok za blok ktorý treba preskočiť, teda sa táto časť audia odignoruje
+- remove skip interval  - ak je aktuálny blok skipped odstráni ho
+- next block  -  presunie sa na editovanie ďalšieho bloku
+- previous block  -  presunie sa na editovanie predchádzajúceho bloku
+- help - zobrazí help obrazovku
+- edit block - presmeruje aplikáciu do editovacieho okna pre vybraný blok
+
+Edit, Split or Merge block
+
+Na tejto obrazovke sa dá konkrétnemu bloku meniť text, zlučovať ho s nasledujúcim blokom ale rozdeliť aktuálne vybraný blok na dva nové bloky, pridaním znaku "|" do textu.
+
+Ovládanie
+
+- merge with the next block - aktuálny blok zúči s nasledujúcim do jedného nového bloku
+- apply edited changes to the script - uloží zmeny a presmeruje aplikáciu späť na stránku Edit block time-marks
+- cancel - neuloží zmeny a presmeruje aplikáciu späť na stránku Edit block time-marks
+- help - zobrazí help obrazovku
+
+Save SyncFile, ScriptFile
+
+V prípade, že sa rozhodnete vykonané zmeny uložiť kliknutím na tlačidlo Save&Exit na stránke Edit block time-marks, aplikácia sa automaticky presmeruje na novú obrazovku pre sťahovanie súborov. Názvy súborov sú prednastavené podľa pôvodných názvov, môžete im však nastaviť nové názvy. Po stlačení tlačidla download sa do počítača stiahnu tie súbory, v ktorých nastala zmena.
 
 ### Vybranie materiálov z lokálneho disku
 V hlavnom menu aplikácie je tlačítko "CHOOSE MEDIA FROM DISK". Tu treba nahrať trojicu audio súbor, súbor s prepísanou audio nahrávkou a synchronizačný súbor. Paralérny preklad je voliteľný. V nastaveniach si treba vybrať mód výučby a prejsť k samotnému prehrávaniu.
