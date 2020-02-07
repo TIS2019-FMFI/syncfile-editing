@@ -13,7 +13,7 @@ include_once('page.php');
 Page::page_header('FAQ');
 Page::page_navbar();
 
-Page::warning_card('NYI');
+Page::info_card('Frequently asked questions', 'Ask one. :-)');
 
 ?>
 
