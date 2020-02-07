@@ -251,7 +251,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 		this.syncFileEditorData.audioFile.on('end', function(){this.checkAudio();}.bind(this));
         try{
             if (this.time1 == null){ //blok pred nema cas znacku 
-                throw "Cant play";     
+                throw "You need to set time of previous block";     
 			}
             if (this.syncFileEditorData.audioIsPlaying()) {
                 this.syncFileEditorData.pauseAudio();
@@ -260,6 +260,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
                 if (this.syncFileEditorData.currentTime() < this.syncFileEditorData.getTimeOfNextBlock() || this.syncFileEditorData.getTimeOfNextBlock() == null){  //ak pri prehravani prejde do dalsieho bloku
                     this.time2 = this.syncFileEditorData.currentTime();
 			    }else{
+				    this.check();
                     throw "You have passed through the next block";     
 				}
                 this.setBlockDuration();
@@ -313,6 +314,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 				this.setBlockDuration();
 
 			}else{
+				this.check();
                 throw "You have passed next Block";
 			}
 		}catch(error){
