@@ -292,6 +292,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 					this.setBlockDuration();
 
 			    }else{
+				    				this.check();
                     throw "You have passed previous Block";     
 			    }
             }
