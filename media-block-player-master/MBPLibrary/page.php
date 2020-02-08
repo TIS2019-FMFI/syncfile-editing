@@ -134,7 +134,7 @@ public static function page_footer()
         </div>
         <div class="footer-copyright">
             <div class="container">
-                version 1.3.0 | &copy; Created by 'Prvá skupina v zozname' as a school project, 2019
+                version 2.0 | &copy; Created by 'Prvá skupina v zozname', 2019 &amp; 'pythons', 2020
             </div>
         </div>
     </footer>
@@ -460,6 +460,34 @@ if ($lectures == null) {
                                 <div class="card-content white-text">
                                     <span class="card-title">Warning</span>
                                     <p><?php echo $warning ?></p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="index.php" class="grey-text text-lighten-2">Go HOME</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <?php
+        }
+
+        /**
+         * @param String $msgtitle - message title 
+         * @param String $msgtext - message text to be printed in card
+         * inserts an info card with message
+         */
+        public static function info_card($msgtitle, $msgtext)
+        {
+            ?>
+            <main style="margin: 3em 0">
+                <div class="container">
+                    <div class="row valign-wrapper" style="padding: 5em">
+                        <div class="col s12">
+                            <div class="card green lighten-2">
+                                <div class="card-content white-text">
+                                    <span class="card-title"><?php echo $msgtitle ?></span>
+                                    <p><?php echo $msgtext ?></p>
                                 </div>
                                 <div class="card-action">
                                     <a href="index.php" class="grey-text text-lighten-2">Go HOME</a>
