@@ -18,19 +18,19 @@
                     <a class="waves-effect waves-light btn-large w-100" href="media_select_from_disk.html"><i class="material-icons right">perm_media</i>Choose Media from Disk</a><br>
                 </div>
                 <div class="col s6">
-                    <!--
                     <a class="waves-effect waves-light btn-large w-100" href="media_select_from_library.html"><i class="material-icons right">cloud</i>Choose Media from Online Library</a><br>
-                    -->
+					<!--
                     <a class="waves-effect waves-light btn-large w-100" href="https://kempelen.dai.fmph.uniba.sk/lb/media_select_from_library.html"><i class="material-icons right">cloud</i>Choose Media from Online Library</a><br>
-                </div>
+					-->
+				</div>
             </div>
             <div class="row row-100">
                 <div class="col s3 offset-s9 right-align">
-                    <!--
                     <a class="waves-effect waves-light btn w-100" target="_blank" href="MBPLibrary/index.php">Online Library</a>
-                    -->
+					<!--
                     <a class="waves-effect waves-light btn w-100" target="_blank" href="https://kempelen.dai.fmph.uniba.sk/lb/MBPLibrary/index.php">Online Library</a>
-                </div>
+					-->
+				</div>
             </div>
             <div class="row">
                 <div class="col s3 offset-s9 right-align">
@@ -41,6 +41,56 @@
                 <div class="col s3 offset-s9 right-align">
                     <a class="waves-effect waves-light btn w-100" href="use_offline.html">Use player offline</a>
                 </div>
+            </div>
+			<div class="row">
+					<script>
+						  document.addEventListener('DOMContentLoaded', function() {
+							var elems = document.querySelectorAll('.modal');
+							var instances = M.Modal.init(elems);
+						  });
+					</script>
+                    <div class="col s3 offset-s9 right-align">
+                        <a class="waves-effect waves-light btn w-100 modal-trigger" href="#helpmodal">Help</a>
+                    </div>
+                    <div id="helpmodal" class="modal">
+                        <div class="modal-content">
+                            <h4>Media Block Player</h4>
+                            <p> 
+							About Media Block-wise Player <br>
+							============================= <br>
+							Media Block-wise Player is free experimental web application that allows self learning of foreign language ‘by playing’.  It refines the process of active listening and reading of shared ‘articles’. The leading principle is: Article is split into short, easily repeatable ‘blocks’ and the script, audio and translation(s) media are ‘block’-wise synchronized. Media are contributed and shared by the community.<br> 
+							<br>
+							Typical usage:<br>
+							==============<br>
+							[CHOOSE MEDIA FROM ONLINE LIBRARY] > Select language > Select Article (click on radio-button next to it)<br>
+							Before [PLAY] you may set some of the parameters (Pause between blocks, Block repetition, Forward or Random direction, visibility of Script and/or Parallel translation) or use one of Play settings.<br>
+							Click on [Play/Pause] button and have a fun!<br>
+							<br>
+							How to share your article?<br>
+							==========================<br>
+							1. Start with Script file (plain .txt file in UTF-8 encoding) in which you separate text blocks by '|' (pipeline) character. You may use any plain text editor, e.g. notepad.<br>
+							2. Have the same script narrated in .mp3 or .wav audio file.<br>
+							3. Optionally you may create also 'Parallel (block-wise) translation' into one or more target languages. Use pipelines to split into the blocks precisely related to the blocks in the Script. In 'Parallel translation' you may use a bit compromised target language to maintain 'block-wise translation'. Save as plain .txt in UTF-8 encoding.<br>
+							4. To synchronize script/translation with audio you have to create SyncFile: Click on [CREATE/EDIT SYNC] and follow the Helps.<br>
+							5. Test the Script, Audio, Parallel Translation and SyncFile using [CHOOSE MEDIA FROM DISK].<br>
+							6. Finally share your Article: Click [ONLINE LIBRAY] REGISTER/LOG IN and follow [FAQ]<br>
+							<br>
+							How to use off-line?<br>
+							====================<br>
+							download Article's files from ONLINE LIBRARY <br>
+							> click on [USE PLAYER OFFLINE] > [DOWNLOAD] > unzip and double-click on index.html<br>
+							<br>
+							Authors:<br>
+							========<br>
+							Designed and developed by krajcik@hipa.sk and the students of 'Development of information systems' course at Faculty of Mathematics, Physics and Informatics at Comenius University, Bratislava in 2019 and 2020 . Apology for possible minor bugs and typos.
+							</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
+
+					
             </div>
             <div class="row">
                 <div class="col s3 offset-s9 right-align">
