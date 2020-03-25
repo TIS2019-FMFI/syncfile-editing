@@ -9,6 +9,7 @@ class FilesPickerViewController extends ViewController {
 
         this.scriptFile;
         this.audioFile;
+		this.audioFileCopy;
         this.syncFile;
 
         this.scriptFileName;
@@ -143,10 +144,19 @@ Hit [START CREATING] to move to the next page ("Edit block time-marks").
 
     audioPickerValueChanged() {
         const audioFile = this.audioFilePicker[0].files[0];
+		const audioFileCopy = this.audioFilePicker[0].files[0];
+
         this.audioFileName = audioFile.name.split('.').slice(0, -1).join('.');
 
         this.getBase64(audioFile).then(data => {
             this.audioFile = new Howl({
+                src: data
+            });
+            this.setupStartCreatingButton();
+        });
+		
+		this.getBase64(audioFileCopy).then(data => {
+            this.audioFileCopy = new Howl({
                 src: data
             });
             this.setupStartCreatingButton();
@@ -201,7 +211,7 @@ Hit [START CREATING] to move to the next page ("Edit block time-marks").
     }
 
     createSyncFileEditorData() {
-        this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.scriptFile, this.syncFile);
+        this.syncFileEditorData = new SyncFileEditorData(this.audioFile, this.audioFileCopy, this.scriptFile, this.syncFile);
         this.syncFileEditorData.audioFileName = this.audioFileName;
         this.syncFileEditorData.scriptFileName = this.scriptFileName;
         if (this.syncFileName == undefined) {

@@ -164,6 +164,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 
     viewDidLoad() {
         this.check();
+		this.setBlockDuration(this.syncFileEditorData.getTimeOfBlock());
 		var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems);
 		
@@ -175,7 +176,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 		this.playPauseIcon.text('play_circle_outline');
 		this.disableButtons();
 		this.time2 = this.syncFileEditorData.getDurationOfAllAudio(); 
-		this.setBlockDuration();
+		this.setBlockDuration(this.time2 - this.time1);
 	}
 
 	highlight(){	
@@ -207,13 +208,17 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 		}
         this.text.html(textarea);
         this.scrollContainer();
-		this.unsetBlockDuration();
+		//this.unsetBlockDuration();
 	}
 
-	setBlockDuration(){
-		var duration = this.time2 - this.time1;
+	setBlockDuration(duration){
 		duration = Math.round(duration * 100) / 100
-		var blockDuration =$('#block_duration').text("   Current block duration: " + duration.toString() + " s"); 
+		if(duration > 0){
+			var blockDuration =$('#block_duration').text("   Current block duration: " + duration.toString() + " s"); 
+		}
+		else{
+			var blockDuration = $('#block_duration').text(""); 
+		}
 
 	}
 	
@@ -248,7 +253,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     // Private Methods
 
     playPauseButtonClicked() {
-		this.syncFileEditorData.audioFile.on('end', function(){this.checkAudio();}.bind(this));
+		this.syncFileEditorData.audioPlayer.audio.on('end', function(){this.checkAudio();}.bind(this));
         try{
             if (this.time1 == null){ //blok pred nema cas znacku 
                 throw "You need to set time of previous block";     
@@ -263,7 +268,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 				    this.check();
                     throw "You have passed through the next block";     
 				}
-                this.setBlockDuration();
+                this.setBlockDuration(this.time2 - this.time1);
             } else {
                 this.syncFileEditorData.rewindAudioToTime(this.time1);
                 this.syncFileEditorData.playAudio();
@@ -290,7 +295,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
                        this.accept.removeClass("disabled");
 					}
                     this.skipBlock.removeClass("disabled");
-					this.setBlockDuration();
+					this.setBlockDuration(this.time2 - this.time1);
 
 			    }else{
 				    				this.check();
@@ -311,7 +316,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
                     this.accept.removeClass("disabled");
 			    }
                 this.skipBlock.removeClass("disabled");
-				this.setBlockDuration();
+				this.setBlockDuration(this.time2 - this.time1);
 
 			}else{
 				this.check();
@@ -324,7 +329,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     }
 
     replayButtonClicked() {
-		this.syncFileEditorData.audioFile.off('end');
+		this.syncFileEditorData.audioPlayer.audio.off('end'); //audioFile
         this.playPauseIcon.text('play_circle_outline');
         
         if (this.time2 != "0.00"){ //ak chce v procese
@@ -347,6 +352,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
                 this.syncFileEditorData.setTimeToBlock(this.time2);
                 this.syncFileEditorData.selectNextBlock();
                 this.check();
+				this.setBlockDuration(this.syncFileEditorData.getTimeOfBlock() - this.syncFileEditorData.getTimeOfPrevBlock());
+
             }
             else {
                     throw "Next Block";        
@@ -367,6 +374,8 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
        
         this.syncFileEditorData.selectNextBlock();
         this.check();
+		this.setBlockDuration(this.syncFileEditorData.getTimeOfBlock() - this.syncFileEditorData.getTimeOfPrevBlock());
+
     }
 
     removeSkipButtonClicked() {
@@ -377,11 +386,15 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
     previousBlockButtonClicked() {
         this.syncFileEditorData.selectPreviousBlock();
         this.check();
+		this.setBlockDuration(this.syncFileEditorData.getTimeOfBlock() - this.syncFileEditorData.getTimeOfPrevBlock());
+
     }
 
     nextBlockButtonClicked() {
         this.syncFileEditorData.selectNextBlock();
 		this.check();
+		this.setBlockDuration(this.syncFileEditorData.getTimeOfBlock() - this.syncFileEditorData.getTimeOfPrevBlock());
+
     }
 
     editBlockButtonClicked() {
@@ -463,7 +476,7 @@ Buttons [<-] and [->] allow you to move to any text block. However be aware that
 		 }else{
             this.editBlock.addClass("disabled");
             this.removeInterval.removeClass("disabled");
-            this.skipBlock.addClass("disabled");
+            this.skipBlock.addClass("disabled");	
 		 }
          this.accept.addClass("disabled");
          this.skipBlock.addClass("disabled");

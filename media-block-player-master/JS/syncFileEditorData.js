@@ -1,13 +1,15 @@
 class SyncFileEditorData {
 
-    constructor(audioFile, scriptFileData, syncFileData) {
+    constructor(audioFile, audioFileCopy, scriptFileData, syncFileData) {
         //subory
         this.audioFile = audioFile;
         this.scriptFileData = scriptFileData;
         this.syncFileData = syncFileData;
+		this.audioCopy = audioFileCopy;
 
         //audio player a blockEditor
-        this.audioPlayer = new AudioPlayer(audioFile);
+        this.audioPlayer = new AudioPlayer(this.audioFile);
+		this.audioPlayerCopy = new AudioPlayer(this.audioCopy);
         this.blocksEditor = new BlockEditor(this.scriptFileData, this.syncFileData);
 
         //nazvy suborov - stringy
@@ -57,7 +59,7 @@ class SyncFileEditorData {
 	}
 
     playInterval(time1, time2){
-        this.audioPlayer.playInterval(time1, time2);
+        this.audioPlayerCopy.playInterval(time1, time2);
 	}
 
     isSelectedBlockSkipped() {
@@ -76,7 +78,7 @@ class SyncFileEditorData {
 				time1 = this.blocksEditor.getTimeOfPreviousBlock();
 				time2 = this.blocksEditor.getTimeOfSelectedBlock();
 			}
-			this.audioPlayer.playInterval(time1, time2);
+			this.audioPlayerCopy.playInterval(time1, time2);
 		}
     }
 
